@@ -1,0 +1,59 @@
+// prettier-ignore
+{
+  "extends": "@tsconfig/react-native/tsconfig.json",     /* Recommended React Native TSConfig base */
+  "compilerOptions": {
+    "jsx": "react",
+    /* Visit https://aka.ms/tsconfig.json to read more about this file */
+
+    "baseUrl": "./" /* Base directory to resolve non-absolute module names. */,
+    "paths": {
+      "@Auth/*": [
+        "./src/modules/Auth/*"
+      ],
+      "@Property/*": [
+        "./src/modules/Property/*"
+      ],
+      "@Home/*": [
+        "./src/modules/Home/*"
+      ],
+      "@Plots/*": [
+        "./src/modules/Plots/*"
+      ],
+      "@Add/*": [
+        "./src/modules/Add/*"
+      ],
+      "@Chats/*": [
+        "./src/modules/Chats/*"
+      ],
+      "@Profile/*": [
+        "./src/modules/Profile/*"
+      ],
+      "@commons/*": [
+        "./src/commons/*"
+      ],
+      "@components/*": [
+        "./src/components/*"
+      ],
+      "@assets/*": [
+        "./src/Assets/*"
+      ],
+      "@network/*": [
+        "./src/network/*"
+      ],
+      "@redux/*": [
+        "./src/redux/*"
+      ],
+      "@baseUrl/*": [
+        "./src/baseUrl.js"
+      ]
+    },
+    /* Completeness */
+    "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
+  },
+  "exclude": [
+    "node_modules",
+    "babel.config.js",
+    "metro.config.js",
+    "jest.config.js"
+  ]
+}
