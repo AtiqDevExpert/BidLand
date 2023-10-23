@@ -87,8 +87,8 @@ const NewProperty = ({navigation}) => {
   const [othersChargesValue, setOthersChargesValue] = useState('');
   const [othersChargesError, setOthersChargesError] = useState(null);
 
-  const [realestateShareValue, setrealestateShareValue] = useState('');
-  const [realestateShareError, setrealestateShareError] = useState(null);
+  const [bidlandShareValue, setbidlandShareValue] = useState('');
+  const [bidlandShareError, setbidlandShareError] = useState(null);
 
   //  Bootom sheet Hook
   const [addClientAmountError, setAddClientAmountError] = useState(null);
@@ -389,12 +389,10 @@ const NewProperty = ({navigation}) => {
                           <View style={styles.input}>
                             <TextField
                               editable={true}
-                              value={realestateShareValue}
+                              value={bidlandShareValue}
                               label="Property Manager Share"
-                              errorText={realestateShareError}
-                              onChangeText={text =>
-                                setrealestateShareValue(text)
-                              }
+                              errorText={bidlandShareError}
+                              onChangeText={text => setbidlandShareValue(text)}
                               secure={false}
                             />
                           </View>

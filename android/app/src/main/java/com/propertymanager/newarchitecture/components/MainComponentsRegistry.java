@@ -1,4 +1,4 @@
-package com.realestate.newarchitecture.components;
+package com.bidland.newarchitecture.components;
 
 import com.facebook.jni.HybridData;
 import com.facebook.proguard.annotations.DoNotStrip;

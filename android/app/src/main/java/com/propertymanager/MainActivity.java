@@ -1,4 +1,4 @@
-package com.realestate;
+package com.bidland;
 
 import android.os.Bundle;
 import com.facebook.react.ReactActivity;
@@ -14,7 +14,7 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "realestate";
+    return "bidland";
   }
   @Override
     protected void onCreate(Bundle savedInstanceState) {
