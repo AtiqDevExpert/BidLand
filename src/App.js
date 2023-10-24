@@ -6,7 +6,7 @@ import SplashScreen from 'react-native-splash-screen';
 import AuthModule from './modules/Auth/navigation/index';
 import {LogBox} from 'react-native';
 import DrawerNavigator from './navigator/DrawerNavigation/DrawerNavigation';
-import {navigationRef} from './RootNavigation';
+
 LogBox.ignoreLogs(['Warning: ...']);
 LogBox.ignoreAllLogs();
 const Stack = createNativeStackNavigator();
@@ -15,10 +15,10 @@ const App = () => {
   useEffect(() => {
     SplashScreen.hide();
   }, []);
-  const [user, setUser] = useState(true);
+  const [user, setUser] = useState(false);
   return (
     <SafeAreaView style={styles.mainView}>
-      <NavigationContainer ref={navigationRef}>
+      <NavigationContainer>
         <StatusBar backgroundColor="black" />
         <Stack.Navigator>
           {user === true ? (

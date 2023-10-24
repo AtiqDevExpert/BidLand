@@ -5,6 +5,7 @@ import {
   ScrollView,
   SafeAreaView,
   TouchableOpacity,
+  ImageBackground,
 } from 'react-native';
 import styles from './styles';
 import {Colors} from '../../../../constants/Colors';
@@ -33,55 +34,51 @@ const ForgotPassword = ({navigation}) => {
   };
   return (
     <SafeAreaView style={styles.main}>
-      <ScrollView keyboardShouldPersistTaps="handled">
-        <View style={styles.view1}>
-          <ForgotPasswordScreenLogo style={styles.logo} />
-        </View>
-        <View style={styles.view2}>
-          <Text style={styles.forgetpassword}>Forget Password</Text>
-          <Text style={styles.fgdiscription}>
-            Please enter your email address{'\n'} to recieve verification code
-          </Text>
-        </View>
+      <ImageBackground
+        style={{flex: 1, justifyContent: 'center'}}
+        source={require('../../../../Assets/Images/house3.jpg')}>
         <View style={styles.view3}>
-          <View style={styles.bluebackground}>
-            <Text style={styles.text}>Enter Your Email</Text>
-            <View style={{}}>
-              <Text></Text>
+          <View style={styles.whitebackground}>
+            <View style={styles.view1}>
+              <ForgotPasswordScreenLogo style={styles.logo} />
+              <Text style={styles.forgetpassword}>Forget Password</Text>
+              <Text style={styles.fgdiscription}>
+                Please enter your email address{'\n'} to recieve verification
+                code
+              </Text>
             </View>
-            <View style={styles.whitebackground}>
-              <View
-                style={{
-                  paddingHorizontal: 20,
-                  marginVertical: 30,
-                }}>
-                <View style={{marginVertical: 15}}>
-                  <TextField
-                    value={value}
-                    label="Email"
-                    errorText={error}
-                    onChangeText={text => setValue(text)}
-                  />
-                </View>
-                <View>
-                  <Button
-                    text={'Send Code'}
-                    color={'#fff'}
-                    fontSize={15}
-                    height={50}
-                    width={'100%'}
-                    borderWidth={1}
-                    marginTop={20}
-                    // marginBottom={10}
-                    backgroundColor={'#0277FA'}
-                    onPress={sendCode}
-                  />
-                </View>
+
+            <View
+              style={{
+                // paddingHorizontal: 20,
+                marginVertical: 30,
+              }}>
+              <View style={{marginVertical: 15, marginHorizontal: 15}}>
+                <TextField
+                  value={value}
+                  label="Email"
+                  errorText={error}
+                  onChangeText={text => setValue(text)}
+                />
+              </View>
+              <View style={{marginHorizontal: 15}}>
+                <Button
+                  text={'Send Code'}
+                  color={Colors.white}
+                  fontSize={15}
+                  height={50}
+                  width={'100%'}
+                  borderWidth={1}
+                  marginTop={20}
+                  // marginBottom={10}
+                  backgroundColor={Colors.black}
+                  onPress={sendCode}
+                />
               </View>
             </View>
           </View>
         </View>
-      </ScrollView>
+      </ImageBackground>
     </SafeAreaView>
   );
 };

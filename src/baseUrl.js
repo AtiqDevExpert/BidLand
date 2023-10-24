@@ -1,3 +1,3 @@
-const URL = 'http://172.104.193.73/property_manager';
+const URL = 'https://bidland-backend.onrender.com/';
 
 export default URL;

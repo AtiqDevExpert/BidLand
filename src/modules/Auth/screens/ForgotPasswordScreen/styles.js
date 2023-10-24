@@ -8,74 +8,33 @@ export default StyleSheet.create({
     backgroundColor: Colors.white,
   },
 
-  borderStyleBase: {
-    width: 30,
-    height: 45,
-  },
-
-  borderStyleHighLighted: {
-    borderColor: Colors.darkPrimery,
-  },
-
-  underlineStyleBase: {
-    width: 50,
-    height: 50,
-    borderWidth: 0.5,
-    borderBottomWidth: 1,
-    backgroundColor: Colors.otpBackgroundColor,
-    borderRadius: 5,
-    borderColor: Colors.darkPrimery,
-  },
-
-  underlineStyleHighLighted: {
-    borderColor: Colors.borderColor,
-    color: Colors.textColor,
-  },
-  timer: {
-    marginVertical: 10,
-    color: Colors.textColor,
-  },
-  timerText: {
-    color: Colors.textColor,
-    textAlign: 'center',
-  },
   view1: {
     justifyContent: 'center',
     alignItems: 'center',
-    alignContent: 'center',
     marginTop: 5,
   },
   logo: {height: 230, width: 230},
   view2: {
     justifyContent: 'center',
     alignItems: 'center',
-    alignContent: 'center',
   },
   forgetpassword: {
-    color: Colors.darkPrimery,
+    color: Colors.black,
     fontWeight: '700',
     fontSize: 24,
     textAlign: 'center',
   },
   fgdiscription: {
-    color: Colors.textColor,
+    color: Colors.black,
     fontWeight: '400',
     fontSize: 16,
     textAlign: 'center',
     marginBottom: 35,
     marginTop: 10,
   },
-  view3: {
-    justifyContent: 'center',
-  
-  },
-  otpView: {
-    width: '70%',
-    height: 100,
-    justifyContent: 'center',
-  },
+  view3: {alignContent: 'center'},
+
   view4: {flexDirection: 'row'},
-  resend: {color: Colors.darkPrimery, fontWeight: '700'},
   view5: {
     justifyContent: 'space-between',
     flexDirection: 'row',
@@ -88,18 +47,16 @@ export default StyleSheet.create({
     marginHorizontal: 5,
   },
   bluebackground: {
-    // flex: 1,
-     //top: 50,
-    backgroundColor: '#0277FA',
-    borderTopStartRadius: width * 0.09,
-    borderTopEndRadius: width * 0.09,
+    backgroundColor: '#fff',
+    borderRadius: width * 0.09,
+    justifyContent: 'center',
   },
   whitebackground: {
-    width: '100%',
-
     backgroundColor: '#fff',
-    borderTopStartRadius: width * 0.09,
-    borderTopEndRadius: width * 0.09,
+    borderRadius: width * 0.09,
+    justifyContent: 'center',
+    marginHorizontal: 10,
+    alignContent: 'center',
   },
   text: {
     color: '#fff',
@@ -112,7 +69,5 @@ export default StyleSheet.create({
     justifyContent: 'center',
     marginTop: 15,
   },
-  sec: {textAlign: 'center',
-   color: Colors.textColor},
-
+  sec: {textAlign: 'center', color: Colors.black},
 });

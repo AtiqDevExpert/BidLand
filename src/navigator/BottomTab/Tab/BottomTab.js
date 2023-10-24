@@ -18,22 +18,12 @@ import {
   ClientsIcon,
   ProfileIcon,
 } from '@assets/SVG/SvgDashboard';
-
 import HomeModule from '@Home/navigation/index';
-// import DetailsScreen from './screens/DetailsScreen';
-// import SettingsScreen from './screens/SettingsScreen';
 import PlotsModule from '@Plots/navigation';
 import AddModule from '@Add/navigation';
 import ProfileModule from '@Profile/navigation';
 import ChatModule from '@Chats/navigation';
-// import ChatModule from '@Chats//navigation';
 
-//Screen names
-const homeName = 'Home';
-const Add = 'Add';
-const Clients = 'Clients';
-const Plots = 'Plots';
-const Profile = 'Profile';
 const Tab = createBottomTabNavigator();
 const BottomTab = () => {
   return (
@@ -57,7 +47,7 @@ const BottomTab = () => {
           elevation: 0,
         },
       }}
-      tabBarStyle={{backgroundColor: 'red', height: 100, marginBottom: 10}}>
+      tabBarStyle={{height: 100, marginBottom: 10}}>
       <Tab.Screen
         name="HomeModule"
         component={HomeModule}

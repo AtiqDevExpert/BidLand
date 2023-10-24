@@ -1,6 +1,6 @@
-import { StyleSheet, Dimensions } from 'react-native';
-const { width, height } = Dimensions.get('window');
-import { Colors } from '../../../../constants/Colors';
+import {StyleSheet, Dimensions} from 'react-native';
+const {width, height} = Dimensions.get('window');
+import {Colors} from '../../../../constants/Colors';
 
 export default StyleSheet.create({
   main: {
@@ -8,29 +8,6 @@ export default StyleSheet.create({
     backgroundColor: Colors.white,
   },
 
-  borderStyleBase: {
-    width: 30,
-    height: 45,
-  },
-
-  borderStyleHighLighted: {
-    borderColor: Colors.darkPrimery,
-  },
-
-  underlineStyleBase: {
-    width: 50,
-    height: 50,
-    borderWidth: 0.5,
-    borderBottomWidth: 1,
-    backgroundColor: Colors.otpBackgroundColor,
-    borderRadius: 5,
-    borderColor: Colors.darkPrimery,
-  },
-
-  underlineStyleHighLighted: {
-    borderColor: Colors.borderColor,
-    color: Colors.textColor,
-  },
   timer: {
     marginVertical: 10,
     color: Colors.textColor,
@@ -45,37 +22,19 @@ export default StyleSheet.create({
     alignContent: 'center',
     marginTop: 5,
   },
-  logo: { height: 230, width: 230 },
+  logo: {height: 230, width: 230},
   view2: {
     justifyContent: 'center',
     alignItems: 'center',
     alignContent: 'center',
   },
-  forgetpassword: {
-    color: Colors.darkPrimery,
-    fontWeight: '700',
-    fontSize: 24,
-    textAlign: 'center',
-  },
-  fgdiscription: {
-    color: Colors.textColor,
-    fontWeight: '400',
-    fontSize: 16,
-    textAlign: 'center',
-    marginBottom: 35,
-    marginTop: 10,
-  },
+
   view3: {
     justifyContent: 'center',
+  },
 
-  },
-  otpView: {
-    width: '70%',
-    height: 100,
-    justifyContent: 'center',
-  },
-  view4: { flexDirection: 'row' },
-  resend: { color: Colors.darkPrimery, fontWeight: '700' },
+  view4: {flexDirection: 'row'},
+  resend: {color: Colors.darkPrimery, fontWeight: '700'},
   view5: {
     justifyContent: 'space-between',
     flexDirection: 'row',
@@ -90,16 +49,15 @@ export default StyleSheet.create({
   bluebackground: {
     // flex: 1,
     //top: 50,
-    backgroundColor: '#0277FA',
-    borderTopStartRadius: width * 0.09,
-    borderTopEndRadius: width * 0.09,
+    backgroundColor: Colors.white,
+    borderRadius: width * 0.09,
   },
   whitebackground: {
-    width: '100%',
-
-    backgroundColor: '#fff',
-    borderTopStartRadius: width * 0.09,
-    borderTopEndRadius: width * 0.09,
+    // width: '100%',
+    backgroundColor: Colors.white,
+    borderRadius: width * 0.09,
+    justifyContent: 'center',
+    marginHorizontal: 10,
   },
   text: {
     color: '#fff',
@@ -135,21 +93,20 @@ export default StyleSheet.create({
     color: Colors.modalTextColor,
     fontSize: 26,
     fontWeight: '500',
-    textAlign: 'center'
+    textAlign: 'center',
   },
   modalLogo: {
     height: 220,
-    width: 220
+    width: 220,
   },
   crossRedIcon: {
     height: 20,
     width: 20,
     marginTop: -10,
-    marginRight: -8
+    marginRight: -8,
   },
   sec: {
     textAlign: 'center',
-    color: Colors.textColor
+    color: Colors.textColor,
   },
-
 });

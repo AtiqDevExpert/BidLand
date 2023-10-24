@@ -25,7 +25,6 @@ import {
   ProfileIcon,
   LogoutIcon,
 } from '@assets/SVG/SvgDashboard';
-import {useDispatch} from 'react-redux';
 const CustomSidebarMenu = props => {
   const navigation = useNavigation();
 

@@ -41,7 +41,7 @@ export const Button: React.FC<any> = ({
         justifyContent: 'center',
         marginTop: marginTop,
         elevation: elevation,
-        borderColor: '#0277FA',
+        borderColor: '#000',
       }}>
       <Text
         style={{

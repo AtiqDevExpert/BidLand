@@ -44,7 +44,7 @@ const TextField: React.FC<Props> = props => {
     }).start();
   }, [focusAnim, isFocused, value]);
 
-let color = isFocused ? '#0277FA' : '#D9D9D9';
+let color = isFocused ? '#000' : '#D9D9D9';
   if (errorText) {
     color = '#B00020';
   }
@@ -69,7 +69,7 @@ let color = isFocused ? '#0277FA' : '#D9D9D9';
             setIsFocused(true);
             onFocus?.(event);
           }}
-          placeholderTextColor="#C6C8C9"
+          placeholderTextColor="#D9D9D9"
           keyboardType={keyboardType}
         />
         <TouchableWithoutFeedback onPress={() =>{

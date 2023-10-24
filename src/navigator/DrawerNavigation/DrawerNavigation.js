@@ -1,6 +1,3 @@
-// import Tabs from '../../../../BottomTab/Tab/tab';
-// import HomeModule from '..';
-import {NavigationContainer, DrawerActions} from '@react-navigation/native';
 import {
   createDrawerNavigator,
   DrawerContentScrollView,
@@ -8,12 +5,10 @@ import {
   DrawerItem,
 } from '@react-navigation/drawer';
 import React from 'react';
-import {Colors} from '../../constants/Colors';
 import CustomSidebarMenu from './CustomSideBarMenu';
 import BottomTab from '../BottomTab/Tab/BottomTab';
 import SoldNavigation from '../../modules/Plots/navigation/SoldModuleNavigation';
 import PlotDetailNavigation from '../../modules/Plots/navigation/PlotDetailModuleNavigation';
-// import UpdateClientNavigation from '@Clients/navigation/UpdateClientNavigation';
 
 const Drawer = createDrawerNavigator();
 const DrawerNavigator = () => {

@@ -6,27 +6,24 @@ import {Colors} from '../../../../constants/Colors';
 export default StyleSheet.create({
   mainView: {
     flex: 1,
-    backgroundColor: Colors.fullDarkBlue,
+    // backgroundColor: Colors.fullDarkBlue,
   },
   bluebackground: {
-    backgroundColor: Colors.darkPrimery,
-    borderTopStartRadius: width * 0.09,
-    borderTopEndRadius: width * 0.09,
+    // backgroundColor: Colors.darkPrimery,
+    borderRadius: width * 0.09,
   },
   text: {
-    color: Colors.white,
-    fontFamily: 'SF Pro Display',
-    fontStyle: 'normal',
-    fontWeight: '500',
-    fontSize: 16,
+    color: Colors.black,
+    fontWeight: 'bold',
+    fontSize: 26,
     textAlign: 'center',
     justifyContent: 'center',
     marginVertical: 20,
   },
   whitebackground: {
     backgroundColor: Colors.white,
-    borderTopStartRadius: width * 0.09,
-    borderTopEndRadius: width * 0.09,
+    borderRadius: width * 0.09,
+    marginHorizontal: 5,
   },
 
   dummyView: {
@@ -41,7 +38,7 @@ export default StyleSheet.create({
   dummy: {
     marginHorizontal: 20,
   },
-  input: {marginVertical: 20},
+  input: {marginVertical: 20, marginHorizontal: 10},
   mainView1: {
     justifyContent: 'center',
     alignContent: 'center',

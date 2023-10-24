@@ -16,7 +16,7 @@ export default StyleSheet.create({
     position: 'absolute',
     paddingHorizontal: 10,
     backgroundColor: 'white',
-    color: "#8B8B8B"
+    color: "#000"
   },
   label: {
     fontFamily: 'Avenir-Heavy',
