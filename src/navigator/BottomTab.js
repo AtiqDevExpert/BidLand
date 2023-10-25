@@ -63,18 +63,18 @@ const BottomTab = () => {
                 alignItems: 'center',
               }}>
               <HomeIcon
-                fill={focused ? '#4AB5E3' : '#798293'}
+                fill={focused ? '#000' : '#798293'}
                 style={{
                   height: 30,
                   width: 25,
                   alignSelf: 'center',
-                  tintColor: focused ? '#4AB5E3' : '#748c94',
+                  tintColor: focused ? '#000' : '#748c94',
                   zIndex: 1,
                 }}
               />
               <Text
                 style={{
-                  color: focused ? '#4AB5E3' : '#748c94',
+                  color: focused ? '#000' : '#748c94',
                   fontSize: 12,
                   textAlign: 'center',
                 }}>
@@ -99,18 +99,18 @@ const BottomTab = () => {
                 alignItems: 'center',
               }}>
               <ClientsIcon
-                fill={focused ? '#4AB5E3' : '#798293'}
+                fill={focused ? '#000' : '#798293'}
                 style={{
                   height: 30,
                   width: 25,
                   alignSelf: 'center',
-                  tintColor: focused ? '#4AB5E3' : '#748c94',
+                  tintColor: focused ? '#000' : '#748c94',
                   zIndex: 1,
                 }}
               />
               <Text
                 style={{
-                  color: focused ? '#4AB5E3' : '#748c94',
+                  color: focused ? '#000' : '#748c94',
                   fontSize: 12,
                   textAlign: 'center',
                 }}>
@@ -135,18 +135,18 @@ const BottomTab = () => {
                 alignSelf: 'center',
               }}>
               <AddIcon
-                fill={focused ? '#4AB5E3' : '#798293'}
+                fill={focused ? '#000' : '#798293'}
                 style={{
                   height: 30,
                   width: 25,
                   alignSelf: 'center',
-                  tintColor: focused ? '#4AB5E3' : '#748c94',
+                  tintColor: focused ? '#000' : '#748c94',
                   zIndex: 1,
                 }}
               />
               <Text
                 style={{
-                  color: focused ? '#4AB5E3' : '#748c94',
+                  color: focused ? '#000' : '#748c94',
                   fontSize: 12,
                   textAlign: 'center',
                 }}>
@@ -170,18 +170,18 @@ const BottomTab = () => {
                 alignItems: 'center',
               }}>
               <ChatIcon
-                fill={focused ? '#4AB5E3' : '#798293'}
+                fill={focused ? '#000' : '#798293'}
                 style={{
                   height: 30,
                   width: 25,
                   alignSelf: 'center',
-                  tintColor: focused ? '#4AB5E3' : '#748c94',
+                  tintColor: focused ? '#000' : '#748c94',
                   zIndex: 1,
                 }}
               />
               <Text
                 style={{
-                  color: focused ? '#4AB5E3' : '#748c94',
+                  color: focused ? '#000' : '#748c94',
                   fontSize: 12,
                   textAlign: 'center',
                 }}>
@@ -206,18 +206,18 @@ const BottomTab = () => {
                 alignItems: 'center',
               }}>
               <ProfileIcon
-                fill={focused ? '#4AB5E3' : '#798293'}
+                fill={focused ? '#000' : '#798293'}
                 style={{
                   height: 30,
                   width: 25,
                   alignSelf: 'center',
-                  tintColor: focused ? '#4AB5E3' : '#748c94',
+                  tintColor: focused ? '#000' : '#748c94',
                   zIndex: 1,
                 }}
               />
               <Text
                 style={{
-                  color: focused ? '#4AB5E3' : '#748c94',
+                  color: focused ? '#000' : '#748c94',
                   fontSize: 12,
                   textAlign: 'center',
                 }}>

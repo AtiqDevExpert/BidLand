@@ -148,10 +148,6 @@ const HomeScreen = ({navigation}) => {
           <Icon name="search" color={Colors.grey} size={25} />
           <TextInput placeholder="Search address, city, location" />
         </View>
-
-        <View style={styles.sortBtn}>
-          <Icon name="tune" color={Colors.white} size={25} />
-        </View>
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* Input and sort button container */}

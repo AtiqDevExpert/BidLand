@@ -14,6 +14,7 @@ import Icon from 'react-native-vector-icons/Feather';
 import Icon2 from 'react-native-vector-icons/MaterialIcons';
 import MIcon from 'react-native-vector-icons/MaterialIcons';
 import {Colors} from '../../../../constants/Colors';
+import styles from './styles';
 const Chats = ({navigation}) => {
   const [stories, setStories] = useState([
     {
@@ -147,77 +148,55 @@ const Chats = ({navigation}) => {
 
   const [currentStoryView, setCurrentStoryView] = useState(stories);
   const [storyModalVisible, setStoryModalVisible] = useState(false);
-
+  const [search, setSearch] = useState('');
   return (
-    <View style={{flex: 1}}>
-      {/* Header */}
-
+    <View style={{flex: 1, backgroundColor: Colors.white}}>
       <View
         style={{
-          height: 50,
           backgroundColor: Colors.white,
+          marginVertical: 10,
         }}>
         <View
           style={{
             marginTop: 10,
-            // backgroundColor: 'red',
-            // paddingVertical: 20,
-            paddingHorizontal: 10,
-            flex: 1,
             flexDirection: 'row',
             alignItems: 'center',
+            justifyContent: 'space-between',
+            marginHorizontal: 10,
           }}>
           <Text
             style={{
-              marginLeft: 14,
-              fontSize: 22,
-              color: Colors.dark,
+              fontSize: 25,
+              fontWeight: 'bold',
+              color: Colors.black,
+              // marginTop: 15,
+              padding: 5,
             }}>
             Chats
           </Text>
-        </View>
-      </View>
-      <View style={{backgroundColor: Colors.white, marginVertical: 10}}>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            paddingHorizontal: 10,
-          }}>
           <View
             style={{
-              height: 50,
-              backgroundColor: Colors.white,
-              flex: 1,
-              flexDirection: 'row',
-              alignItems: 'center',
-              paddingHorizontal: 10,
-              borderRadius: 12,
-            }}>
-            <Icon2 name="search" color={Colors.grey} size={25} />
-            <TextInput
-              placeholder="Search address, city, location"
-              placeholderTextColor={Colors.dark}
-            />
-          </View>
-
-          <View
-            style={{
-              backgroundColor: Colors.dark,
-              height: 50,
-              width: 50,
-              borderRadius: 12,
               justifyContent: 'center',
               alignItems: 'center',
-              marginLeft: 10,
+              width: '75%',
             }}>
-            <Icon2 name="tune" color={Colors.white} size={25} />
+            <View style={styles.searchInputContainer}>
+              <Icon name="search" color={Colors.grey} size={25} />
+              <TextInput
+                placeholder="Search Chats"
+                placeholderTextColor={'#000'}
+                value={search}
+                onChange={text => {
+                  setSearch(text);
+                }}
+              />
+            </View>
           </View>
         </View>
       </View>
 
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={{flex: 1}}>
+        <View style={{flex: 1, backgroundColor: Colors.light}}>
           {messages.map(chat => (
             <TouchableOpacity
               onPress={() => {
@@ -229,7 +208,7 @@ const Chats = ({navigation}) => {
                 paddingVertical: 10,
                 flexDirection: 'row',
                 alignItems: 'center',
-                backgroundColor: '#fafafa',
+                backgroundColor: '#fff',
                 borderBottomWidth: 1,
                 borderBottomColor: '#dfe4ea',
               }}
@@ -314,7 +293,6 @@ const Chats = ({navigation}) => {
                   {chat.isTyping ? (
                     <Text
                       style={{
-                        fontFamily: 'NSRegular',
                         fontSize: 16,
                         color: 'green',
                       }}>
@@ -323,12 +301,6 @@ const Chats = ({navigation}) => {
                   ) : (
                     <Text
                       style={{
-                        fontFamily:
-                          chat.message.sender !== 'You'
-                            ? chat.message.seenByYou
-                              ? 'NSRegular'
-                              : 'NSBold'
-                            : 'NSRegular',
                         fontSize: 16,
                         color: Colors.textblack,
                       }}>

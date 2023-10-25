@@ -13,7 +13,7 @@ import AppIntroSlider from 'react-native-app-intro-slider';
 import {useNavigation} from '@react-navigation/native';
 import {ForwardIcon} from '../../Assets/SVG/Svg';
 const Introo = ({data, onSkip, onDone, onSlideChange}) => {
-  let slider = AppIntroSlider || undefined;
+  let slider = AppIntroSlider;
   const navigation = useNavigation();
   const renderItem = ({item}) => {
     return (
@@ -37,7 +37,7 @@ const Introo = ({data, onSkip, onDone, onSlideChange}) => {
             justifyContent: 'center',
           }}>
           <TouchableOpacity
-            onPress={() => slider?.goToSlide(2, true)}
+            onPress={() => navigation.navigate('login')}
             style={styles.skip}>
             <Text style={styles.textskip}>Skip</Text>
           </TouchableOpacity>

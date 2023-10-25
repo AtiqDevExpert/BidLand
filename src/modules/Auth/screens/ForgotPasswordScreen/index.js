@@ -67,7 +67,7 @@ const ForgotPassword = ({navigation}) => {
                   color={Colors.white}
                   fontSize={15}
                   height={50}
-                  width={'100%'}
+                  width={'95%'}
                   borderWidth={1}
                   marginTop={20}
                   // marginBottom={10}

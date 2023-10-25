@@ -325,10 +325,8 @@ const Plots = ({navigation}) => {
   ];
 
   const [search, setSearch] = useState('');
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
   return (
     <SafeAreaView style={styles.mainView1}>
-      {/* {plotNavigation == 'filter' && ( */}
       <>
         <View
           style={{
@@ -350,8 +348,7 @@ const Plots = ({navigation}) => {
           <>
             <View
               style={{
-                // backgroundColor: 'red',
-                width: '75%',
+                width: '70%',
                 justifyContent: 'center',
                 alignItems: 'center',
               }}>
