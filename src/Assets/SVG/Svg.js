@@ -9,8 +9,7 @@ import Svg, {
   Mask,
 } from 'react-native-svg';
 
-
-const ForwardIcon = ({style, stroke, onPress} ) => {
+const ForwardIcon = ({style, stroke, onPress}) => {
   return (
     <Svg
       style={style}
@@ -25,7 +24,7 @@ const ForwardIcon = ({style, stroke, onPress} ) => {
     </Svg>
   );
 };
-const LoginScreenLogo = ({style, stroke, onPress} ) => {
+const LoginScreenLogo = ({style, stroke, onPress}) => {
   return (
     <Svg
       style={style}
@@ -125,7 +124,7 @@ const LoginScreenLogo = ({style, stroke, onPress} ) => {
     </Svg>
   );
 };
-const OPTScreenLogo = ({style, stroke, onPress} ) => {
+const OPTScreenLogo = ({style, stroke, onPress}) => {
   return (
     <Svg
       style={style}
@@ -540,7 +539,7 @@ const OPTScreenLogo = ({style, stroke, onPress} ) => {
   );
 };
 
-const ForgotPasswordScreenLogo = ({style, stroke, onPress} ) => {
+const ForgotPasswordScreenLogo = ({style, stroke, onPress}) => {
   return (
     <Svg
       style={style}
@@ -969,7 +968,7 @@ const ForgotPasswordScreenLogo = ({style, stroke, onPress} ) => {
   );
 };
 
-const CreateNewPasswordScreenLogo = ({style, stroke, onPress} ) => {
+const CreateNewPasswordScreenLogo = ({style, stroke, onPress}) => {
   return (
     <Svg
       style={style}
@@ -1554,7 +1553,7 @@ const CreateNewPasswordScreenLogo = ({style, stroke, onPress} ) => {
     </Svg>
   );
 };
-const ModalLogo = ({style, stroke, onPress} ) => {
+const ModalLogo = ({style, stroke, onPress}) => {
   return (
     <Svg
       style={style}
@@ -1944,7 +1943,7 @@ const ModalLogo = ({style, stroke, onPress} ) => {
     </Svg>
   );
 };
-const CrossRedIcon = ({style, stroke, onPress} ) => {
+const CrossRedIcon = ({style, stroke, onPress}) => {
   return (
     <Svg
       style={style}
@@ -1960,7 +1959,7 @@ const CrossRedIcon = ({style, stroke, onPress} ) => {
     </Svg>
   );
 };
-const UploadIcon = ({style, stroke, onPress} ) => {
+const UploadIcon = ({style, stroke, onPress}) => {
   return (
     <Svg
       style={style}
@@ -1981,7 +1980,7 @@ const UploadIcon = ({style, stroke, onPress} ) => {
     </Svg>
   );
 };
-const Usernamelogo = ({style, stroke, onPress} ) => {
+const Usernamelogo = ({style, stroke, onPress}) => {
   return (
     <Svg
       style={style}
@@ -2001,7 +2000,7 @@ const Usernamelogo = ({style, stroke, onPress} ) => {
   );
 };
 
-const PlotIcon = ({style, stroke, onPress} ) => {
+const PlotIcon = ({style, stroke, onPress}) => {
   return (
     <Svg
       style={style}
@@ -2029,7 +2028,7 @@ const PlotIcon = ({style, stroke, onPress} ) => {
   );
 };
 
-const NavigationIcon = ({style, stroke, onPress} ) => {
+const NavigationIcon = ({style, stroke, onPress}) => {
   return (
     <Svg
       style={style}
@@ -2049,7 +2048,7 @@ const NavigationIcon = ({style, stroke, onPress} ) => {
   );
 };
 
-const NewPropertyPlotIcon = ({style, stroke, onPress} ) => {
+const NewPropertyPlotIcon = ({style, stroke, onPress}) => {
   return (
     <Svg
       width="28"
@@ -2057,7 +2056,13 @@ const NewPropertyPlotIcon = ({style, stroke, onPress} ) => {
       viewBox="0 0 28 28"
       fill="none"
       xmlns="http://www.w3.org/2000/svg">
-      <Rect width="28" height="28" rx="4" fill="#0277FA30" fill-opacity="0.19" />
+      <Rect
+        width="28"
+        height="28"
+        rx="4"
+        fill="#0277FA30"
+        fill-opacity="0.19"
+      />
       <Path
         d="M12.5052 7.25L11 7.2395C10.9972 6.64458 10.7589 6.07498 10.3373 5.65529C9.91563 5.2356 9.34492 4.99999 8.74999 5L7.25 5C6.65326 5 6.08096 5.23705 5.65901 5.65901C5.23705 6.08096 5 6.65326 5 7.25V8.74999C5 9.34582 5.23633 9.91732 5.65715 10.3391C6.07797 10.7609 6.64892 10.9986 7.24475 11L7.23425 12.4947C7.23356 12.5933 7.25229 12.691 7.28939 12.7823C7.32649 12.8736 7.38123 12.9567 7.45046 13.0269C7.5197 13.097 7.60208 13.1528 7.6929 13.1911C7.78372 13.2294 7.88119 13.2494 7.97975 13.25H7.98425C8.18225 13.25 8.37223 13.1717 8.51273 13.0322C8.65323 12.8927 8.73286 12.7032 8.73424 12.5052L8.74474 11H8.74999C9.34673 11 9.91903 10.7629 10.341 10.341C10.7629 9.91903 11 9.34673 11 8.74999V8.73949L12.4947 8.74999H12.5C12.5985 8.75034 12.6961 8.73128 12.7872 8.69391C12.8783 8.65654 12.9612 8.60158 13.0311 8.53218C13.101 8.46278 13.1565 8.3803 13.1945 8.28943C13.2325 8.19857 13.2523 8.10111 13.2526 8.00262C13.253 7.90413 13.2339 7.80653 13.1965 7.71541C13.1592 7.62428 13.1042 7.54141 13.0348 7.47152C12.9654 7.40163 12.8829 7.3461 12.7921 7.30809C12.7012 7.27008 12.6037 7.25034 12.5052 7.25ZM9.49999 8.74999C9.49999 8.94891 9.42098 9.13967 9.28032 9.28032C9.13967 9.42098 8.94891 9.49999 8.74999 9.49999H7.25C7.05108 9.49999 6.86032 9.42098 6.71967 9.28032C6.57902 9.13967 6.5 8.94891 6.5 8.74999V7.25C6.5 7.05108 6.57902 6.86032 6.71967 6.71967C6.86032 6.57902 7.05108 6.5 7.25 6.5H8.74999C8.94891 6.5 9.13967 6.57902 9.28032 6.71967C9.42098 6.86032 9.49999 7.05108 9.49999 7.25V8.74999Z"
         fill="#055EC1"
@@ -2078,7 +2083,7 @@ const NewPropertyPlotIcon = ({style, stroke, onPress} ) => {
   );
 };
 
-const NewPropertyTransFee = ({style, stroke, onPress} ) => {
+const NewPropertyTransFee = ({style, stroke, onPress}) => {
   return (
     <Svg
       width="28"
@@ -2086,7 +2091,13 @@ const NewPropertyTransFee = ({style, stroke, onPress} ) => {
       viewBox="0 0 28 28"
       fill="none"
       xmlns="http://www.w3.org/2000/svg">
-      <Rect width="28" height="28" rx="4" fill="#AA4ABA30" fill-opacity="0.19" />
+      <Rect
+        width="28"
+        height="28"
+        rx="4"
+        fill="#AA4ABA30"
+        fill-opacity="0.19"
+      />
       <Path
         d="M13.5 23C8.825 23 5 19.175 5 14.5C5 9.825 8.825 6 13.5 6C18.175 6 22 9.825 22 14.5C22 19.2281 18.175 23 13.5 23ZM13.5 7.22187C9.4625 7.22187 6.22187 10.5156 6.22187 14.5C6.22187 18.4844 9.4625 21.7781 13.5 21.7781C17.4844 21.7781 20.7781 18.5375 20.7781 14.5C20.7781 10.5156 17.5375 7.22187 13.5 7.22187Z"
         fill="#AA4ABA"
@@ -2103,7 +2114,7 @@ const NewPropertyTransFee = ({style, stroke, onPress} ) => {
   );
 };
 
-const NewPropertySocietyCharges = ({style, stroke, onPress} ) => {
+const NewPropertySocietyCharges = ({style, stroke, onPress}) => {
   return (
     <Svg
       width="28"
@@ -2111,7 +2122,13 @@ const NewPropertySocietyCharges = ({style, stroke, onPress} ) => {
       viewBox="0 0 28 28"
       fill="none"
       xmlns="http://www.w3.org/2000/svg">
-      <Rect width="28" height="28" rx="4" fill="#EBAD4247" fill-opacity="0.28" />
+      <Rect
+        width="28"
+        height="28"
+        rx="4"
+        fill="#EBAD4247"
+        fill-opacity="0.28"
+      />
       <Path
         d="M22.081 10.6688C21.9538 10.9233 21.7418 11.0081 21.4449 11.0081C16.4831 11.0081 11.5636 11.0081 6.60175 11.0081C6.17766 11.0081 6.00803 10.8385 6.00803 10.4144C6.00803 10.1599 6.00803 9.90545 6.00803 9.651C6.00803 9.39655 6.09284 9.22691 6.34729 9.14209C8.84943 8.12428 11.3516 7.06405 13.8537 6.04623C14.0233 5.96141 14.193 6.00383 14.3626 6.08864C15.7621 6.68237 17.204 7.2761 18.6035 7.82741C19.6213 8.2515 20.6391 8.67559 21.657 9.09968C21.869 9.1845 21.9962 9.26932 22.081 9.48137C22.081 9.86305 22.081 10.2871 22.081 10.6688ZM14.0233 9.60859C14.9563 9.60859 15.8893 9.60859 16.7799 9.60859C16.992 9.60859 17.1616 9.52377 17.2464 9.35414C17.4161 9.01487 17.1616 8.67559 16.7799 8.67559C15.8893 8.67559 15.0411 8.67559 14.1506 8.67559C13.1751 8.67559 12.1997 8.67559 11.1819 8.67559C10.9699 8.67559 10.8002 8.76041 10.7154 8.93005C10.5458 9.26932 10.8002 9.60859 11.1819 9.60859C12.1573 9.60859 13.0903 9.60859 14.0233 9.60859Z"
         fill="#EBAD42"
@@ -2148,7 +2165,7 @@ const NewPropertySocietyCharges = ({style, stroke, onPress} ) => {
   );
 };
 
-const NewPropertyOthers = ({style, stroke, onPress} ) => {
+const NewPropertyOthers = ({style, stroke, onPress}) => {
   return (
     <Svg
       width="28"
@@ -2156,7 +2173,13 @@ const NewPropertyOthers = ({style, stroke, onPress} ) => {
       viewBox="0 0 28 28"
       fill="none"
       xmlns="http://www.w3.org/2000/svg">
-      <Rect width="28" height="28" rx="4" fill="#2AA77D52" fill-opacity="0.32" />
+      <Rect
+        width="28"
+        height="28"
+        rx="4"
+        fill="#2AA77D52"
+        fill-opacity="0.32"
+      />
       <Mask
         id="path-2-outside-1_334_762"
         maskUnits="userSpaceOnUse"
@@ -2191,7 +2214,7 @@ const NewPropertyOthers = ({style, stroke, onPress} ) => {
   );
 };
 
-const BackIcon = ({style, stroke, onPress} ) => {
+const BackIcon = ({style, stroke, onPress}) => {
   return (
     <Svg
       style={style}
@@ -2207,69 +2230,159 @@ const BackIcon = ({style, stroke, onPress} ) => {
   );
 };
 
-const PlusIcon = ({style, stroke, onPress,fill} ) => {
+const PlusIcon = ({style, stroke, onPress, fill}) => {
   return (
-    <Svg style={style} viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <Circle cx="11" cy="11" r="10" stroke={stroke} stroke-width="2"/>
-    <Rect x="10.1678" y="3.92871" width="1.66387" height="14.1429" rx="0.831933" fill={fill}/>
-    <Rect x="18.0708" y="10.168" width="1.66387" height="14.1429" rx="0.831933" transform="rotate(90 18.0708 10.168)" fill={fill}/>
+    <Svg
+      style={style}
+      viewBox="0 0 22 22"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg">
+      <Circle cx="11" cy="11" r="10" stroke={stroke} stroke-width="2" />
+      <Rect
+        x="10.1678"
+        y="3.92871"
+        width="1.66387"
+        height="14.1429"
+        rx="0.831933"
+        fill={fill}
+      />
+      <Rect
+        x="18.0708"
+        y="10.168"
+        width="1.66387"
+        height="14.1429"
+        rx="0.831933"
+        transform="rotate(90 18.0708 10.168)"
+        fill={fill}
+      />
     </Svg>
   );
 };
 
-const SearchIcon = ({style, stroke, onPress,fill} ) => {
+const SearchIcon = ({style, stroke, onPress, fill}) => {
   return (
-    <Svg style={style} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <Path d="M21 11C21 15.4183 17.4183 19 13 19C8.58172 19 5 15.4183 5 11C5 6.58172 8.58172 3 13 3C17.4183 3 21 6.58172 21 11Z" stroke="#0277FA" stroke-width="1.4" stroke-linecap="round"/>
-    <Path d="M2 22L7 17" stroke="#0277FA" stroke-width="1.4" stroke-linecap="round"/>
+    <Svg
+      style={style}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg">
+      <Path
+        d="M21 11C21 15.4183 17.4183 19 13 19C8.58172 19 5 15.4183 5 11C5 6.58172 8.58172 3 13 3C17.4183 3 21 6.58172 21 11Z"
+        stroke="#0277FA"
+        stroke-width="1.4"
+        stroke-linecap="round"
+      />
+      <Path
+        d="M2 22L7 17"
+        stroke="#0277FA"
+        stroke-width="1.4"
+        stroke-linecap="round"
+      />
     </Svg>
   );
 };
 
-const TickIcon = ({style, stroke, onPress,fill} ) => {
-  return ( 
-    <Svg style={style} viewBox="0 0 21 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <Path d="M2 6.44444L8.07143 12L19 2" stroke="#3F53B0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+const TickIcon = ({style, stroke, onPress, fill}) => {
+  return (
+    <Svg
+      style={style}
+      viewBox="0 0 21 14"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg">
+      <Path
+        d="M2 6.44444L8.07143 12L19 2"
+        stroke="#3F53B0"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
     </Svg>
   );
 };
 
-const AreaIcon = ({style, stroke, onPress,fill} ) => {
-  return ( 
-    <Svg style={style} viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <Path fill-rule="evenodd" clip-rule="evenodd" d="M2.38972 3.11522C2.38972 3.35277 2.1165 3.4864 1.929 3.34055L0.110206 1.92594C-0.0367352 1.81165 -0.0367352 1.58956 0.110206 1.47527L1.929 0.0606623C2.1165 -0.0851817 2.38972 0.0484456 2.38972 0.285999V1.12968H9.24096V0.286033C9.24096 0.0484796 9.51418 -0.0851476 9.7017 0.0606963L11.5205 1.47531C11.6675 1.5896 11.6675 1.81168 11.5205 1.92597L9.7017 3.34058C9.51418 3.48644 9.24096 3.3528 9.24096 3.11526V2.27157H2.38972V3.11522ZM9.81182 5.69705H1.81864C1.50332 5.69705 1.2477 5.95267 1.2477 6.26799V14.2612C1.2477 14.5765 1.50332 14.8321 1.81864 14.8321H9.81182C10.1271 14.8321 10.3827 14.5765 10.3827 14.2612V6.26799C10.3827 5.95267 10.1271 5.69705 9.81182 5.69705ZM1.81864 4.55517C0.872675 4.55517 0.105821 5.32204 0.105821 6.26799V14.2612C0.105821 15.2071 0.872675 15.974 1.81864 15.974H9.81182C10.7577 15.974 11.5246 15.2071 11.5246 14.2612V6.26799C11.5246 5.32204 10.7577 4.55517 9.81182 4.55517H1.81864ZM15.794 6.83897H14.9503V13.6903H15.794C16.0315 13.6903 16.1652 13.9635 16.0193 14.151L14.6047 15.9698C14.4904 16.1168 14.2683 16.1168 14.154 15.9698L12.7395 14.151C12.5937 13.9635 12.7273 13.6903 12.9648 13.6903H13.8084V6.83897H12.9648C12.7273 6.83897 12.5935 6.56575 12.7395 6.37824L14.154 4.55945C14.2683 4.41251 14.4904 4.41251 14.6047 4.55946L16.0193 6.37824C16.1651 6.56575 16.0315 6.83897 15.794 6.83897Z" fill="#0277FA"/>
+const AreaIcon = ({style, stroke, onPress, fill}) => {
+  return (
+    <Svg
+      style={style}
+      viewBox="0 0 17 17"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg">
+      <Path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M2.38972 3.11522C2.38972 3.35277 2.1165 3.4864 1.929 3.34055L0.110206 1.92594C-0.0367352 1.81165 -0.0367352 1.58956 0.110206 1.47527L1.929 0.0606623C2.1165 -0.0851817 2.38972 0.0484456 2.38972 0.285999V1.12968H9.24096V0.286033C9.24096 0.0484796 9.51418 -0.0851476 9.7017 0.0606963L11.5205 1.47531C11.6675 1.5896 11.6675 1.81168 11.5205 1.92597L9.7017 3.34058C9.51418 3.48644 9.24096 3.3528 9.24096 3.11526V2.27157H2.38972V3.11522ZM9.81182 5.69705H1.81864C1.50332 5.69705 1.2477 5.95267 1.2477 6.26799V14.2612C1.2477 14.5765 1.50332 14.8321 1.81864 14.8321H9.81182C10.1271 14.8321 10.3827 14.5765 10.3827 14.2612V6.26799C10.3827 5.95267 10.1271 5.69705 9.81182 5.69705ZM1.81864 4.55517C0.872675 4.55517 0.105821 5.32204 0.105821 6.26799V14.2612C0.105821 15.2071 0.872675 15.974 1.81864 15.974H9.81182C10.7577 15.974 11.5246 15.2071 11.5246 14.2612V6.26799C11.5246 5.32204 10.7577 4.55517 9.81182 4.55517H1.81864ZM15.794 6.83897H14.9503V13.6903H15.794C16.0315 13.6903 16.1652 13.9635 16.0193 14.151L14.6047 15.9698C14.4904 16.1168 14.2683 16.1168 14.154 15.9698L12.7395 14.151C12.5937 13.9635 12.7273 13.6903 12.9648 13.6903H13.8084V6.83897H12.9648C12.7273 6.83897 12.5935 6.56575 12.7395 6.37824L14.154 4.55945C14.2683 4.41251 14.4904 4.41251 14.6047 4.55946L16.0193 6.37824C16.1651 6.56575 16.0315 6.83897 15.794 6.83897Z"
+        fill="#0277FA"
+      />
     </Svg>
   );
 };
 
-const LocationIcon = ({style, stroke, onPress,fill} ) => {
-  return ( 
-    <Svg style={style} viewBox="0 0 14 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <Path d="M7.00002 4.20605C6.44926 4.20605 5.91087 4.3705 5.45293 4.6786C4.99499 4.98669 4.63807 5.4246 4.4273 5.93694C4.21654 6.44929 4.16139 7.01305 4.26884 7.55695C4.37629 8.10086 4.6415 8.60046 5.03095 8.99259C5.42039 9.38472 5.91658 9.65177 6.45675 9.75996C6.99693 9.86815 7.55684 9.81262 8.06567 9.6004C8.57451 9.38818 9.00941 9.0288 9.3154 8.5677C9.62138 8.1066 9.7847 7.5645 9.7847 7.00994C9.7847 6.26631 9.49132 5.55313 8.96909 5.02729C8.44686 4.50146 7.73856 4.20605 7.00002 4.20605ZM7.00002 8.41189C6.72464 8.41189 6.45544 8.32967 6.22647 8.17562C5.9975 8.02157 5.81904 7.80262 5.71366 7.54644C5.60828 7.29027 5.58071 7.00839 5.63443 6.73644C5.68815 6.46449 5.82076 6.21468 6.01548 6.01862C6.21021 5.82255 6.4583 5.68903 6.72839 5.63494C6.99847 5.58084 7.27843 5.60861 7.53284 5.71472C7.78726 5.82083 8.00472 6.00052 8.15771 6.23107C8.3107 6.46161 8.39236 6.73267 8.39236 7.00994C8.39236 7.38176 8.24567 7.73835 7.98455 8.00127C7.72344 8.26418 7.36929 8.41189 7.00002 8.41189Z" fill="#0277FA"/>
-    <Path d="M7 16.8247C6.41379 16.8278 5.83538 16.6893 5.31322 16.421C4.79106 16.1527 4.34034 15.7623 3.99881 15.2826C1.3457 11.5976 0 8.82734 0 7.04828C0 5.17896 0.737498 3.3862 2.05025 2.06439C3.36301 0.742584 5.14348 0 7 0C8.85652 0 10.637 0.742584 11.9497 2.06439C13.2625 3.3862 14 5.17896 14 7.04828C14 8.82734 12.6543 11.5976 10.0012 15.2826C9.65966 15.7623 9.20894 16.1527 8.68678 16.421C8.16462 16.6893 7.58622 16.8278 7 16.8247ZM7 1.53022C5.54668 1.53189 4.15337 2.11394 3.12572 3.14868C2.09807 4.18341 1.52001 5.58634 1.51835 7.04968C1.51835 8.45863 2.8362 11.0641 5.22824 14.3861C5.43131 14.6677 5.69772 14.8969 6.00567 15.055C6.31362 15.213 6.65435 15.2954 7 15.2954C7.34565 15.2954 7.68638 15.213 7.99433 15.055C8.30228 14.8969 8.56869 14.6677 8.77176 14.3861C11.1638 11.0641 12.4817 8.45863 12.4817 7.04968C12.48 5.58634 11.9019 4.18341 10.8743 3.14868C9.84663 2.11394 8.45332 1.53189 7 1.53022Z" fill="#0277FA"/>
+const LocationIcon = ({style, stroke, onPress, fill}) => {
+  return (
+    <Svg
+      style={style}
+      viewBox="0 0 14 17"
+      fill={fill}
+      xmlns="http://www.w3.org/2000/svg">
+      <Path
+        d="M7.00002 4.20605C6.44926 4.20605 5.91087 4.3705 5.45293 4.6786C4.99499 4.98669 4.63807 5.4246 4.4273 5.93694C4.21654 6.44929 4.16139 7.01305 4.26884 7.55695C4.37629 8.10086 4.6415 8.60046 5.03095 8.99259C5.42039 9.38472 5.91658 9.65177 6.45675 9.75996C6.99693 9.86815 7.55684 9.81262 8.06567 9.6004C8.57451 9.38818 9.00941 9.0288 9.3154 8.5677C9.62138 8.1066 9.7847 7.5645 9.7847 7.00994C9.7847 6.26631 9.49132 5.55313 8.96909 5.02729C8.44686 4.50146 7.73856 4.20605 7.00002 4.20605ZM7.00002 8.41189C6.72464 8.41189 6.45544 8.32967 6.22647 8.17562C5.9975 8.02157 5.81904 7.80262 5.71366 7.54644C5.60828 7.29027 5.58071 7.00839 5.63443 6.73644C5.68815 6.46449 5.82076 6.21468 6.01548 6.01862C6.21021 5.82255 6.4583 5.68903 6.72839 5.63494C6.99847 5.58084 7.27843 5.60861 7.53284 5.71472C7.78726 5.82083 8.00472 6.00052 8.15771 6.23107C8.3107 6.46161 8.39236 6.73267 8.39236 7.00994C8.39236 7.38176 8.24567 7.73835 7.98455 8.00127C7.72344 8.26418 7.36929 8.41189 7.00002 8.41189Z"
+        fill="#0277FA"
+      />
+      <Path
+        d="M7 16.8247C6.41379 16.8278 5.83538 16.6893 5.31322 16.421C4.79106 16.1527 4.34034 15.7623 3.99881 15.2826C1.3457 11.5976 0 8.82734 0 7.04828C0 5.17896 0.737498 3.3862 2.05025 2.06439C3.36301 0.742584 5.14348 0 7 0C8.85652 0 10.637 0.742584 11.9497 2.06439C13.2625 3.3862 14 5.17896 14 7.04828C14 8.82734 12.6543 11.5976 10.0012 15.2826C9.65966 15.7623 9.20894 16.1527 8.68678 16.421C8.16462 16.6893 7.58622 16.8278 7 16.8247ZM7 1.53022C5.54668 1.53189 4.15337 2.11394 3.12572 3.14868C2.09807 4.18341 1.52001 5.58634 1.51835 7.04968C1.51835 8.45863 2.8362 11.0641 5.22824 14.3861C5.43131 14.6677 5.69772 14.8969 6.00567 15.055C6.31362 15.213 6.65435 15.2954 7 15.2954C7.34565 15.2954 7.68638 15.213 7.99433 15.055C8.30228 14.8969 8.56869 14.6677 8.77176 14.3861C11.1638 11.0641 12.4817 8.45863 12.4817 7.04968C12.48 5.58634 11.9019 4.18341 10.8743 3.14868C9.84663 2.11394 8.45332 1.53189 7 1.53022Z"
+        fill="#0277FA"
+      />
     </Svg>
   );
 };
 
-const AreaIcon1 = ({style, stroke, onPress,fill} ) => {
-  return ( 
-    <Svg style={style} viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <Path d="M0 1.55556V12.4444C0 13.3023 0.697667 14 1.55556 14H12.4444C13.3023 14 14 13.3023 14 12.4444V1.55556C14 0.697667 13.3023 0 12.4444 0H1.55556C0.697667 0 0 0.697667 0 1.55556ZM12.446 12.4444H1.55556V1.55556H12.4444L12.446 12.4444Z" fill="#0277FA"/>
-    <Path d="M9.33355 7.00022H10.8891V3.11133H7.00022V4.66688H9.33355V7.00022ZM7.00022 9.33355H4.66688V7.00022H3.11133V10.8891H7.00022V9.33355Z" fill="#0277FA"/>
-    </Svg>    
+const AreaIcon1 = ({style, stroke, onPress, fill}) => {
+  return (
+    <Svg
+      style={style}
+      viewBox="0 0 14 14"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg">
+      <Path
+        d="M0 1.55556V12.4444C0 13.3023 0.697667 14 1.55556 14H12.4444C13.3023 14 14 13.3023 14 12.4444V1.55556C14 0.697667 13.3023 0 12.4444 0H1.55556C0.697667 0 0 0.697667 0 1.55556ZM12.446 12.4444H1.55556V1.55556H12.4444L12.446 12.4444Z"
+        fill="#0277FA"
+      />
+      <Path
+        d="M9.33355 7.00022H10.8891V3.11133H7.00022V4.66688H9.33355V7.00022ZM7.00022 9.33355H4.66688V7.00022H3.11133V10.8891H7.00022V9.33355Z"
+        fill="#0277FA"
+      />
+    </Svg>
   );
 };
 
-const InvestmentIcon = ({style, stroke, onPress,fill} ) => {
-  return ( 
-<Svg style={style} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-<Circle cx="10" cy="10" r="9" stroke="#0277FA" stroke-width="2"/>
-<Rect x="9.28564" y="5" width="1.42857" height="10" rx="0.714286" fill="#0277FA"/>
-<Rect x="15" y="9.28564" width="1.42857" height="10" rx="0.714286" transform="rotate(90 15 9.28564)" fill="#0277FA"/>
-</Svg>  
+const InvestmentIcon = ({style, stroke, onPress, fill}) => {
+  return (
+    <Svg
+      style={style}
+      viewBox="0 0 20 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg">
+      <Circle cx="10" cy="10" r="9" stroke="#0277FA" stroke-width="2" />
+      <Rect
+        x="9.28564"
+        y="5"
+        width="1.42857"
+        height="10"
+        rx="0.714286"
+        fill="#0277FA"
+      />
+      <Rect
+        x="15"
+        y="9.28564"
+        width="1.42857"
+        height="10"
+        rx="0.714286"
+        transform="rotate(90 15 9.28564)"
+        fill="#0277FA"
+      />
+    </Svg>
   );
 };
-
 
 export {
   ForwardIcon,

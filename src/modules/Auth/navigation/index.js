@@ -5,6 +5,7 @@ import AppIntro from '../screens/IntroSlider';
 import ForgotPassword from '../screens/ForgotPasswordScreen';
 import CreateNewPassword from '../screens/CreateNewPasswordScreen';
 import SignUpScreen from '@Auth/screens/SignUpScreen';
+import BottomTab from '../../../navigator/BottomTab';
 
 const Stack = createNativeStackNavigator();
 const screenOptions = {headerShown: false};
@@ -32,6 +33,11 @@ export const AuthModule = () => {
       <Stack.Screen
         name="createnewpassword"
         component={CreateNewPassword}
+        options={screenOptions}
+      />
+      <Stack.Screen
+        name="BottomTab"
+        component={BottomTab}
         options={screenOptions}
       />
     </Stack.Navigator>

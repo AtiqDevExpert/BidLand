@@ -10,8 +10,7 @@ import Svg, {
   G,
 } from 'react-native-svg';
 
-
-const ArrowIconnext = ({style, stroke, onPress, fill} ) => {
+const ArrowIconnext = ({style, stroke, onPress, fill}) => {
   return (
     <Svg
       style={style}
@@ -26,7 +25,7 @@ const ArrowIconnext = ({style, stroke, onPress, fill} ) => {
   );
 };
 
-const ThreePersonIconblue = ({style, stroke, onPress, fill} ) => {
+const ThreePersonIconblue = ({style, stroke, onPress, fill}) => {
   return (
     <Svg
       style={style}
@@ -61,7 +60,7 @@ const ThreePersonIconblue = ({style, stroke, onPress, fill} ) => {
   );
 };
 
-const FilterIcon = ({style, stroke, onPress, fill} ) => {
+const FilterIcon = ({style, stroke, onPress, fill}) => {
   return (
     <Svg
       style={style}
@@ -84,7 +83,7 @@ const FilterIcon = ({style, stroke, onPress, fill} ) => {
   );
 };
 
-const ThreeLines = ({style, stroke, onPress, fill} ) => {
+const ThreeLines = ({style, stroke, onPress, fill}) => {
   return (
     <Svg
       style={style}
@@ -112,7 +111,7 @@ const ThreeLines = ({style, stroke, onPress, fill} ) => {
   );
 };
 
-const BellIcon = ({style, stroke, onPress, fill} ) => {
+const BellIcon = ({style, stroke, onPress, fill}) => {
   return (
     <Svg
       style={style}
@@ -127,7 +126,7 @@ const BellIcon = ({style, stroke, onPress, fill} ) => {
   );
 };
 
-const DownIcon = ({style, stroke, onPress, fill} ) => {
+const DownIcon = ({style, stroke, onPress, fill}) => {
   return (
     <Svg
       style={style}
@@ -142,7 +141,7 @@ const DownIcon = ({style, stroke, onPress, fill} ) => {
   );
 };
 
-const DoYouIcon = ({style, stroke, onPress, fill} ) => {
+const DoYouIcon = ({style, stroke, onPress, fill}) => {
   return (
     <Svg
       style={style}
@@ -789,7 +788,7 @@ const DoYouIcon = ({style, stroke, onPress, fill} ) => {
     </Svg>
   );
 };
-const HomeIcon = ({style, stroke, onPress, fill} ) => {
+const HomeIcon = ({style, stroke, onPress, fill}) => {
   return (
     <Svg
       style={style}
@@ -804,7 +803,7 @@ const HomeIcon = ({style, stroke, onPress, fill} ) => {
     </Svg>
   );
 };
-const PlotIcon = ({style, stroke, onPress, fill} ) => {
+const PlotIcon = ({style, stroke, onPress, fill}) => {
   return (
     <Svg
       style={style}
@@ -831,7 +830,7 @@ const PlotIcon = ({style, stroke, onPress, fill} ) => {
     </Svg>
   );
 };
-const AddIcon = ({style, stroke, onPress, fill} ) => {
+const AddIcon = ({style, stroke, onPress, fill}) => {
   return (
     <Svg
       style={style}
@@ -847,7 +846,7 @@ const AddIcon = ({style, stroke, onPress, fill} ) => {
   );
 };
 
-const ClientsIcon = ({style, stroke, onPress, fill} ) => {
+const ClientsIcon = ({style, stroke, onPress, fill}) => {
   return (
     <Svg
       style={style}
@@ -882,7 +881,7 @@ const ClientsIcon = ({style, stroke, onPress, fill} ) => {
     </Svg>
   );
 };
-const ProfileIcon = ({style, stroke, onPress, fill} ) => {
+const ProfileIcon = ({style, stroke, onPress, fill}) => {
   return (
     <Svg
       style={style}
@@ -900,7 +899,7 @@ const ProfileIcon = ({style, stroke, onPress, fill} ) => {
     </Svg>
   );
 };
-const GreenIcon = ({style, stroke, onPress, fill} ) => {
+const GreenIcon = ({style, stroke, onPress, fill}) => {
   return (
     <Svg
       style={style}
@@ -911,7 +910,7 @@ const GreenIcon = ({style, stroke, onPress, fill} ) => {
     </Svg>
   );
 };
-const BlueIcon = ({style, stroke, onPress, fill} ) => {
+const BlueIcon = ({style, stroke, onPress, fill}) => {
   return (
     <Svg
       style={style}
@@ -922,7 +921,7 @@ const BlueIcon = ({style, stroke, onPress, fill} ) => {
     </Svg>
   );
 };
-const RedIcon = ({style, stroke, onPress, fill} ) => {
+const RedIcon = ({style, stroke, onPress, fill}) => {
   return (
     <Svg
       style={style}
@@ -933,7 +932,7 @@ const RedIcon = ({style, stroke, onPress, fill} ) => {
     </Svg>
   );
 };
-const DrawerBackIcon = ({style, stroke, onPress, fill} ) => {
+const DrawerBackIcon = ({style, stroke, onPress, fill}) => {
   return (
     <Svg
       style={style}
@@ -948,7 +947,7 @@ const DrawerBackIcon = ({style, stroke, onPress, fill} ) => {
     </Svg>
   );
 };
-const LogoutIcon = ({style, stroke, onPress, fill} ) => {
+const LogoutIcon = ({style, stroke, onPress, fill}) => {
   return (
     <Svg
       style={style}
@@ -968,7 +967,7 @@ const LogoutIcon = ({style, stroke, onPress, fill} ) => {
   );
 };
 
-const SearchRightIcon = ({style, stroke, onPress, fill} ) => {
+const SearchRightIcon = ({style, stroke, onPress, fill}) => {
   return (
     <Svg
       style={style}
@@ -979,13 +978,13 @@ const SearchRightIcon = ({style, stroke, onPress, fill} ) => {
         fill-rule="evenodd"
         clip-rule="evenodd"
         d="M8.47853 0C13.1534 0 16.9571 3.80364 16.9571 8.47856C16.9571 10.3461 16.3428 12.0688 15.3158 13.4712L19.9481 18.1035C20.4575 18.6129 20.4575 19.4387 19.9481 19.948C19.4388 20.4573 18.613 20.4573 18.1036 19.948L13.4714 15.3157C12.0689 16.3427 10.3461 16.9571 8.47857 16.9571C3.80364 16.9571 0 13.1535 0 8.47856C0 3.80364 3.8036 0 8.47853 0ZM2.60879 8.47855C2.60879 11.7153 5.24176 14.3483 8.47855 14.3483C11.7153 14.3483 14.3483 11.7153 14.3483 8.47855C14.3483 5.24176 11.7153 2.60879 8.47855 2.60879C5.24176 2.60879 2.60879 5.24176 2.60879 8.47855Z"
-       fill={fill}
+        fill={fill}
       />
     </Svg>
   );
 };
 
-const IndexIcon = ({style, stroke, onPress, fill} ) => {
+const IndexIcon = ({style, stroke, onPress, fill}) => {
   return (
     <Svg
       style={style}
@@ -1008,7 +1007,7 @@ const IndexIcon = ({style, stroke, onPress, fill} ) => {
   );
 };
 
-const BackIconWhite = ({style, stroke, onPress, fill} ) => {
+const BackIconWhite = ({style, stroke, onPress, fill}) => {
   return (
     <Svg
       style={style}
@@ -1023,7 +1022,7 @@ const BackIconWhite = ({style, stroke, onPress, fill} ) => {
     </Svg>
   );
 };
-const PlusIcon = ({style, stroke, onPress, fill} ) => {
+const PlusIcon = ({style, stroke, onPress, fill}) => {
   return (
     <Svg
       style={style}
@@ -1052,7 +1051,7 @@ const PlusIcon = ({style, stroke, onPress, fill} ) => {
     </Svg>
   );
 };
-const DotsIcon = ({style, stroke, onPress, fill} ) => {
+const DotsIcon = ({style, stroke, onPress, fill}) => {
   return (
     <Svg
       style={style}
@@ -1092,7 +1091,7 @@ const DotsIcon = ({style, stroke, onPress, fill} ) => {
     </Svg>
   );
 };
-const ClientEmptyIcon = ({style, stroke, onPress, fill} ) => {
+const ClientEmptyIcon = ({style, stroke, onPress, fill}) => {
   return (
     <Svg
       style={style}
@@ -1299,6 +1298,24 @@ const ClientEmptyIcon = ({style, stroke, onPress, fill} ) => {
     </Svg>
   );
 };
+const ChatIcon = ({style, stroke, onPress, fill}) => {
+  return (
+    <Svg
+      fill={fill}
+      style={style}
+      onPress={onPress}
+      version="1.1"
+      id="Capa_1"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 60 60">
+      <Path
+        d="M30,1.5c-16.542,0-30,12.112-30,27c0,5.205,1.647,10.246,4.768,14.604c-0.591,6.537-2.175,11.39-4.475,13.689
+	c-0.304,0.304-0.38,0.769-0.188,1.153C0.276,58.289,0.625,58.5,1,58.5c0.046,0,0.093-0.003,0.14-0.01
+	c0.405-0.057,9.813-1.412,16.617-5.338C21.622,54.711,25.738,55.5,30,55.5c16.542,0,30-12.112,30-27S46.542,1.5,30,1.5z"
+      />
+    </Svg>
+  );
+};
 
 export {
   ArrowIconnext,
@@ -1324,4 +1341,5 @@ export {
   PlusIcon,
   DotsIcon,
   ClientEmptyIcon,
+  ChatIcon,
 };

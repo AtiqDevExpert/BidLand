@@ -11,7 +11,7 @@ import {
 } from '../../Assets/SVG/Svg';
 
 const PlotComponent = ({item1, onPressButton, onChangeText}) => {
-  const divider = (index: number) => {
+  const divider = index => {
     if (data.length - 1 == index) {
       return 0;
     } else {
@@ -37,7 +37,7 @@ const PlotComponent = ({item1, onPressButton, onChangeText}) => {
         }}>
         <View
           style={{
-            backgroundColor: Colors.darkPrimery,
+            backgroundColor: Colors.black,
             flexDirection: 'row',
             borderTopLeftRadius: 10,
             borderTopRightRadius: 10,
@@ -49,9 +49,7 @@ const PlotComponent = ({item1, onPressButton, onChangeText}) => {
               alignItems: 'center',
               justifyContent: 'center',
             }}>
-            <Text style={styles.text5}>
-              {/* {item1.Phase} */}
-              </Text>
+            <Text style={styles.text5}>{/* {item1.Phase} */}</Text>
           </View>
 
           <View
@@ -74,9 +72,7 @@ const PlotComponent = ({item1, onPressButton, onChangeText}) => {
               alignItems: 'center',
               justifyContent: 'center',
             }}>
-            <Text style={styles.text5}>
-              {/* {item1.Block} */}
-              </Text>
+            <Text style={styles.text5}>{/* {item1.Block} */}</Text>
           </View>
         </View>
 
@@ -101,9 +97,7 @@ const PlotComponent = ({item1, onPressButton, onChangeText}) => {
             <View style={styles.ndummyChild1}>
               <View style={styles.ndummyChild2}>
                 <LocationIcon style={styles.logo} />
-                <Text style={styles.text2}>
-                  {/* {item1.Location} */}
-                  </Text>
+                <Text style={styles.text2}>{/* {item1.Location} */}</Text>
               </View>
 
               <View style={styles.ndummyChild3}>
@@ -115,16 +109,12 @@ const PlotComponent = ({item1, onPressButton, onChangeText}) => {
 
             <View style={styles.ndummyChild21}>
               <AreaIcon style={styles.logo} />
-              <Text style={styles.text2}>
-                {/* {item1.width} */}
-                </Text>
+              <Text style={styles.text2}>{/* {item1.width} */}</Text>
             </View>
 
             <View style={styles.ndummyChild21}>
               <AreaIcon1 style={styles.logo} />
-              <Text style={styles.text2}>
-                {/* {item1.area} */}
-                </Text>
+              <Text style={styles.text2}>{/* {item1.area} */}</Text>
             </View>
           </View>
 
@@ -140,7 +130,7 @@ const PlotComponent = ({item1, onPressButton, onChangeText}) => {
               alignSelf: 'center',
               flexWrap: 'wrap',
             }}>
-            {data.map((item: any, index: any) => {
+            {data.map((item, index) => {
               return (
                 <>
                   <View
@@ -154,7 +144,8 @@ const PlotComponent = ({item1, onPressButton, onChangeText}) => {
                     }}>
                     <Text style={styles.text6}>
                       {/* {item.name} */}
-                       20%</Text>
+                      20%
+                    </Text>
                   </View>
                 </>
               );

@@ -70,7 +70,7 @@ const CreateNewPassword = ({navigation}) => {
     <SafeAreaView style={styles.main}>
       <ImageBackground
         style={{flex: 1, justifyContent: 'center'}}
-        source={require('../../../../Assets/Images/house3.jpg')}>
+        source={require('../../../../Assets/Images/background2.jpg')}>
         <View style={styles.view3}>
           <View style={styles.whitebackground}>
             <View style={styles.view1}>

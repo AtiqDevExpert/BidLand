@@ -5,7 +5,8 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import SplashScreen from 'react-native-splash-screen';
 import AuthModule from './modules/Auth/navigation/index';
 import {LogBox} from 'react-native';
-import DrawerNavigator from './navigator/DrawerNavigation/DrawerNavigation';
+
+import BottomTab from './navigator/BottomTab';
 
 LogBox.ignoreLogs(['Warning: ...']);
 LogBox.ignoreAllLogs();
@@ -24,8 +25,8 @@ const App = () => {
           {user === true ? (
             <>
               <Stack.Screen
-                name="Drawer"
-                component={DrawerNavigator}
+                name="BottomTab"
+                component={BottomTab}
                 options={{headerShown: false}}
               />
             </>

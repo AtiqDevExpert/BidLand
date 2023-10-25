@@ -17,6 +17,7 @@ import {
   AddIcon,
   ClientsIcon,
   ProfileIcon,
+  ChatIcon,
 } from '@assets/SVG/SvgDashboard';
 import HomeModule from '@Home/navigation/index';
 import PlotsModule from '@Plots/navigation';
@@ -97,7 +98,7 @@ const BottomTab = () => {
                 justifyContent: 'center',
                 alignItems: 'center',
               }}>
-              <PlotIcon
+              <ClientsIcon
                 fill={focused ? '#4AB5E3' : '#798293'}
                 style={{
                   height: 30,
@@ -113,7 +114,7 @@ const BottomTab = () => {
                   fontSize: 12,
                   textAlign: 'center',
                 }}>
-                Plots
+                Sellers
               </Text>
             </View>
           ),
@@ -168,7 +169,7 @@ const BottomTab = () => {
                 justifyContent: 'center',
                 alignItems: 'center',
               }}>
-              <ClientsIcon
+              <ChatIcon
                 fill={focused ? '#4AB5E3' : '#798293'}
                 style={{
                   height: 30,

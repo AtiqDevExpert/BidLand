@@ -21,6 +21,7 @@ export default StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 20,
     borderRadius: 12,
+    marginBottom: 10,
   },
   sortBtn: {
     backgroundColor: Colors.dark,

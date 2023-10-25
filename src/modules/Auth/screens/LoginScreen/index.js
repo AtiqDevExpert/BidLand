@@ -23,7 +23,7 @@ const Login = () => {
     navigation.navigate('forgotpassword');
   };
   const SubmitLogin = () => {
-    navigation.navigate('HomeModule');
+    navigation.navigate('BottomTab');
   };
 
   const gotoSignUp = () => {
@@ -34,7 +34,7 @@ const Login = () => {
     <SafeAreaView style={styles.mainView}>
       <ImageBackground
         style={{flex: 1, justifyContent: 'center'}}
-        source={require('../../../../Assets/Images/house3.jpg')}>
+        source={require('../../../../Assets/Images/background2.jpg')}>
         <View style={styles.dummyView}>
           <View style={styles.mainView1}>
             <ScrollView keyboardShouldPersistTaps="handled">

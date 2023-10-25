@@ -77,7 +77,7 @@ ndummyChild21:{
 logo: { height: 15, width: 15 },
 text2: {
   width:"70%",
-  color: "#263238",
+  color:  Colors.black,
   fontFamily: 'SF Pro Display',
   fontStyle: 'normal',
   fontWeight: '400',

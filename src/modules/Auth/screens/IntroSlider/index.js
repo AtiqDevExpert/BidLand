@@ -15,7 +15,7 @@ const AppIntro = ({navigation}) => {
       text: 'Lorem ipsum is a placeholder text\n commonly used to demonstrate the\n visual form of a document or a typeface\n without relying on meani Lorem ipsum\n may be ',
 
       image: require('../../../../Assets/Intro/Images/Logo1.png'),
-      ImageBackground: require('../../../../Assets/Intro/Images/background.png'),
+      ImageBackground: require('../../../../Assets/Intro/Images/background2.jpg'),
       TouchableOpacity: TouchableOpacity,
     },
     {
@@ -25,7 +25,7 @@ const AppIntro = ({navigation}) => {
       text: 'Lorem ipsum is a placeholder text\n commonly used to demonstrate the\n visual form of a document or a typeface\n without relying on meani Lorem ipsum\n may be ',
 
       image: require('../../../../Assets/Intro/Images/Logo2.png'),
-      ImageBackground: require('../../../../Assets/Intro/Images/background.png'),
+      ImageBackground: require('../../../../Assets/Intro/Images/background2.jpg'),
       TouchableOpacity: TouchableOpacity,
     },
     {
@@ -33,7 +33,7 @@ const AppIntro = ({navigation}) => {
       title: 'Its Totally\nReliable',
       text: 'Lorem ipsum is a placeholder text\n commonly used to demonstrate the\n visual form of a document or a typeface\n without relying on meani Lorem ipsum\n may be ',
       image: require('../../../../Assets/Intro/Images/Logo3.png'),
-      ImageBackground: require('../../../../Assets/Intro/Images/background.png'),
+      ImageBackground: require('../../../../Assets/Intro/Images/background2.jpg'),
       TouchableOpacity: TouchableOpacity,
     },
   ];

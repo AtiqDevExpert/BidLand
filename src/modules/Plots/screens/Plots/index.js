@@ -6,17 +6,13 @@ import {
   FlatList,
   TextInput,
   SafeAreaView,
+  TouchableOpacity,
 } from 'react-native';
 import styles from './styles';
 import {Colors} from '../../../../constants/Colors';
 import PlotComponent from '@components/PlotComponent';
-import {LocationIcon} from '@assets/SVG/Svg';
-import {SearchRightIcon} from '@assets/SVG/SvgDashboard';
-import SwitchSelector from 'react-native-switch-selector';
-import SoldPlotComponent from '@components/SolidPlotComponent';
-//component containing the view of Login screen
+import Icon from 'react-native-vector-icons/MaterialIcons';
 const Plots = ({navigation}) => {
-  let plotNavigation = 'filter';
   const plotdata = [
     {
       Phase: 'Phase 1',
@@ -327,52 +323,80 @@ const Plots = ({navigation}) => {
       soldPrice: '25000000',
     },
   ];
-  const [plotType, setPlotType] = useState('Purchase');
-  const [searchPlot, setSearchPlot] = useState();
+
   const [search, setSearch] = useState('');
-  // console.log('------------> from ui response ', plotNavigation);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
   return (
     <SafeAreaView style={styles.mainView1}>
-      {plotNavigation == 'filter' && (
-        <>
-          <View style={styles.topview1}>
-            <Text style={styles.text1}>Filter Result</Text>
-          </View>
-          <ScrollView
-            style={{
-              flex: 1,
-              // backgroundColor:'red'
-            }}>
-            {plotType == 'Purchase' && (
-              <View style={styles.view2}>
-                <FlatList
-                  nestedScrollEnabled={true}
-                  style={{
-                    borderRadius: 20,
+      {/* {plotNavigation == 'filter' && ( */}
+      <>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            marginVertical: 20,
+            marginHorizontal: 10,
+          }}>
+          <>
+            <View
+              style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <Text style={styles.text1}>All Sellers</Text>
+            </View>
+          </>
+          <>
+            <View
+              style={{
+                // backgroundColor: 'red',
+                width: '75%',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <View style={styles.searchInputContainer}>
+                <Icon name="search" color={Colors.grey} size={25} />
+                <TextInput
+                  placeholder="Search seller"
+                  placeholderTextColor={'#000'}
+                  value={search}
+                  onChange={text => {
+                    setSearch(text);
                   }}
-                  data={plotdata.filter(item =>
-                    item.Location.toUpperCase().includes(search.toUpperCase()),
-                  )}
-                  showsVerticalScrollIndicator={false}
-                  renderItem={({item, index}) => {
-                    return (
-                      <PlotComponent
-                        item1={item}
-                        onPressButton={() =>
-                          navigation.navigate('PlotDetailNavigation')
-                        }
-                      />
-                    );
-                  }}
-                  keyExtractor={item => item.id}
                 />
               </View>
-            )}
-          </ScrollView>
-        </>
-      )}
+            </View>
+          </>
+        </View>
 
-      {plotNavigation == 'plot' && (
+        <View style={styles.view2}>
+          <FlatList
+            nestedScrollEnabled={true}
+            style={{
+              borderRadius: 20,
+            }}
+            data={plotdata.filter(item =>
+              item.Location.toUpperCase().includes(search.toUpperCase()),
+            )}
+            showsVerticalScrollIndicator={false}
+            renderItem={({item, index}) => {
+              return (
+                <PlotComponent
+                  item1={item}
+                  onPressButton={() =>
+                    navigation.navigate('PlotDetailNavigation')
+                  }
+                />
+              );
+            }}
+            keyExtractor={item => item.id}
+          />
+        </View>
+      </>
+      {/* )} */}
+
+      {/* {plotNavigation == 'plot' && (
         <>
           <View style={styles.mainView}>
             <View style={styles.view1}>
@@ -388,7 +412,7 @@ const Plots = ({navigation}) => {
                     placeholder="Search property"
                     placeholderTextColor="#0277FA"
                     style={styles.text3}
-                    onChangeText={(text) => {
+                    onChangeText={text => {
                       setSearch(text);
                     }}
                     value={search}
@@ -495,7 +519,7 @@ const Plots = ({navigation}) => {
             )}
           </ScrollView>
         </>
-      )}
+      )} */}
     </SafeAreaView>
   );
 };

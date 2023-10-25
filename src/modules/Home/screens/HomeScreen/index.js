@@ -69,7 +69,8 @@ const HomeScreen = ({navigation}) => {
     return (
       <Pressable
         activeOpacity={0.8}
-        onPress={() => navigation.navigate('DetailsScreen', house)}>
+        onPress={() => navigation.navigate('DetailsScreen', house)}
+        style={{marginVertical: 20}}>
         <View style={styles.card}>
           {/* House image */}
           <Image source={house.image} style={styles.cardImage} />
@@ -137,30 +138,34 @@ const HomeScreen = ({navigation}) => {
           source={require('../../../../Assets/Images/person.jpg')}
         />
       </View>
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          paddingHorizontal: 20,
+        }}>
+        <View style={styles.searchInputContainer}>
+          <Icon name="search" color={Colors.grey} size={25} />
+          <TextInput placeholder="Search address, city, location" />
+        </View>
+
+        <View style={styles.sortBtn}>
+          <Icon name="tune" color={Colors.white} size={25} />
+        </View>
+      </View>
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* Input and sort button container */}
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            paddingHorizontal: 20,
-          }}>
-          <View style={styles.searchInputContainer}>
-            <Icon name="search" color={Colors.grey} size={25} />
-            <TextInput placeholder="Search address, city, location" />
-          </View>
 
-          <View style={styles.sortBtn}>
-            <Icon name="tune" color={Colors.white} size={25} />
-          </View>
-        </View>
         <ListOptions />
         <ListCategories />
         <FlatList
           snapToInterval={width - 20}
           showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{paddingLeft: 20, paddingVertical: 20}}
-          horizontal
+          contentContainerStyle={{
+            paddingLeft: 20,
+            paddingVertical: 20,
+          }}
+          horizontal={false}
           data={houses}
           renderItem={({item}) => <Card house={item} />}
         />

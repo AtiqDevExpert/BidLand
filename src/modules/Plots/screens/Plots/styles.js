@@ -4,11 +4,11 @@ import {Colors} from '../../../../constants/Colors';
 export default StyleSheet.create({
   mainView1: {
     flex: 1,
-    backgroundColor: '#F5F5F5',
+    backgroundColor: '#fff',
     //alignItems: "center",
   },
   mainView: {
-    backgroundColor: '#fff',
+    backgroundColor: '#F5F5F5',
   },
   view1: {
     backgroundColor: Colors.darkPrimery,
@@ -18,15 +18,15 @@ export default StyleSheet.create({
     borderBottomRightRadius: 20,
   },
   topview1: {
-    height: '25%',
-    width: '100%',
-    backgroundColor: Colors.darkPrimery,
+    // height: '10%',
+    // width: '100%',
+    backgroundColor: Colors.light,
     alignItems: 'center',
     justifyContent: 'center',
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
     flexDirection: 'row',
-    marginBottom:20,
+    marginBottom: 10,
   },
   view2: {
     flexDirection: 'row',
@@ -35,16 +35,15 @@ export default StyleSheet.create({
     width: '94%',
     alignSelf: 'center',
     // height: 450,
-    // backgroundColor:'green'
+    backgroundColor: '#F5F5F5',
   },
   text1: {
-    fontSize: 30,
-    fontWeight: '600',
-    color: Colors.white,
-    marginTop: 25,
+    fontSize: 25,
+    fontWeight: 'bold',
+    color: Colors.black,
+    // marginTop: 15,
+    padding: 5,
   },
-
-
 
   view11: {
     backgroundColor: 'white',
@@ -94,5 +93,25 @@ export default StyleSheet.create({
     width: 40,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  searchInputContainer: {
+    height: 50,
+    backgroundColor: Colors.light,
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+    borderRadius: 12,
+    // marginBottom: 10,
+    width: '100%',
+  },
+  sortBtn: {
+    backgroundColor: Colors.dark,
+    height: 50,
+    width: 50,
+    borderRadius: 12,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: 10,
   },
 });
