@@ -29,27 +29,40 @@ const SignUp = ({navigation}) => {
   const [visible, setVisible] = useState(false);
   const Signup = async () => {
     let finalUsername = name.replace(/\s+/g, '');
-    let body = {
-      username: finalUsername,
-      email: emailValue,
-      password: passwordValue,
-      role: role,
-      phone: phoneNumber,
-    };
-    if (!body?.email.includes('@') || body?.password.length < 8) {
+    let body = new FormData();
+    body.append('username', finalUsername);
+    body.append('email', emailValue);
+    body.append('password', passwordValue);
+    body.append('role', role);
+    body.append('phone', phoneNumber);
+
+    // Check if an image is selected
+    if (image) {
+      body.append('profilePicture', {
+        uri: image,
+        type: 'image/jpeg', // Adjust the type as per your image format
+        name: 'image.jpg',
+      });
+    }
+
+    if (!body.get('email').includes('@') || body.get('password').length < 8) {
       alert(
-        'Invalid Credential! Please check your email has @ and passowrd should be 8 or greater than 8 characters',
+        'Invalid Credential! Please check your email has @ and password should be 8 or greater than 8 characters',
       );
     } else {
-      // let response = await SignUp_Request(body);
+      try {
+        // Use the SignUp_Request function to send the request
+        let response = await SignUp_Request(body);
 
-      Toast.show('User Registered Successfully', Toast.LONG);
-      // console.log('🚀 ~ file: index.js:31 ~ Signup ~ response:', response);
+        // Handle the API response
+        Toast.show('User Registered Successfully', Toast.LONG);
+      } catch (error) {
+        console.error('Error signing up:', error);
+      }
     }
   };
-  const takePhotoFromCamera = () => {
-    // setVisible(false);
 
+  const takePhotoFromCamera = () => {
     ImagePicker.openCamera({
       width: 300,
       height: 400,
@@ -57,16 +70,8 @@ const SignUp = ({navigation}) => {
     }).then(async image => {
       if (selecter === false) {
         setImage(image.path);
-        console.log(
-          'selected image from main file ---------------------',
-          image.path,
-        );
       } else {
-        console.log(
-          'selected image from main file ---------------------',
-          image.path,
-        );
-        Alert.alert('Error2');
+        console.log('Error2');
       }
     });
   };
@@ -80,16 +85,8 @@ const SignUp = ({navigation}) => {
     }).then(image => {
       if (selecter === false) {
         setImage(image.path);
-        console.log(
-          'selected image from main file ---------------------',
-          image.path,
-        );
       } else {
-        console.log(
-          'selected image from main file ---------------------',
-          image.path,
-        );
-        Alert.alert('Error2');
+        console.log('Error2');
       }
     });
   };
