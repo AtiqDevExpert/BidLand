@@ -5,18 +5,28 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import SplashScreen from 'react-native-splash-screen';
 import AuthModule from './modules/Auth/navigation/index';
 import {LogBox} from 'react-native';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import BottomTab from './navigator/BottomTab';
-
 LogBox.ignoreLogs(['Warning: ...']);
 LogBox.ignoreAllLogs();
 const Stack = createNativeStackNavigator();
-
 const App = () => {
+  const fetchUserDetail = async () => {
+    let user = await AsyncStorage.getItem('USER_INFO');
+    console.log('🚀 ~ file: App.js:18 ~ fetchUserDetail ~ user:', user);
+    let registeredUser = JSON.parse(user);
+    if (registeredUser !== undefined) {
+      setUser(true);
+    } else {
+      setUser(false);
+    }
+  };
   useEffect(() => {
+    fetchUserDetail();
+
     SplashScreen.hide();
   }, []);
-  const [user, setUser] = useState(false);
+  const [user, setUser] = useState();
   return (
     <SafeAreaView style={styles.mainView}>
       <NavigationContainer>

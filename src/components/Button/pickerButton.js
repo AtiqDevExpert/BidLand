@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text, TouchableOpacity} from 'react-native';
 
-export const PickerButton: React.FC<any> = ({ disabled,text,marginBottom, fontWeight,fontSize,marginHorizontal ,backgroundColor, onPress, marginTop, color, elevation, flex,height,width,borderWidth,borderColor }) => {
+export const PickerButton = ({ disabled,text,marginBottom, fontWeight,fontSize,marginHorizontal ,backgroundColor, onPress, marginTop, color, elevation, flex,height,width,borderWidth,borderColor }) => {
     // console.log(borderColor)
 
     

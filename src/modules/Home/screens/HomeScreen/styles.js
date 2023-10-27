@@ -32,6 +32,7 @@ export default StyleSheet.create({
     alignItems: 'center',
     marginLeft: 10,
   },
+
   optionsCard: {
     height: 210,
     width: width / 2 - 30,
@@ -71,7 +72,7 @@ export default StyleSheet.create({
     paddingHorizontal: 40,
   },
   card: {
-    height: 250,
+    height: 270,
     backgroundColor: Colors.white,
     elevation: 10,
     width: width - 40,
@@ -81,9 +82,22 @@ export default StyleSheet.create({
   },
   cardImage: {
     width: '100%',
-    height: 120,
+    height: 150,
     borderRadius: 15,
   },
   facility: {flexDirection: 'row', marginRight: 15},
   facilityText: {marginLeft: 5, color: Colors.grey},
+  popupContainer: {
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    zIndex: 9999,
+  },
+  slide: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });

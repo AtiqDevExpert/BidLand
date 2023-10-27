@@ -12,7 +12,7 @@ import {
   ScrollView,
 } from 'react-native';
 import Modal from 'react-native-modal';
-import Button from '../../components/Button/button';
+import Button from '../Button/button';
 import {Colors} from '../../constants/Colors';
 import TextField from '@components/TextField';
 import {

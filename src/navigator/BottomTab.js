@@ -20,7 +20,7 @@ import {
   ChatIcon,
 } from '@assets/SVG/SvgDashboard';
 import HomeModule from '@Home/navigation/index';
-import PlotsModule from '@Plots/navigation';
+import SellersModule from '@Sellers/navigation/index';
 import AddModule from '@Add/navigation';
 import ProfileModule from '@Profile/navigation';
 import ChatModule from '@Chats/navigation';
@@ -86,8 +86,8 @@ const BottomTab = () => {
       />
 
       <Tab.Screen
-        name="PlotsModule"
-        component={PlotsModule}
+        name="SellersModule"
+        component={SellersModule}
         options={{
           headerShown: false,
           tabBarIcon: ({focused}) => (

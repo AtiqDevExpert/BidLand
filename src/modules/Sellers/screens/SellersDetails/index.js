@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -13,49 +13,44 @@ import ListofClientCard from '@components/ListofClientCard/ListofClientCard';
 import styles from './styles';
 import Button from '@components/Button/button';
 import SalePlotModal from '@components/SalePlotModal';
+import Loading from '../../../../components/Loading/Loading';
+import {get_Seller} from '../../../../utils/API/Requests';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 //component containing the view of Login screen
-const PlotDetail = ({navigation}) => {
+const SellersDetail = ({navigation, route}) => {
   const [issalePlotModalVisible, setSalePlotModalVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [seller, setSeller] = useState({});
+  let sellerId = route.params;
 
-  const clientDetail = [
-    {
-      personName: 'John Smith',
-      plotcount: '5',
-      Block: 'Block C',
-      location: 'Plot 266, Block B H.B.F.C Society, Lahore, Punjab, Pakistan',
-      totalInvestment: '50 Lacs',
-    },
-    {
-      personName: 'John Aly',
-      plotcount: '8',
-      Block: 'Block B',
-      location: 'Plot 266, Block B H.B.F.C Society, Lahore, Punjab, Pakistan',
-      totalInvestment: '70 Lacs',
-    },
-    {
-      personName: 'Smith Asad',
-      plotcount: '7',
-      Block: 'Block C',
-      location: 'Plot 266, Block B H.B.F.C Society, Lahore, Punjab, Pakistan',
-      totalInvestment: '10 Lacs',
-    },
-    {
-      personName: 'Jawad Ahmed',
-      plotcount: '5',
-      Block: 'Block K',
-      location: 'Plot 266, Block B H.B.F.C Society, Lahore, Punjab, Pakistan',
-      totalInvestment: '60 Lacs',
-    },
-  ];
+  const fetchAllSellers = async () => {
+    setLoading(true);
+    try {
+      let token = await AsyncStorage.getItem('USER_TOKEN');
+      let response = await get_Seller(token, sellerId);
+
+      if (response) {
+        setSeller(response);
+        setLoading(false);
+      }
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  };
+  useEffect(() => {
+    fetchAllSellers();
+  }, [sellerId]);
+  console.log(seller);
   return (
     <SafeAreaView style={styles.mainView}>
       <View style={styles.view1}>
         <BackIconWhite
           style={styles.backIcon}
-          fill={Colors.white}
+          fill={Colors.dark}
           onPress={() => navigation.goBack()}
         />
-        <Text style={styles.text1}>Plot Detail</Text>
+        <Text style={styles.text1}>Seller Detail</Text>
         <BackIconWhite style={styles.backIcon1} />
       </View>
       <ScrollView>
@@ -71,9 +66,9 @@ const PlotDetail = ({navigation}) => {
               backgroundColor: Colors.white,
               marginVertical: 10,
               borderRadius: 11,
+              padding: 10,
             }}>
-            <Text style={styles.text2}>Property Detail</Text>
-            <Text style={styles.text3}>Avenue Society</Text>
+            <Text style={styles.text3}>{seller?.seller?.username}</Text>
             <View
               style={{
                 flexDirection: 'row',
@@ -82,29 +77,9 @@ const PlotDetail = ({navigation}) => {
               }}>
               <View style={{width: '50%', flex: 1}}>
                 <View style={{marginVertical: 10}}>
-                  <Text style={styles.text4}>Plot No:</Text>
-                  <Text style={styles.text5}>03251 - 21251</Text>
+                  <Text style={styles.text4}>Phone No :</Text>
+                  <Text style={styles.text5}>{seller?.seller?.phone}</Text>
                 </View>
-
-                <View style={{marginVertical: 10}}>
-                  <Text style={styles.text4}>Price:</Text>
-                  <Text style={styles.text5}>2 Crore</Text>
-                </View>
-
-                <View style={{marginVertical: 10}}>
-                  <Text style={styles.text4}>Plot Area:</Text>
-                  <Text style={styles.text5}>2 Kanal</Text>
-                </View>
-
-                <View style={{marginVertical: 10}}>
-                  <Text style={styles.text4}>Purchase Date:</Text>
-                  <Text style={styles.text5}>22-Oct-2021</Text>
-                </View>
-
-                {/* <View style={{marginVertical: 10}}>
-                  <Text style={styles.text4}>Profit:</Text>
-                  <Text style={styles.text5}>22,00000</Text>
-                </View> */}
               </View>
 
               <View
@@ -113,26 +88,11 @@ const PlotDetail = ({navigation}) => {
                   //backgroundColor: 'yellow'
                 }}>
                 <View style={{marginVertical: 10}}>
-                  <Text style={styles.text4}>Address:</Text>
+                  <Text style={styles.text4}>Email :</Text>
                   <Text numberOfLines={1} style={styles.text5}>
-                    New colony 33 streerny ali kodex
+                    {seller?.seller?.email}
                   </Text>
                 </View>
-
-                <View style={{marginVertical: 10}}>
-                  <Text style={styles.text4}>Plot Dimension: </Text>
-                  <Text style={styles.text5}>307 * 307</Text>
-                </View>
-
-                <View style={{marginVertical: 10}}>
-                  <Text style={styles.text4}>No Of Clients:</Text>
-                  <Text style={styles.text5}>2 </Text>
-                </View>
-
-                {/* <View style={{marginVertical: 10}}>
-                  <Text style={styles.text4}>Sold Date:</Text>
-                  <Text style={styles.text5}>22-Nov-2021</Text>
-                </View> */}
               </View>
             </View>
           </View>
@@ -152,7 +112,7 @@ const PlotDetail = ({navigation}) => {
           </View>
         </View>
 
-        <View style={styles.view12}>
+        {/* <View style={styles.view12}>
           <FlatList
             nestedScrollEnabled={true}
             style={{
@@ -167,7 +127,7 @@ const PlotDetail = ({navigation}) => {
             }}
             keyExtractor={item => item.id}
           />
-        </View>
+        </View> */}
 
         <View
           style={{
@@ -189,14 +149,22 @@ const PlotDetail = ({navigation}) => {
         </View>
       </ScrollView>
 
-      <>
-        <SalePlotModal
-          isModalVisible={issalePlotModalVisible}
-          setModalVisible={setSalePlotModalVisible}
-        />
-      </>
+      {loading && (
+        <View
+          style={{
+            zIndex: 99999,
+            width: '100%',
+            height: '100%',
+            position: 'absolute',
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: 'rgba(255, 255, 255, 0.9)',
+          }}>
+          <Loading />
+        </View>
+      )}
     </SafeAreaView>
   );
 };
 
-export default PlotDetail;
+export default SellersDetail;

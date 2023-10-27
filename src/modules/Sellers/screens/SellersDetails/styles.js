@@ -9,9 +9,9 @@ export default StyleSheet.create({
     //alignItems: "center",
   },
   view1: {
-    height: '25%',
+    height: '10%',
     width: '100%',
-    backgroundColor: Colors.darkPrimery,
+    backgroundColor: Colors.white,
     alignItems: 'center',
     justifyContent: 'space-between',
     borderBottomLeftRadius: 20,
@@ -38,7 +38,7 @@ export default StyleSheet.create({
   text1: {
     fontSize: 30,
     fontWeight: '600',
-    color: Colors.white,
+    color: Colors.black,
     // marginTop:25,
   },
   text2: {

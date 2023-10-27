@@ -3,9 +3,8 @@ import {Text, TouchableOpacity, View} from 'react-native';
 import {
   NewPropertySocietyCharges,PlusIcon
 } from '../../Assets/SVG/Svg';
-import { style } from '@mui/system';
 
-export const IconButton: React.FC<any> = ({
+export const IconButton = ({
   disabled,
   text,
   marginBottom,
@@ -63,7 +62,6 @@ export const IconButton: React.FC<any> = ({
           textAlign: 'center',
           fontWeight: fontWeight,
         }}>
-        {' '}
         {text}
       </Text>
       </View>

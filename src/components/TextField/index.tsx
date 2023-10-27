@@ -59,7 +59,7 @@ let color = isFocused ? '#000' : '#D9D9D9';
           {...restOfProps}
           value={value}
           placeholder={label}
-          selectionColor="black"
+          selectionColor="#000"
           secureTextEntry={secure}
           onBlur={event => {
             setIsFocused(false);
@@ -69,7 +69,7 @@ let color = isFocused ? '#000' : '#D9D9D9';
             setIsFocused(true);
             onFocus?.(event);
           }}
-          placeholderTextColor="#D9D9D9"
+          placeholderTextColor="#000"
           keyboardType={keyboardType}
         />
         <TouchableWithoutFeedback onPress={() =>{

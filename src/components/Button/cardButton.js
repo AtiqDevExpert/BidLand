@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 
-export const CardButton: React.FC<any> = ({
+export const CardButton= ({
   disabled,
   text,
   marginBottom,

@@ -23,7 +23,7 @@ import {ModalLogo} from '../../../../Assets/SVG/Svg';
 
 import {BackIcon} from '../../../../Assets/SVG/Svg';
 import IconButton from '@components/Button/iconButton';
-import PlotComponent from '@components/PlotComponent';
+import PlotComponent from '@components/SellerComponent';
 import {FlatList} from 'react-native-gesture-handler';
 //component containing the view of Login screen
 const ListOfPlots = ({navigation}) => {

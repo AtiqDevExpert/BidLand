@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text, TouchableOpacity} from 'react-native';
 
-export const DoubleValueButton: React.FC<any> = ({
+export const Button = ({
   disabled,
   text,
   marginBottom,
@@ -41,7 +41,7 @@ export const DoubleValueButton: React.FC<any> = ({
         justifyContent: 'center',
         marginTop: marginTop,
         elevation: elevation,
-        borderColor: '#0277FA',
+        borderColor: '#000',
       }}>
       <Text
         style={{
@@ -50,21 +50,10 @@ export const DoubleValueButton: React.FC<any> = ({
           textAlign: 'center',
           fontWeight: fontWeight,
         }}>
-        {' '}
-        {text}
-      </Text>
-      <Text
-        style={{
-          color: color,
-          fontSize: fontSize,
-          textAlign: 'center',
-          fontWeight: fontWeight,
-        }}>
-        {' '}
         {text}
       </Text>
     </TouchableOpacity>
   );
 };
 
-export default DoubleValueButton;
+export default Button;

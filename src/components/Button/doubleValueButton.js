@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text, TouchableOpacity} from 'react-native';
 
-export const Button: React.FC<any> = ({
+export const DoubleValueButton= ({
   disabled,
   text,
   marginBottom,
@@ -41,8 +41,18 @@ export const Button: React.FC<any> = ({
         justifyContent: 'center',
         marginTop: marginTop,
         elevation: elevation,
-        borderColor: '#000',
+        borderColor: '#0277FA',
       }}>
+      <Text
+        style={{
+          color: color,
+          fontSize: fontSize,
+          textAlign: 'center',
+          fontWeight: fontWeight,
+        }}>
+        {' '}
+        {text}
+      </Text>
       <Text
         style={{
           color: color,
@@ -57,4 +67,4 @@ export const Button: React.FC<any> = ({
   );
 };
 
-export default Button;
+export default DoubleValueButton;

@@ -6,6 +6,7 @@ import {
   Image,
   ImageBackground,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
 import Modal from 'react-native-modal';
 import Toast from 'react-native-simple-toast';
@@ -16,6 +17,7 @@ import {Colors} from '../../../../constants/Colors';
 import React, {useState} from 'react';
 import {SignUp_Request} from '../../../../utils/API/Requests';
 import ImagePicker from 'react-native-image-crop-picker';
+import RNImageToBase64 from 'react-native-image-base64';
 import PickerButton from '@components/Button/pickerButton';
 import {CrossRedIcon, UploadIcon} from '@assets/SVG/Svg';
 const SignUp = ({navigation}) => {
@@ -24,40 +26,38 @@ const SignUp = ({navigation}) => {
   const [emailValue, setEmailValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
   const [role, setRole] = useState('user');
-  const [image, setImage] = useState('');
   const [selecter, setSelecter] = useState(false);
   const [visible, setVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [image, setImage] = useState(null);
+  const [imageUrl, setImageUrl] = useState(null);
   const Signup = async () => {
+    setLoading(true);
     let finalUsername = name.replace(/\s+/g, '');
-    let body = new FormData();
-    body.append('username', finalUsername);
-    body.append('email', emailValue);
-    body.append('password', passwordValue);
-    body.append('role', role);
-    body.append('phone', phoneNumber);
+    let body = {
+      username: finalUsername,
+      email: emailValue,
+      password: passwordValue,
+      role: role,
+      phone: phoneNumber,
+      profilePicture: imageUrl,
+    };
 
-    // Check if an image is selected
-    if (image) {
-      body.append('profilePicture', {
-        uri: image,
-        type: 'image/jpeg', // Adjust the type as per your image format
-        name: 'image.jpg',
-      });
-    }
-
-    if (!body.get('email').includes('@') || body.get('password').length < 8) {
+    if (!body.email.includes('@') || body.password.length < 8) {
       alert(
         'Invalid Credential! Please check your email has @ and password should be 8 or greater than 8 characters',
       );
+      setLoading(false);
     } else {
       try {
-        // Use the SignUp_Request function to send the request
         let response = await SignUp_Request(body);
-
-        // Handle the API response
+        console.log('response ==== > ', response);
         Toast.show('User Registered Successfully', Toast.LONG);
+        navigation.navigate('login');
+        setLoading(false);
       } catch (error) {
         console.error('Error signing up:', error);
+        setLoading(false);
       }
     }
   };
@@ -67,17 +67,12 @@ const SignUp = ({navigation}) => {
       width: 300,
       height: 400,
       cropping: true,
-    }).then(async image => {
-      if (selecter === false) {
-        setImage(image.path);
-      } else {
-        console.log('Error2');
-      }
+    }).then(async selectedImage => {
+      setImage(selectedImage.path);
     });
   };
 
   const takePhotoFromGallery = () => {
-    setVisible(false);
     ImagePicker.openPicker({
       width: 300,
       height: 400,
@@ -85,13 +80,34 @@ const SignUp = ({navigation}) => {
     }).then(image => {
       if (selecter === false) {
         setImage(image.path);
+        setVisible(false);
       } else {
         console.log('Error2');
+        setVisible(false);
       }
     });
   };
+  const convertToBase64 = () => {
+    if (image) {
+      // Use the library to convert the image to Base64
+      RNImageToBase64.getBase64String(image)
+        .then(base64String => {
+          console.log(
+            '🚀 ~ file: index.js:96 ~ .then ~ base64String:',
+            base64String,
+          );
+          setImageUrl(base64String);
+          // You can now use the base64String in your request to upload the image to the server
+          // Include the base64String in your request body
+          // Example: body.profilePicture = base64String;
+        })
+        .catch(error => {
+          console.error('Error converting image to base64:', error);
+        });
+    }
+  };
   const onClear = () => {
-    setImage('');
+    setImage(null);
   };
   return (
     <SafeAreaView style={styles.mainView}>
@@ -115,7 +131,14 @@ const SignUp = ({navigation}) => {
                           style={styles.touch1}
                           onPress={() => setVisible(true)}>
                           <UploadIcon style={styles.uploadIcon} />
-                          <Text>Upload Image</Text>
+                          <Text
+                            style={{
+                              color: 'black',
+                              justifyContent: 'center',
+                              alignItems: 'center',
+                            }}>
+                            Upload Image
+                          </Text>
                         </TouchableOpacity>
                       </View>
                     </View>
@@ -194,16 +217,37 @@ const SignUp = ({navigation}) => {
 
                   <>
                     <View style={styles.dummy}>
-                      <Button
-                        text={'Next'}
-                        color={Colors.white}
-                        fontSize={15}
-                        height={50}
-                        width={'95%'}
-                        backgroundColor={Colors.black}
-                        marginBottom={20}
-                        onPress={Signup}
-                      />
+                      {loading ? (
+                        <View
+                          style={{
+                            alignSelf: 'center',
+                            backgroundColor: Colors.black,
+                            height: 50,
+                            width: '90%',
+                            borderRadius: 10,
+                            justifyContent: 'center',
+
+                            borderColor: '#000',
+                          }}>
+                          <ActivityIndicator
+                            size="small"
+                            color={Colors.white}
+                          />
+                        </View>
+                      ) : (
+                        <>
+                          <Button
+                            text={'Next'}
+                            color={Colors.white}
+                            fontSize={15}
+                            height={50}
+                            width={'95%'}
+                            backgroundColor={Colors.black}
+                            marginBottom={20}
+                            onPress={Signup}
+                          />
+                        </>
+                      )}
                     </View>
                   </>
                 </View>

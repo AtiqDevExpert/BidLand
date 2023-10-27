@@ -35,7 +35,7 @@ export default StyleSheet.create({
   headerBtn: {
     height: 50,
     width: 50,
-    backgroundColor: Colors.white,
+    backgroundColor: 'transparent',
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
@@ -59,8 +59,8 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
   interiorImage: {
-    width: width / 3 - 20,
-    height: 80,
+    width: width - 40,
+    height: 100,
     marginRight: 10,
     borderRadius: 10,
   },
@@ -84,5 +84,5 @@ export default StyleSheet.create({
   },
   detailsContainer: {flex: 1, paddingHorizontal: 20, marginTop: 40},
   facility: {flexDirection: 'row', marginRight: 15},
-  facilityText: {marginLeft: 5, color: Colors.grey},
+  facilityText: {marginLeft: 5, color: Colors.black},
 });

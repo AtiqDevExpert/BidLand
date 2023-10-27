@@ -11,7 +11,7 @@ module.exports = {
            */
           '@Auth': './src/modules/Auth/',
           '@Home': './src/modules/Home/',
-          '@Plots': './src/modules/Plots/',
+          '@Sellers': './src/modules/Sellers/',
           '@Add': './src/modules/Add/',
           '@Chats': './src/modules/Chats/',
           '@Profile': './src/modules/Profile/',

@@ -5,25 +5,57 @@ import {
   SafeAreaView,
   Image,
   ImageBackground,
+  ActivityIndicator,
 } from 'react-native';
 import React, {useState} from 'react';
+import Toast from 'react-native-simple-toast';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import TextField from '../../../../components/TextField/index';
 import Button from '../../../../components/Button/button';
 import TransparentBtn from '../../../../components/TransparentBtn/transparentBtn';
-
 import styles from './styles';
 import {Colors} from '../../../../constants/Colors';
-//component containing the view of Login screen
 import {useNavigation} from '@react-navigation/native';
+import {Login_Request} from '../../../../utils/API/Requests';
 const Login = () => {
   const navigation = useNavigation();
   const [emailValue, setEmailValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
+  const [loading, setLoading] = useState(false);
   const gotoForgotPassword = () => {
     navigation.navigate('forgotpassword');
   };
-  const SubmitLogin = () => {
-    navigation.navigate('BottomTab');
+  const SubmitLogin = async () => {
+    setLoading(true);
+    let body = {
+      email: emailValue,
+      password: passwordValue,
+    };
+    console.log(body);
+    if (!body.email.includes('@') || body.password.length < 8) {
+      alert(
+        'Invalid Credential! Please check your email has @ and password should be 8 or greater than 8 characters',
+      );
+      setLoading(false);
+    } else {
+      try {
+        let response = await Login_Request(body);
+        console.log('Login response ==== > ', response);
+        if (response) {
+          await AsyncStorage.setItem(
+            'USER_INFO',
+            JSON.stringify(response.user),
+          );
+          await AsyncStorage.setItem('USER_TOKEN', response.token);
+          Toast.show('User Login Successfully', Toast.LONG);
+          navigation.navigate('BottomTab');
+          setLoading(false);
+        }
+      } catch (error) {
+        console.error('Error Login up:', error);
+        setLoading(false);
+      }
+    }
   };
 
   const gotoSignUp = () => {
@@ -35,7 +67,7 @@ const Login = () => {
       <ImageBackground
         style={{flex: 1, justifyContent: 'center'}}
         source={require('../../../../Assets/Images/background2.jpg')}>
-        <View style={styles.dummyView}>
+        <View pointerEvent={loading ? 'none' : 'auto'} style={styles.dummyView}>
           <View style={styles.mainView1}>
             <ScrollView keyboardShouldPersistTaps="handled">
               <View style={styles.bluebackground}>
@@ -74,20 +106,46 @@ const Login = () => {
                       </View>
                     </View>
                   </View>
+
                   <>
-                    <Button
-                      text={'Login'}
-                      color={Colors.white}
-                      fontSize={15}
-                      height={50}
-                      width={'90%'}
-                      backgroundColor={Colors.black}
-                      // onPress={() => navigation.navigate('otp')}
-                      onPress={SubmitLogin}
-                    />
+                    {loading ? (
+                      <View
+                        style={{
+                          alignSelf: 'center',
+                          backgroundColor: Colors.black,
+                          height: 50,
+                          width: '90%',
+                          borderRadius: 10,
+                          justifyContent: 'center',
+
+                          borderColor: '#000',
+                        }}>
+                        <ActivityIndicator size="small" color={Colors.white} />
+                      </View>
+                    ) : (
+                      <>
+                        <Button
+                          text={'Login'}
+                          color={Colors.white}
+                          fontSize={15}
+                          height={50}
+                          width={'90%'}
+                          backgroundColor={Colors.black}
+                          // onPress={() => navigation.navigate('otp')}
+                          onPress={SubmitLogin}
+                        />
+                      </>
+                    )}
 
                     <View style={styles.dontaccountview}>
-                      <Text>Don’t have an Account?</Text>
+                      <Text
+                        style={{
+                          color: 'black',
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                        }}>
+                        Don’t have an Account ?
+                      </Text>
                       <TransparentBtn
                         text={'SignUp'}
                         color={Colors.black}

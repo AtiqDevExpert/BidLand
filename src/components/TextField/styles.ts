@@ -10,6 +10,7 @@ export default StyleSheet.create({
     fontFamily: 'Avenir-Medium',
     fontSize: 16,
     backgroundColor: 'white',
+    color: "#000"
   },
   labelContainer: {
     marginTop: -3.6,   
@@ -21,6 +22,7 @@ export default StyleSheet.create({
   label: {
     fontFamily: 'Avenir-Heavy',
     fontSize: 16,
+    color: "#000"
   },
   error: {
     marginTop: 4,
