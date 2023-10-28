@@ -224,6 +224,9 @@ const HomeScreen = ({navigation}) => {
               data={proerties}
               renderItem={renderProperties}
               extraData={proerties}
+              refreshControl={
+                <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+              }
             />
           </View>
         </>

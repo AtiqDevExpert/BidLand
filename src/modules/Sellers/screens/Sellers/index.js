@@ -8,6 +8,7 @@ import {
   SafeAreaView,
   TouchableOpacity,
   RefreshControl,
+  StatusBar,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import styles from './styles';
@@ -58,6 +59,11 @@ const Sellers = ({navigation}) => {
   };
   return (
     <SafeAreaView style={styles.mainView1}>
+      <StatusBar
+        translucent={false}
+        backgroundColor={Colors.white}
+        barStyle="dark-content"
+      />
       <>
         <View
           style={{
