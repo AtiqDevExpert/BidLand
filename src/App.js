@@ -15,10 +15,10 @@ const App = () => {
     let user = await AsyncStorage.getItem('USER_INFO');
     console.log('🚀 ~ file: App.js:18 ~ fetchUserDetail ~ user:', user);
     let registeredUser = JSON.parse(user);
-    if (registeredUser !== undefined) {
-      setUser(true);
-    } else {
+    if (registeredUser === null) {
       setUser(false);
+    } else {
+      setUser(true);
     }
   };
   useEffect(() => {

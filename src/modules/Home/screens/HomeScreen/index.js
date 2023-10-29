@@ -12,6 +12,7 @@ import {
   Pressable,
   ScrollView,
   RefreshControl,
+  TouchableOpacity,
 } from 'react-native';
 import SwitchSelector from 'react-native-switch-selector';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -28,6 +29,7 @@ import {useFocusEffect} from '@react-navigation/native';
 const HomeScreen = ({navigation}) => {
   const [activeSwicth, setActiveSwicth] = useState('listing');
   const [proerties, setProperties] = useState([]);
+  const [user, setUser] = useState({});
   const [biddingProerties, setBiddingProperties] = useState([]);
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
@@ -55,6 +57,11 @@ const HomeScreen = ({navigation}) => {
     setLoading(true);
     try {
       let token = await AsyncStorage.getItem('USER_TOKEN');
+      let userInfo = await AsyncStorage.getItem('USER_INFO');
+      let userDetail = JSON.parse(userInfo);
+
+      setUser(userDetail);
+
       let response = await get_bidding_properties(token);
       if (response.length > 0) {
         setBiddingProperties(response);
@@ -116,9 +123,11 @@ const HomeScreen = ({navigation}) => {
             </Text>
             <View
               style={{
-                marginTop: 10,
                 flexDirection: 'row',
-                justifyContent: 'space-around',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                marginHorizental: 10,
+                marginTop: 5,
               }}>
               <View style={styles.facility}>
                 <Icon name="hotel" size={18} />
@@ -129,13 +138,22 @@ const HomeScreen = ({navigation}) => {
               <View style={styles.facility}>
                 <Icon name="bathtub" size={18} />
                 <Text style={styles.facilityText}>
-                  {item?.specifications[1]}
+                  {item?.specifications[2]}
                 </Text>
               </View>
+            </View>
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                marginHorizental: 10,
+                marginTop: 5,
+              }}>
               <View style={styles.facility}>
                 <Icon name="aspect-ratio" size={18} />
                 <Text style={styles.facilityText}>
-                  {item?.specifications[2]}
+                  {item?.specifications[1]}
                 </Text>
               </View>
               <View style={styles.facility}>
@@ -162,15 +180,21 @@ const HomeScreen = ({navigation}) => {
       {/* Header container */}
       <View style={styles.header}>
         <View>
-          <Text style={{color: Colors.grey}}>Location</Text>
+          <Text style={{color: Colors.dark}}>Welcome</Text>
           <Text style={{color: Colors.dark, fontSize: 20, fontWeight: 'bold'}}>
-            Canada
+            {user.username ? user.username : ''}
           </Text>
         </View>
-        <Image
-          style={styles.profileImage}
-          source={require('../../../../Assets/Images/person.jpg')}
-        />
+        <Pressable
+          activeOpacity={0.8}
+          onPress={() => navigation.navigate('profileModule')}>
+          <>
+            <Image
+              style={styles.profileImage}
+              source={require('../../../../Assets/Images/person.jpg')}
+            />
+          </>
+        </Pressable>
       </View>
       <View
         style={{

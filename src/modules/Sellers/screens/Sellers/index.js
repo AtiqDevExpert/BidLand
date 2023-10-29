@@ -104,7 +104,7 @@ const Sellers = ({navigation}) => {
           </>
         </View>
 
-        <View style={styles.view2}>
+        <View style={{flex: 1}}>
           <FlatList
             nestedScrollEnabled={true}
             style={{

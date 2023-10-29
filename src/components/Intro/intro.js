@@ -36,11 +36,11 @@ const Introo = ({data, onSkip, onDone, onSlideChange}) => {
           style={{
             justifyContent: 'center',
           }}>
-          <TouchableOpacity
+          <View
             onPress={() => navigation.navigate('login')}
             style={styles.skip}>
             <Text style={styles.textskip}>Skip</Text>
-          </TouchableOpacity>
+          </View>
         </View>
         <View
           style={{
@@ -64,11 +64,9 @@ const Introo = ({data, onSkip, onDone, onSlideChange}) => {
             style={{
               justifyContent: 'center',
             }}>
-            <TouchableOpacity
-              onPress={() => slider?.goToSlide(2, true)}
-              style={styles.skip}>
+            <View style={styles.skip}>
               <Text style={styles.textskip}>Skip</Text>
-            </TouchableOpacity>
+            </View>
           </View>
           <View
             style={{
@@ -82,13 +80,13 @@ const Introo = ({data, onSkip, onDone, onSlideChange}) => {
       </>
     );
   };
+
   return (
     <>
       <AppIntroSlider
-        ref={ref => (slider = !ref)}
         data={data}
-        activeDotStyle={{backgroundColor: '#0277FA', height: 8, width: 8}}
-        dotStyle={{backgroundColor: '#0277FA66', width: 8, height: 8}}
+        activeDotStyle={{backgroundColor: '#fff', height: 8, width: 8}}
+        dotStyle={{backgroundColor: '#000', width: 8, height: 8}}
         renderItem={renderItem}
         onSkip={onSkip}
         renderNextButton={renderNextButton}
@@ -108,7 +106,7 @@ const styles = StyleSheet.create({
     height: 32,
     width: 64,
     padding: 6,
-    backgroundColor: '#0277FA',
+    backgroundColor: '#0000',
     borderRadius: 32,
   },
   textskip: {
