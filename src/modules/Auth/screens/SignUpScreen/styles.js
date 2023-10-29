@@ -143,4 +143,10 @@ export default StyleSheet.create({
     bottom: 18,
     marginRight: -12,
   },
+  crossRedIcon2: {
+    height: 30,
+    width: 30,
+    // top: 5,
+    marginRight: -16,
+  },
 });

@@ -26,6 +26,7 @@ import {
 } from '../../../../utils/API/Requests';
 import Loading from '../../../../components/Loading/Loading';
 import {useFocusEffect} from '@react-navigation/native';
+
 const HomeScreen = ({navigation}) => {
   const [activeSwicth, setActiveSwicth] = useState('listing');
   const [proerties, setProperties] = useState([]);
@@ -33,6 +34,7 @@ const HomeScreen = ({navigation}) => {
   const [biddingProerties, setBiddingProperties] = useState([]);
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
+  const [profilePath, setProfilePath] = useState('');
   const options = [
     {label: 'Listing', value: 'listing'},
     {label: 'Bid Listing', value: 'bidListing'},
@@ -60,7 +62,9 @@ const HomeScreen = ({navigation}) => {
       let userInfo = await AsyncStorage.getItem('USER_INFO');
       let userDetail = JSON.parse(userInfo);
 
-      setUser(userDetail);
+      setTimeout(() => {
+        setUser(userDetail);
+      }, 1000);
 
       let response = await get_bidding_properties(token);
       if (response.length > 0) {
@@ -191,7 +195,7 @@ const HomeScreen = ({navigation}) => {
           <>
             <Image
               style={styles.profileImage}
-              source={require('../../../../Assets/Images/person.jpg')}
+              source={{uri: `file://${profilePath}`}}
             />
           </>
         </Pressable>

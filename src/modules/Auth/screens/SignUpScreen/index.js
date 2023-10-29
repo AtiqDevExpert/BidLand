@@ -34,15 +34,17 @@ const SignUp = ({navigation}) => {
   const Signup = async () => {
     setLoading(true);
     let finalUsername = name.replace(/\s+/g, '');
+    const formattedEmailValue =
+      emailValue.charAt(0).toLowerCase() + emailValue.slice(1);
     let body = {
       username: finalUsername,
-      email: emailValue,
+      email: formattedEmailValue,
       password: passwordValue,
       role: role,
       phone: phoneNumber,
       profilePicture: imageUrl,
     };
-
+    console.log('Signup body ===== > ', body);
     if (!body.email.includes('@') || body.password.length < 8) {
       alert(
         'Invalid Credential! Please check your email has @ and password should be 8 or greater than 8 characters',
@@ -67,8 +69,18 @@ const SignUp = ({navigation}) => {
       width: 300,
       height: 400,
       cropping: true,
-    }).then(async selectedImage => {
-      setImage(selectedImage.path);
+      includeBase64: true,
+    }).then(image => {
+      convertToBase64(image);
+      if (selecter === false) {
+        setImage(image.path);
+        setVisible(false);
+        setSelecter(false);
+      } else {
+        console.log('Error2');
+        setVisible(false);
+        setSelecter(false);
+      }
     });
   };
 
@@ -77,20 +89,24 @@ const SignUp = ({navigation}) => {
       width: 300,
       height: 400,
       cropping: true,
+      includeBase64: true,
     }).then(image => {
+      convertToBase64(image);
       if (selecter === false) {
         setImage(image.path);
         setVisible(false);
+        setSelecter(false);
       } else {
         console.log('Error2');
         setVisible(false);
+        setSelecter(false);
       }
     });
   };
-  const convertToBase64 = () => {
-    if (image) {
+  const convertToBase64 = img => {
+    if (img) {
       // Use the library to convert the image to Base64
-      RNImageToBase64.getBase64String(image)
+      RNImageToBase64.getBase64String(img.path)
         .then(base64String => {
           console.log(
             '🚀 ~ file: index.js:96 ~ .then ~ base64String:',
@@ -108,6 +124,7 @@ const SignUp = ({navigation}) => {
   };
   const onClear = () => {
     setImage(null);
+    setSelecter(false);
   };
   return (
     <SafeAreaView style={styles.mainView}>
@@ -123,9 +140,12 @@ const SignUp = ({navigation}) => {
                     style={{justifyContent: 'center', alignItems: 'center'}}>
                     <Text style={styles.text}>Sign Up</Text>
                   </View>
-                  {image === '' ? (
+                  {image === null ? (
                     <View
-                      style={{justifyContent: 'center', alignItems: 'center'}}>
+                      style={{
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                      }}>
                       <View style={styles.coverView}>
                         <TouchableOpacity
                           style={styles.touch1}
@@ -136,6 +156,7 @@ const SignUp = ({navigation}) => {
                               color: 'black',
                               justifyContent: 'center',
                               alignItems: 'center',
+                              color: Colors.dark,
                             }}>
                             Upload Image
                           </Text>
