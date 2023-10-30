@@ -27,11 +27,13 @@ const Login = () => {
   };
   const SubmitLogin = async () => {
     setLoading(true);
+    const formattedEmailValue =
+      emailValue.charAt(0).toLowerCase() + emailValue.slice(1);
     let body = {
       email: emailValue,
       password: passwordValue,
     };
-    console.log(body);
+    console.log('SubmitLogin ===>', body);
     if (!body.email.includes('@') || body.password.length < 8) {
       alert(
         'Invalid Credential! Please check your email has @ and password should be 8 or greater than 8 characters',

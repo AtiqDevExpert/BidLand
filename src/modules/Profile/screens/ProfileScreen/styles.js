@@ -20,9 +20,12 @@ export default StyleSheet.create({
     height: 30,
     width: 30,
   },
-  safearea: {flex: 1, backgroundColor: '#F5F5F5'},
-  view1: {
+  safearea: {
     flex: 1,
+    backgroundColor: '#F5F5F5',
+    justifyContent: 'center',
+  },
+  view1: {
     backgroundColor: '#F5F5F5',
     justifyContent: 'center',
     alignItems: 'center',
@@ -58,11 +61,12 @@ export default StyleSheet.create({
   },
   view4: {
     backgroundColor: '#FFFFFF',
-    flex: 1,
+
     justifyContent: 'center',
     marginVertical: 10,
     marginHorizontal: 10,
     borderRadius: 10,
+    padding: 10,
   },
   view5: {justifyContent: 'center', marginHorizontal: 10},
   text3: {
@@ -93,8 +97,27 @@ export default StyleSheet.create({
     textAlign: 'left',
     color: '#9C9C9C',
   },
-  view8: {
-    borderRadius: 20,
-    marginBottom: 10,
+
+  img: {
+    backgroundColor: Colors.white,
+    borderRadius: 10,
+
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 6,
+    },
+    shadowOpacity: 0.37,
+    shadowRadius: 7.49,
+
+    elevation: 5,
+
+    marginVertical: 10,
+    height: 180,
+    width: 180,
+    borderRadius: 100,
+
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

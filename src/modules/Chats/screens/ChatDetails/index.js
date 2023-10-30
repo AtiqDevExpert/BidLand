@@ -17,12 +17,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import {Colors} from '../../../../constants/Colors';
 export default function ChatDetails({navigation, route}) {
   let chat = route.params;
-  console.log('🚀 ~ file: index.js:20 ~ ChatDetails ~ chat:', chat);
-  const [chatUser] = useState({
-    name: 'Robert Henry',
-    profile_image: 'https://randomuser.me/api/portraits/men/0.jpg',
-    last_seen: 'online',
-  });
+  let sellerObj = route?.params?.seller;
 
   const [currentUser] = useState({
     name: 'John Doe',
@@ -111,7 +106,7 @@ export default function ChatDetails({navigation, route}) {
       <View style={{flex: 1}}>
         <View
           style={{
-            backgroundColor: Colors.secondry,
+            backgroundColor: Colors.white,
             flexDirection: 'row',
             justifyContent: 'space-between',
             alignItems: 'center',
@@ -123,7 +118,7 @@ export default function ChatDetails({navigation, route}) {
               onPress={() => {
                 navigation.goBack();
               }}>
-              <Icon name="arrow-back" size={30} color={Colors.white} />
+              <Icon name="arrow-back" size={30} color={Colors.dark} />
             </TouchableOpacity>
             <Image
               style={styles.userProfileImage}
@@ -134,10 +129,11 @@ export default function ChatDetails({navigation, route}) {
                 paddingLeft: 10,
                 justifyContent: 'center',
               }}>
-              <Text style={{color: '#fff', fontWeight: '700', fontSize: 18}}>
-                {route.params?.userName}
+              <Text
+                style={{color: Colors.dark, fontWeight: '700', fontSize: 18}}>
+                {route.params?.sellerObj?.username}
               </Text>
-              <Text style={{color: '#fff', fontWeight: '300'}}>
+              <Text style={{color: Colors.dark, fontWeight: '300'}}>
                 {route.params?.isTyping === true ? 'online' : 'offline'}
               </Text>
             </View>
@@ -147,12 +143,12 @@ export default function ChatDetails({navigation, route}) {
             onPress={() => {
               Alert.alert('Audio Call', 'Audio Call Button Pressed');
             }}>
-            <Icon name="call" size={28} color="#fff" />
+            <Icon name="call" size={28} color={Colors.dark} />
           </TouchableOpacity>
         </View>
         <View style={styles.container}>
           <FlatList
-            style={{backgroundColor: '#f2f2ff'}}
+            style={{backgroundColor: '#fff'}}
             inverted={true}
             data={JSON.parse(JSON.stringify(messages)).reverse()}
             renderItem={({item}) => (

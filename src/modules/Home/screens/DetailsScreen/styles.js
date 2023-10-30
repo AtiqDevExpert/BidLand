@@ -72,7 +72,7 @@ export default StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginVertical: 10,
+    marginVertical: 15,
   },
   bookNowBtn: {
     height: 50,
@@ -85,4 +85,22 @@ export default StyleSheet.create({
   detailsContainer: {flex: 1, paddingHorizontal: 20, marginTop: 40},
   facility: {flexDirection: 'row', marginRight: 15},
   facilityText: {marginLeft: 5, color: Colors.black},
+  review: {
+    height: 70,
+    backgroundColor: Colors.light,
+    borderRadius: 10,
+    paddingHorizontal: 20,
+    // alignItems: 'center',
+    // flexDirection: 'row',
+    justifyContent: 'center',
+    marginVertical: 10,
+    marginHorizontal: 10,
+  },
+  inputReview: {
+    width: '100%',
+    height: 50,
+    backgroundColor: '#f1f3f6',
+    paddingHorizontal: 10,
+    borderRadius: 10,
+  },
 });

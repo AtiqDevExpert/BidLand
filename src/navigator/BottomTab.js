@@ -120,7 +120,7 @@ const BottomTab = () => {
           ),
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="AddModule"
         component={AddModule}
         options={{
@@ -155,7 +155,7 @@ const BottomTab = () => {
             </View>
           ),
         }}
-      />
+      /> */}
       <Tab.Screen
         name="ChatModule"
         component={ChatModule}

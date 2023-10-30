@@ -34,12 +34,11 @@ const HomeScreen = ({navigation}) => {
   const [biddingProerties, setBiddingProperties] = useState([]);
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
-  const [profilePath, setProfilePath] = useState('');
   const options = [
     {label: 'Listing', value: 'listing'},
     {label: 'Bid Listing', value: 'bidListing'},
   ];
-  const fetchPropertyDetails = async () => {
+  const fetchPropertyListing = async () => {
     setLoading(true);
     try {
       let token = await AsyncStorage.getItem('USER_TOKEN');
@@ -59,12 +58,6 @@ const HomeScreen = ({navigation}) => {
     setLoading(true);
     try {
       let token = await AsyncStorage.getItem('USER_TOKEN');
-      let userInfo = await AsyncStorage.getItem('USER_INFO');
-      let userDetail = JSON.parse(userInfo);
-
-      setTimeout(() => {
-        setUser(userDetail);
-      }, 1000);
 
       let response = await get_bidding_properties(token);
       if (response.length > 0) {
@@ -76,17 +69,24 @@ const HomeScreen = ({navigation}) => {
       setLoading(false);
     }
   };
-
+  const fetchUserInfo = async () => {
+    let userInfo = await AsyncStorage.getItem('USER_INFO');
+    let userDetail = JSON.parse(userInfo);
+    if (userDetail) {
+      setUser(userDetail);
+    }
+  };
   useFocusEffect(
     React.useCallback(() => {
-      fetchPropertyDetails();
+      fetchUserInfo();
+      fetchPropertyListing();
       fetchPropertyBidding();
     }, []),
   );
 
   const onRefresh = () => {
     setRefreshing(true);
-    fetchPropertyDetails();
+    fetchPropertyListing();
     fetchPropertyBidding();
     setRefreshing(false);
   };
@@ -195,8 +195,12 @@ const HomeScreen = ({navigation}) => {
           <>
             <Image
               style={styles.profileImage}
-              source={{uri: `file://${profilePath}`}}
+              source={{uri: `data:image/png;base64,${user.profilePicture}`}}
             />
+            {/* <Image
+              style={styles.profileImage}
+              source={{uri: `file://${profilePath}`}}
+            /> */}
           </>
         </Pressable>
       </View>
@@ -255,6 +259,13 @@ const HomeScreen = ({navigation}) => {
               refreshControl={
                 <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
               }
+              ListEmptyComponent={
+                <>
+                  <View>
+                    <Text>No data found</Text>
+                  </View>
+                </>
+              }
             />
           </View>
         </>
@@ -274,6 +285,13 @@ const HomeScreen = ({navigation}) => {
               extraData={biddingProerties}
               refreshControl={
                 <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+              }
+              ListEmptyComponent={
+                <>
+                  <View>
+                    <Text>No data found</Text>
+                  </View>
+                </>
               }
             />
           </View>

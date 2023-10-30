@@ -52,7 +52,10 @@ const Sellers = ({navigation}) => {
       <SellerComponent
         item1={item}
         onPressButton={() =>
-          navigation.navigate('SellersDetail', {sellerId: item._id})
+          navigation.navigate('SellersDetail', {
+            sellerId: item._id,
+            seller: item,
+          })
         }
       />
     );

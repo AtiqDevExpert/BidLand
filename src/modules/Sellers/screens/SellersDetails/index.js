@@ -8,7 +8,11 @@ import {
   SafeAreaView,
   Dimensions,
   StatusBar,
+  Pressable,
+  Image,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import SwitchSelector from 'react-native-switch-selector';
 import {Colors} from '../../../../constants/Colors';
 import {BackIconWhite} from '@assets/SVG/SvgDashboard';
 import styles from './styles';
@@ -23,12 +27,19 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useFocusEffect} from '@react-navigation/native';
 
 const SellersDetail = ({navigation, route}) => {
+  const [activeSwicth, setActiveSwicth] = useState('listing');
+  const options = [
+    {label: 'Listing', value: 'listing'},
+    {label: 'Bid Listing', value: 'bidListing'},
+  ];
   const [loading, setLoading] = useState(false);
   const [seller, setSeller] = useState({});
   const [proerties, setProperties] = useState([]);
   const [biddingProerties, setBiddingProperties] = useState([]);
   const [sellerProperties, setSellerProperties] = useState([]);
   let sellerId = route.params?.sellerId;
+  let sellerObj = route.params?.seller;
+
   const {width} = Dimensions.get('screen');
 
   const fetchAllSellers = async () => {
@@ -45,16 +56,11 @@ const SellersDetail = ({navigation, route}) => {
       setLoading(false);
     }
   };
-  // useEffect(() => {
-  //   fetchAllSellers();
-  // }, [sellerId]);
 
   useFocusEffect(
     React.useCallback(() => {
       fetchAllSellers();
-      setTimeout(() => {
-        fetchSellerProperty();
-      }, 500);
+      fetchSellerProperty();
     }, [sellerId]),
   );
 
@@ -63,9 +69,22 @@ const SellersDetail = ({navigation, route}) => {
     try {
       let token = await AsyncStorage.getItem('USER_TOKEN');
       let bidingProperties = await get_bidding_properties(token);
-      let properties = await get_properties(token);
-      console.log('seller properties', bidingProperties, properties);
-      console.log('seller bidingProperties', bidingProperties);
+      let listingproperties = await get_properties(token);
+
+      const filteredBidingProperties = bidingProperties.filter(
+        property => property.addedBy === sellerId,
+      );
+      const filteredProperties = listingproperties?.properties.filter(
+        property => property.addedBy === sellerId,
+      );
+
+      const allSellerProperties = [
+        ...filteredProperties,
+        ...filteredBidingProperties,
+      ];
+
+      // Set the merged result in the state
+      setSellerProperties(allSellerProperties);
     } catch (error) {
       console.log(error);
     } finally {
@@ -142,7 +161,9 @@ const SellersDetail = ({navigation, route}) => {
       </Pressable>
     );
   };
-  console.log('sellerProperties', sellerProperties);
+  const contactToSeller = () => {
+    navigation.navigate('ChatModule', {seller: sellerObj});
+  };
   return (
     <SafeAreaView style={styles.mainView}>
       <StatusBar
@@ -168,10 +189,10 @@ const SellersDetail = ({navigation, route}) => {
           }}>
           <View
             style={{
-              width: '94%',
+              width: '100%',
               backgroundColor: Colors.white,
               marginVertical: 10,
-              borderRadius: 11,
+              // borderRadius: 10,
               padding: 10,
             }}>
             <Text style={styles.text3}>{seller?.seller?.username}</Text>
@@ -216,6 +237,30 @@ const SellersDetail = ({navigation, route}) => {
             <Text style={styles.text6}>Seller Properties</Text>
           </View>
         </View>
+        {/* <View
+          style={{
+            paddingBottom: 5,
+            marginHorizontal: 20,
+            marginVertical: 10,
+          }}>
+          <SwitchSelector
+            initial={0}
+            height={50}
+            onPress={label => {
+              setActiveSwicth(label);
+            }}
+            textColor={'#000'}
+            bold={true}
+            fontSize={15}
+            selectedColor={'#fff'}
+            buttonColor={'#000'}
+            borderColor={'#000'}
+            hasPadding
+            options={options}
+            testID="gender-switch-selector"
+            accessibilityLabel="gender-switch-selector"
+          />
+        </View> */}
         <>
           <View style={{flex: 1}}>
             <FlatList
@@ -226,9 +271,9 @@ const SellersDetail = ({navigation, route}) => {
                 paddingVertical: 20,
               }}
               horizontal={false}
-              data={proerties}
+              data={sellerProperties}
               renderItem={renderProperties}
-              extraData={proerties}
+              extraData={sellerProperties}
             />
           </View>
         </>
@@ -245,6 +290,7 @@ const SellersDetail = ({navigation, route}) => {
             width={'94%'}
             backgroundColor={Colors.dark}
             borderColor={Colors.dark}
+            onPress={contactToSeller}
           />
         </View>
       </ScrollView>

@@ -249,6 +249,7 @@ const SignUp = ({navigation}) => {
                             justifyContent: 'center',
 
                             borderColor: '#000',
+                            top: -10,
                           }}>
                           <ActivityIndicator
                             size="small"

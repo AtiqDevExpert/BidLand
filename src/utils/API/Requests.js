@@ -102,6 +102,7 @@ const post_request_with_Token = async ({target, body}) => {
   }
 };
 const get_properties = async token => {
+  // console.log('Token + UL', token, Url);
   try {
     const inst = axios.create({
       baseURL: Url,
@@ -110,14 +111,14 @@ const get_properties = async token => {
       },
     });
     const response = await inst.get('property/view');
-    // console.log("post response", JSON.stringify(response.data));
+    // console.log('post response', JSON.stringify(response.data));
 
     return response.data;
   } catch (error) {
     if (error.response) {
       // console.log("post error", JSON.stringify(error.response));
 
-      return new Error(JSON.stringify(error.response.data.message));
+      return new Error(JSON.stringify(error.response.data));
     } else {
       throw new Error('Invalide Error!');
     }
@@ -137,9 +138,9 @@ const get_bidding_properties = async token => {
     return response.data;
   } catch (error) {
     if (error.response) {
-      // console.log("post error", JSON.stringify(error.response));
+      // console.log('post error', JSON.stringify(error.response));
 
-      return new Error(JSON.stringify(error.response.data.message));
+      return new Error(JSON.stringify(error.response.data));
     } else {
       throw new Error('Invalide Error!');
     }
