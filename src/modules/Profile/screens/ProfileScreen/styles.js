@@ -1,101 +1,13 @@
 import {StyleSheet} from 'react-native';
 import {Colors} from '../../../../constants/Colors';
-
+const {width, height} = Dimensions.get('window');
+import {Dimensions} from 'react-native';
 export default StyleSheet.create({
-  mainView: {
-    marginVertical: 10,
-    marginHorizontal: 10,
-  },
-  investmentICon: {
-    height: 20,
-    width: 20,
-    marginHorizontal: 5,
-  },
-  ploticon: {
-    height: 30,
-    width: 30,
-    margin: 15,
-  },
-  arrowIconnext: {
-    height: 30,
-    width: 30,
-  },
   safearea: {
     flex: 1,
-    backgroundColor: '#F5F5F5',
+    backgroundColor: Colors.white,
     justifyContent: 'center',
-  },
-  view1: {
-    backgroundColor: '#F5F5F5',
-    justifyContent: 'center',
-    alignItems: 'center',
-    // marginTop: 10,
-  },
-  img: {
-    height: 200,
-    width: 200,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  view2: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: 300,
-  },
-  text1: {
-    fontWeight: '600',
-    fontSize: 50,
-    textAlign: 'center',
-    color: '#0277FA',
-  },
-  view3: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: 300,
-  },
-  text2: {
-    fontWeight: '400',
-    fontSize: 18,
-    textAlign: 'center',
-    color: '#0277FA',
-  },
-  view4: {
-    backgroundColor: '#FFFFFF',
-
-    justifyContent: 'center',
-    marginVertical: 10,
-    marginHorizontal: 10,
-    borderRadius: 10,
-    padding: 10,
-  },
-  view5: {justifyContent: 'center', marginHorizontal: 10},
-  text3: {
-    fontWeight: '400',
-    fontSize: 18,
-    textAlign: 'left',
-    color: '#9C9C9C',
-  },
-  view6: {
-    justifyContent: 'center',
-    marginHorizontal: 10,
-    marginTop: 20,
-  },
-  text4: {
-    fontWeight: '400',
-    fontSize: 18,
-    textAlign: 'left',
-    color: '#0277FA',
-  },
-  view7: {
-    justifyContent: 'center',
-    marginHorizontal: 10,
-    marginTop: 20,
-  },
-  text5: {
-    fontWeight: '400',
-    fontSize: 18,
-    textAlign: 'left',
-    color: '#9C9C9C',
+    // alignItems: 'center',
   },
 
   img: {
@@ -120,4 +32,143 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  mainView: {
+    flex: 1,
+    // backgroundColor: Colors.fullDarkBlue,
+  },
+
+  text: {
+    color: Colors.black,
+    fontWeight: 'bold',
+    fontSize: 26,
+    textAlign: 'right',
+    justifyContent: 'center',
+  },
+  whitebackground: {
+    backgroundColor: Colors.white,
+    borderRadius: width * 0.09,
+    marginHorizontal: 5,
+    justifyContent: 'center',
+    flex: 1,
+  },
+
+  dummyView: {
+    justifyContent: 'center',
+    alignContent: 'center',
+    flex: 1,
+  },
+  dummyView1: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignContent: 'center',
+  },
+  dummy: {
+    marginHorizontal: 20,
+  },
+  input: {marginVertical: 20, marginHorizontal: 10},
+  mainView1: {
+    justifyContent: 'center',
+    alignContent: 'center',
+  },
+  ModalView: {
+    backgroundColor: '#FFFFFF',
+
+    height: 200,
+    width: '100%',
+
+    // marginHorizontal:10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+    borderRadius: 10,
+  },
+  ModalBtnView: {
+    flexDirection: 'row',
+    marginTop: 30,
+    width: '100%',
+    justifyContent: 'space-evenly',
+    // marginVertical:-50
+  },
+  Modalbtn: {
+    borderRadius: 40,
+    backgroundColor: 'white',
+    height: 50,
+    width: 130,
+    fontWeight: 'bold',
+    alignSelf: 'center',
+    justifyContent: 'center',
+    borderColor: 'lightgrey',
+    borderWidth: 0.2,
+  },
+  Modalbtntext: {
+    fontWeight: 'bold',
+    alignSelf: 'center',
+    marginTop: 15,
+    flex: 1,
+  },
+  modalIcon: {
+    width: 18,
+    height: 18,
+    position: 'absolute',
+    right: 0,
+    top: 0,
+  },
+  images: {
+    width: 130,
+    height: 130,
+    borderRadius: 100,
+  },
+  imageBox: {
+    flexDirection: 'row-reverse',
+    marginHorizontal: 10,
+  },
+  touchable: {
+    marginTop: -10,
+    height: 15,
+    marginLeft: -10,
+  },
+  imageContainer: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  buttonTouch: {
+    justifyContent: 'center',
+    marginTop: 20,
+    marginHorizontal: 15,
+  },
+  icon: {height: 20, width: 30},
+  indicator: {height: 120, width: '100%'},
+  mainView1: {
+    justifyContent: 'center',
+    alignContent: 'center',
+  },
+  coverView: {
+    backgroundColor: Colors.white,
+    height: 150,
+    width: 150,
+    borderRadius: 100,
+    borderWidth: 1,
+    borderColor: Colors.hiddenText,
+    marginBottom: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  touch1: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  uploadIcon: {height: 50, width: 50},
+  buttonView: {marginBottom: 45},
+
+  modelMainView: {
+    backgroundColor: Colors.white,
+    borderRadius: 10,
+  },
+  crossRedIcon: {
+    height: 30,
+    width: 30,
+    bottom: 18,
+    marginRight: -12,
+  },
+  crossRedIcon2: {},
 });

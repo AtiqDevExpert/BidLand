@@ -9,6 +9,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import Modal from 'react-native-modal';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import Toast from 'react-native-simple-toast';
 import TextField from '../../../../components/TextField/index';
 import Button from '../../../../components/Button/button';
@@ -42,6 +43,14 @@ const SignUp = ({navigation}) => {
       password: passwordValue,
       role: role,
       phone: phoneNumber,
+      profilePicture: '',
+    };
+    let userInfo = {
+      username: finalUsername,
+      email: formattedEmailValue,
+      password: passwordValue,
+      role: role,
+      phone: phoneNumber,
       profilePicture: imageUrl,
     };
     console.log('Signup body ===== > ', body);
@@ -55,6 +64,7 @@ const SignUp = ({navigation}) => {
         let response = await SignUp_Request(body);
         console.log('response ==== > ', response);
         Toast.show('User Registered Successfully', Toast.LONG);
+        await AsyncStorage.setItem('USER_INFO', JSON.stringify(userInfo));
         navigation.navigate('login');
         setLoading(false);
       } catch (error) {

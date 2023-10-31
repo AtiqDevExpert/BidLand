@@ -62,11 +62,7 @@ const Sellers = ({navigation}) => {
   };
   return (
     <SafeAreaView style={styles.mainView1}>
-      <StatusBar
-        translucent={false}
-        backgroundColor={Colors.white}
-        barStyle="dark-content"
-      />
+      <StatusBar hidden={true} />
       <>
         <View
           style={{

@@ -16,11 +16,8 @@
       "@Home/*": [
         "./src/modules/Home/*"
       ],
-      "@Plots/*": [
-        "./src/modules/Plots/*"
-      ],
-      "@Add/*": [
-        "./src/modules/Add/*"
+      "@Sellers/*": [
+        "./src/modules/Sellers/*"
       ],
       "@Chats/*": [
         "./src/modules/Chats/*"
@@ -36,12 +33,6 @@
       ],
       "@assets/*": [
         "./src/Assets/*"
-      ],
-      "@network/*": [
-        "./src/network/*"
-      ],
-      "@redux/*": [
-        "./src/redux/*"
       ],
       "@baseUrl/*": [
         "./src/baseUrl.js"

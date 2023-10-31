@@ -2235,7 +2235,7 @@ const PlusIcon = ({style, stroke, onPress, fill}) => {
     <Svg
       style={style}
       viewBox="0 0 22 22"
-      fill="none"
+      fill={fill}
       xmlns="http://www.w3.org/2000/svg">
       <Circle cx="11" cy="11" r="10" stroke={stroke} stroke-width="2" />
       <Rect

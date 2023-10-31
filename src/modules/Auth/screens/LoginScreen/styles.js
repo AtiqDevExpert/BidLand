@@ -49,10 +49,7 @@ export default StyleSheet.create({
     alignItems: 'center',
     alignContent: 'center',
   },
-  dummy: {
-    // paddingHorizontal: 20,
-    // marginVertical: 30,
-  },
+
   input: {marginVertical: 15, marginHorizontal: 10},
   mainView1: {
     justifyContent: 'center',

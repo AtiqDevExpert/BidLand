@@ -21,7 +21,7 @@ import {
 } from '@assets/SVG/SvgDashboard';
 import HomeModule from '@Home/navigation/index';
 import SellersModule from '@Sellers/navigation/index';
-import AddModule from '@Add/navigation';
+
 import ProfileModule from '@Profile/navigation';
 import ChatModule from '@Chats/navigation';
 
@@ -120,42 +120,7 @@ const BottomTab = () => {
           ),
         }}
       />
-      {/* <Tab.Screen
-        name="AddModule"
-        component={AddModule}
-        options={{
-          headerShown: false,
-          tabBarIcon: ({focused}) => (
-            <View
-              style={{
-                height: 30,
-                width: 45,
-                justifyContent: 'center',
-                alignItems: 'center',
-                alignSelf: 'center',
-              }}>
-              <AddIcon
-                fill={focused ? '#000' : '#798293'}
-                style={{
-                  height: 30,
-                  width: 25,
-                  alignSelf: 'center',
-                  tintColor: focused ? '#000' : '#748c94',
-                  zIndex: 1,
-                }}
-              />
-              <Text
-                style={{
-                  color: focused ? '#000' : '#748c94',
-                  fontSize: 12,
-                  textAlign: 'center',
-                }}>
-                Add
-              </Text>
-            </View>
-          ),
-        }}
-      /> */}
+
       <Tab.Screen
         name="ChatModule"
         component={ChatModule}

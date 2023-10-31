@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {Children, useEffect, useRef, useState} from 'react';
 import styles from './styles';
 import {
   Text,
@@ -9,15 +9,10 @@ import {
   Easing,
   TouchableWithoutFeedback,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import {Image} from 'react-native';
 
-type Props = React.ComponentProps<typeof TextInput> & {
-  label: string;
-  errorText?: string | null;
-  secure: boolean;
-   editable: boolean;
-};
-
-const TextField: React.FC<Props> = props => {
+const TextField = props => {
   const {
     label,
     errorText,
@@ -28,11 +23,12 @@ const TextField: React.FC<Props> = props => {
     secure,
     editable,
     keyboardType,
+    Children,
     ...restOfProps
   } = props;
   const [isFocused, setIsFocused] = useState(false);
 
-  const inputRef = useRef<TextInput>(null);
+  const inputRef = useRef(null);
   const focusAnim = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
@@ -44,7 +40,7 @@ const TextField: React.FC<Props> = props => {
     }).start();
   }, [focusAnim, isFocused, value]);
 
-let color = isFocused ? '#000' : '#D9D9D9';
+  let color = isFocused ? '#000' : '#D9D9D9';
   if (errorText) {
     color = '#B00020';
   }
@@ -72,10 +68,11 @@ let color = isFocused ? '#000' : '#D9D9D9';
           placeholderTextColor="#000"
           keyboardType={keyboardType}
         />
-        <TouchableWithoutFeedback onPress={() =>{
-           inputRef.current?.focus();
-           
-           }}>
+
+        <TouchableWithoutFeedback
+          onPress={() => {
+            inputRef.current?.focus();
+          }}>
           <Animated.View
             style={[
               styles.labelContainer,

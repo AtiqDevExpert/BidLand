@@ -9,11 +9,9 @@ import {
   Image,
 } from 'react-native';
 import AppIntroSlider from 'react-native-app-intro-slider';
-
 import {useNavigation} from '@react-navigation/native';
 import {ForwardIcon} from '../../Assets/SVG/Svg';
 const Introo = ({data, onSkip, onDone, onSlideChange}) => {
-  let slider = AppIntroSlider;
   const navigation = useNavigation();
   const renderItem = ({item}) => {
     return (
@@ -106,7 +104,7 @@ const styles = StyleSheet.create({
     height: 32,
     width: 64,
     padding: 6,
-    backgroundColor: '#0000',
+    backgroundColor: '#000',
     borderRadius: 32,
   },
   textskip: {

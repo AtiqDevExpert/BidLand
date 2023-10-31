@@ -166,11 +166,7 @@ const SellersDetail = ({navigation, route}) => {
   };
   return (
     <SafeAreaView style={styles.mainView}>
-      <StatusBar
-        translucent={false}
-        backgroundColor={Colors.white}
-        barStyle="dark-content"
-      />
+      <StatusBar hidden={true} />
       <View style={styles.view1}>
         <BackIconWhite
           style={styles.backIcon}

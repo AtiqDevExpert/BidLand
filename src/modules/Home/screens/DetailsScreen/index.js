@@ -12,6 +12,7 @@ import {
   TouchableOpacity,
   Alert,
   TextInput,
+  StatusBar,
 } from 'react-native';
 import styles from './styles';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -20,25 +21,21 @@ const {width} = Dimensions.get('screen');
 import {Rating} from 'react-native-ratings';
 import Button from '@components/Button/button';
 const DetailsScreen = ({navigation, route}) => {
-  const item = route.params;
+  const item = route.params?.item;
+  // console.log('🚀 ~ file: index.js:24 ~ DetailsScreen ~ item:', item);
+  const bidPrice = route.params?.bidPrice;
   const [review, setReview] = useState('');
-  const [reviews, setReviews] = useState(item.reviews);
+  const [reviews, setReviews] = useState(null);
 
-  console.log('🚀 ~ file: index.js:20 ~ DetailsScreen ~ item:', item);
+  console.log('item', item);
   useEffect(() => {
-    setReviews(item.reviews);
+    if (item.reviews.length > 0) {
+      setReviews(item.reviews);
+    } else {
+      setReviews(null);
+    }
   }, [item]);
-  const renderImages = ({item}) => {
-    return (
-      <View style={{justifyContent: 'center', alignItems: 'center'}}>
-        <Image
-          resizeMode="cover"
-          source={{uri: item}}
-          style={styles.interiorImage}
-        />
-      </View>
-    );
-  };
+
   const renderReview = ({item}) => {
     return (
       <>
@@ -57,6 +54,7 @@ const DetailsScreen = ({navigation, route}) => {
   };
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: Colors.white}}>
+      <StatusBar hidden={true} />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.backgroundImageContainer}>
           <ImageBackground
@@ -126,32 +124,15 @@ const DetailsScreen = ({navigation, route}) => {
             </View>
           </View>
 
-          {/* Interior list */}
-          <View
-            style={{
-              marginVertical: 10,
-            }}>
-            <Text
-              style={{fontSize: 20, color: Colors.black, fontWeight: 'bold'}}>
-              Property Pictures
-            </Text>
-          </View>
-
-          <View style={{flex: 1}}>
-            <FlatList
-              // contentContainerStyle={{marginTop: 20}}
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              keyExtractor={(_, key) => key.toString()}
-              data={item.images}
-              renderItem={renderImages}
-            />
-          </View>
           <View style={{flex: 1}}>
             <View>
               <Text
-                style={{fontSize: 20, color: Colors.black, fontWeight: 'bold'}}>
-                Cstomer Reviews
+                style={{
+                  fontSize: 20,
+                  color: Colors.black,
+                  fontWeight: 'bold',
+                }}>
+                Customer Reviews
               </Text>
             </View>
             <FlatList
@@ -162,6 +143,7 @@ const DetailsScreen = ({navigation, route}) => {
               renderItem={renderReview}
             />
           </View>
+
           <View style={{marginVertical: 10}}>
             <Text
               style={{fontSize: 16, color: Colors.black, fontWeight: '600'}}>
@@ -198,7 +180,6 @@ const DetailsScreen = ({navigation, route}) => {
           {/* footer container */}
           <View
             style={{
-              // marginHorizontal: 10,
               marginVertical: 10,
             }}>
             <Text
@@ -206,37 +187,71 @@ const DetailsScreen = ({navigation, route}) => {
               Price Details
             </Text>
           </View>
-          <View style={styles.footer}>
-            <View>
-              <Text
-                style={{fontSize: 20, color: Colors.black, fontWeight: 'bold'}}>
-                Fixed Price
-              </Text>
-              <Text
-                style={{
-                  color: Colors.switchergray,
-                  fontWeight: 'bold',
-                  fontSize: 18,
-                }}>
-                PKR-{item.fixedPrice}
-              </Text>
+
+          {bidPrice ? (
+            <View style={styles.footer}>
+              <View>
+                <Text
+                  style={{
+                    fontSize: 20,
+                    color: Colors.black,
+                    fontWeight: 'bold',
+                  }}>
+                  Fixed Price
+                </Text>
+                <Text
+                  style={{
+                    color: Colors.switchergray,
+                    fontWeight: 'bold',
+                    fontSize: 18,
+                  }}>
+                  PKR-{item.fixedPrice}
+                </Text>
+              </View>
+              <View style={{height: 50, backgroundColor: 'red', width: 2}} />
+
+              <View>
+                <Text
+                  style={{
+                    fontSize: 20,
+                    color: Colors.black,
+                    fontWeight: 'bold',
+                  }}>
+                  Bidding Price
+                </Text>
+                <Text
+                  style={{
+                    color: Colors.switchergray,
+                    fontWeight: 'bold',
+                    fontSize: 18,
+                  }}>
+                  PKR-{bidPrice}
+                </Text>
+              </View>
             </View>
-            <View style={{height: 50, backgroundColor: 'red', width: 2}} />
-            <View>
-              <Text
-                style={{fontSize: 20, color: Colors.black, fontWeight: 'bold'}}>
-                Bidding Price
-              </Text>
-              <Text
-                style={{
-                  color: Colors.switchergray,
-                  fontWeight: 'bold',
-                  fontSize: 18,
-                }}>
-                PKR-{item.biddingPrice}
-              </Text>
+          ) : (
+            <View style={styles.footer}>
+              <View>
+                <Text
+                  style={{
+                    fontSize: 20,
+                    color: Colors.black,
+                    fontWeight: 'bold',
+                  }}>
+                  Fixed Price
+                </Text>
+                <Text
+                  style={{
+                    color: Colors.switchergray,
+                    fontWeight: 'bold',
+                    fontSize: 18,
+                  }}>
+                  PKR-{item.fixedPrice}
+                </Text>
+              </View>
             </View>
-          </View>
+          )}
+
           <>
             <Button
               text={'Book Now'}

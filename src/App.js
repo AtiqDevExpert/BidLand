@@ -23,14 +23,13 @@ const App = () => {
   };
   useEffect(() => {
     fetchUserDetail();
-
     SplashScreen.hide();
   }, []);
   const [user, setUser] = useState();
   return (
     <SafeAreaView style={styles.mainView}>
       <NavigationContainer>
-        <StatusBar backgroundColor="black" />
+        <StatusBar hidden={true} />
         <Stack.Navigator>
           {user === true ? (
             <>

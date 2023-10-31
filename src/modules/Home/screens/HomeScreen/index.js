@@ -14,6 +14,7 @@ import {
   RefreshControl,
   TouchableOpacity,
 } from 'react-native';
+import Modal from 'react-native-modal';
 import SwitchSelector from 'react-native-switch-selector';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import styles from './styles';
@@ -26,14 +27,18 @@ import {
 } from '../../../../utils/API/Requests';
 import Loading from '../../../../components/Loading/Loading';
 import {useFocusEffect} from '@react-navigation/native';
-
+import Button from '../../../../components/Button/button';
+import TextField from '../../../../components/TextField';
 const HomeScreen = ({navigation}) => {
+  const [search, setSearch] = useState('');
   const [activeSwicth, setActiveSwicth] = useState('listing');
   const [proerties, setProperties] = useState([]);
   const [user, setUser] = useState({});
   const [biddingProerties, setBiddingProperties] = useState([]);
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const [bidPrice, setBidPrice] = useState('');
   const options = [
     {label: 'Listing', value: 'listing'},
     {label: 'Bid Listing', value: 'bidListing'},
@@ -43,6 +48,10 @@ const HomeScreen = ({navigation}) => {
     try {
       let token = await AsyncStorage.getItem('USER_TOKEN');
       let response = await get_properties(token);
+      console.log(
+        '🚀 ~ file: index.js:51 ~ fetchPropertyListing ~ response:',
+        response.properties,
+      );
 
       if (response.properties.length > 0) {
         setProperties(response.properties);
@@ -91,13 +100,18 @@ const HomeScreen = ({navigation}) => {
     setRefreshing(false);
   };
 
-  const renderProperties = ({item, index}) => {
+  const renderListingProperties = ({item, index}) => {
     return (
       <Pressable
         activeOpacity={0.8}
-        onPress={() => navigation.navigate('DetailsScreen', item)}
+        onPress={() =>
+          navigation.navigate('DetailsScreen', {
+            item: item,
+            bidPrice: null,
+          })
+        }
         style={{marginVertical: 5}}>
-        <View style={styles.card}>
+        <View style={[styles.card]}>
           {/* House image */}
           <View>
             <Image
@@ -172,15 +186,192 @@ const HomeScreen = ({navigation}) => {
       </Pressable>
     );
   };
+  const renderBiddingProperties = ({item, index}) => {
+    return (
+      <>
+        <View style={{marginVertical: 5}}>
+          <View style={[styles.card]}>
+            {/* House image */}
+            <View>
+              <Image
+                source={{uri: item.images[0]}} // Assuming item.images contains image URLs
+                style={styles.cardImage}
+              />
+            </View>
+            <View style={{marginTop: 5}}>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  marginTop: 5,
+                }}>
+                <Text
+                  style={{
+                    fontSize: 16,
+                    fontWeight: 'bold',
+                    color: Colors.black,
+                  }}>
+                  {item.name ? item.name : ''}
+                </Text>
+                <Text
+                  style={{
+                    fontWeight: 'bold',
+                    color: Colors.black,
+                    fontSize: 16,
+                  }}>
+                  PKR-{item.fixedPrice ? item.fixedPrice : ''}
+                </Text>
+              </View>
+
+              <Text style={{color: Colors.black, fontSize: 14, marginTop: 5}}>
+                {item?.location?.address ? item?.location?.address : ''}
+              </Text>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  marginHorizental: 10,
+                  marginTop: 5,
+                }}>
+                <View style={styles.facility}>
+                  <Icon name="hotel" size={18} />
+                  <Text style={styles.facilityText}>
+                    {item?.specifications[0]}
+                  </Text>
+                </View>
+                <View style={styles.facility}>
+                  <Icon name="bathtub" size={18} />
+                  <Text style={styles.facilityText}>
+                    {item?.specifications[2]}
+                  </Text>
+                </View>
+              </View>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  marginHorizental: 10,
+                  marginTop: 5,
+                }}>
+                <View style={styles.facility}>
+                  <Icon name="aspect-ratio" size={18} />
+                  <Text style={styles.facilityText}>
+                    {item?.specifications[1]}
+                  </Text>
+                </View>
+                <View style={styles.facility}>
+                  <Icon name="aspect-ratio" size={18} />
+                  <Text style={styles.facilityText}>
+                    {item?.specifications[3]}
+                  </Text>
+                </View>
+              </View>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  marginHorizontal: 10,
+                  marginTop: 10,
+                }}>
+                <>
+                  <Button
+                    text={'Detail'}
+                    color={Colors.white}
+                    fontSize={15}
+                    height={50}
+                    width={'30%'}
+                    backgroundColor={Colors.black}
+                    onPress={() => {
+                      navigation.navigate('DetailsScreen', {
+                        item: item,
+                        bidPrice: null,
+                      });
+                    }}
+                  />
+                </>
+                <>
+                  <Button
+                    text={'Place Bid'}
+                    color={Colors.white}
+                    fontSize={15}
+                    height={50}
+                    width={'30%'}
+                    backgroundColor={Colors.black}
+                    onPress={() => setVisible(true)}
+                  />
+                </>
+              </View>
+            </View>
+          </View>
+        </View>
+        <>
+          <Modal isVisible={visible}>
+            <View style={styles.ModalView}>
+              <Text
+                style={{
+                  color: Colors.dark,
+                  fontWeight: '600',
+                  fontSize: 16,
+                }}>
+                Enter the Bid Amount
+              </Text>
+
+              <View style={styles.input}>
+                <TextField
+                  value={bidPrice}
+                  label="Price"
+                  onChangeText={text => setBidPrice(text)}
+                  secure={false}
+                />
+              </View>
+
+              <View
+                style={{
+                  flexDirection: 'row',
+                  marginHorizontal: 5,
+                }}>
+                <View style={{width: '60%'}}>
+                  <Button
+                    text={'Place Bid'}
+                    color={Colors.white}
+                    fontSize={15}
+                    height={50}
+                    width={'60%'}
+                    backgroundColor={Colors.black}
+                    onPress={() => {
+                      navigation.navigate('DetailsScreen', {
+                        item: item,
+                        bidPrice: bidPrice,
+                      });
+                      setBidPrice('');
+                    }}
+                  />
+                </View>
+                <View style={{width: '60%'}}>
+                  <Button
+                    text={'Cancel'}
+                    color={Colors.white}
+                    fontSize={15}
+                    height={50}
+                    width={'60%'}
+                    backgroundColor={Colors.black}
+                    onPress={() => setVisible(false)}
+                  />
+                </View>
+              </View>
+            </View>
+          </Modal>
+        </>
+      </>
+    );
+  };
 
   return (
     <SafeAreaView style={{backgroundColor: Colors.white, flex: 1}}>
       {/* Customise status bar */}
-      <StatusBar
-        translucent={false}
-        backgroundColor={Colors.white}
-        barStyle="dark-content"
-      />
+      <StatusBar hidden={true} />
       {/* Header container */}
       <View style={styles.header}>
         <View>
@@ -197,10 +388,6 @@ const HomeScreen = ({navigation}) => {
               style={styles.profileImage}
               source={{uri: `data:image/png;base64,${user.profilePicture}`}}
             />
-            {/* <Image
-              style={styles.profileImage}
-              source={{uri: `file://${profilePath}`}}
-            /> */}
           </>
         </Pressable>
       </View>
@@ -213,8 +400,10 @@ const HomeScreen = ({navigation}) => {
         <View style={styles.searchInputContainer}>
           <Icon name="search" color={Colors.grey} size={25} />
           <TextInput
-            placeholder="Search address, city, location"
+            placeholder="Search property"
+            value={search}
             placeholderTextColor={'#000'}
+            onChangeText={text => setSearch(text)}
           />
         </View>
       </View>
@@ -229,6 +418,7 @@ const HomeScreen = ({navigation}) => {
           height={50}
           onPress={label => {
             setActiveSwicth(label);
+            setVisible(false);
           }}
           textColor={'#000'}
           bold={true}
@@ -254,7 +444,7 @@ const HomeScreen = ({navigation}) => {
               }}
               horizontal={false}
               data={proerties}
-              renderItem={renderProperties}
+              renderItem={renderListingProperties}
               extraData={proerties}
               refreshControl={
                 <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
@@ -281,7 +471,7 @@ const HomeScreen = ({navigation}) => {
               }}
               horizontal={false}
               data={biddingProerties}
-              renderItem={renderProperties}
+              renderItem={renderBiddingProperties}
               extraData={biddingProerties}
               refreshControl={
                 <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />

@@ -72,7 +72,6 @@ export default StyleSheet.create({
     paddingHorizontal: 40,
   },
   card: {
-    height: 280,
     backgroundColor: Colors.white,
     elevation: 10,
     width: width - 40,
@@ -100,4 +99,21 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  modelMainView: {
+    backgroundColor: Colors.white,
+    borderRadius: 10,
+  },
+  ModalView: {
+    backgroundColor: '#FFFFFF',
+
+    height: 200,
+    width: '100%',
+
+    // marginHorizontal:10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+    borderRadius: 10,
+  },
+  input: {marginVertical: 15, marginHorizontal: 10, height: 60, width: '70%'},
 });

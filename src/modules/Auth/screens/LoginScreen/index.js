@@ -6,6 +6,8 @@ import {
   Image,
   ImageBackground,
   ActivityIndicator,
+  TouchableOpacity,
+  TextInput,
 } from 'react-native';
 import React, {useState} from 'react';
 import Toast from 'react-native-simple-toast';
@@ -17,20 +19,25 @@ import styles from './styles';
 import {Colors} from '../../../../constants/Colors';
 import {useNavigation} from '@react-navigation/native';
 import {Login_Request} from '../../../../utils/API/Requests';
+import Icon from 'react-native-vector-icons/FontAwesome';
 const Login = () => {
   const navigation = useNavigation();
   const [emailValue, setEmailValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
   const [loading, setLoading] = useState(false);
+  const [isVisiblePassword, setVisiblePassword] = useState(false);
   const gotoForgotPassword = () => {
     navigation.navigate('forgotpassword');
+  };
+  const visiblePassword = () => {
+    setVisiblePassword(!isVisiblePassword);
   };
   const SubmitLogin = async () => {
     setLoading(true);
     const formattedEmailValue =
       emailValue.charAt(0).toLowerCase() + emailValue.slice(1);
     let body = {
-      email: emailValue,
+      email: formattedEmailValue,
       password: passwordValue,
     };
     console.log('SubmitLogin ===>', body);
@@ -76,36 +83,37 @@ const Login = () => {
                 <Text style={styles.text}>Login Via Email</Text>
 
                 <View style={styles.whitebackground}>
-                  <View style={styles.dummy}>
-                    <View style={styles.input}>
-                      <TextField
-                        value={emailValue}
-                        label="Email"
-                        onChangeText={text => {
-                          setEmailValue(text);
-                        }}
+                  <View style={styles.input}>
+                    <TextField
+                      value={emailValue}
+                      label="Email"
+                      onChangeText={text => {
+                        setEmailValue(text);
+                      }}
+                    />
+                  </View>
+
+                  <View style={styles.input}>
+                    <TextField
+                      value={passwordValue}
+                      secureTextEntry={!isVisiblePassword}
+                      label="Password"
+                      secure={true}
+                      onChangeText={text => {
+                        setPasswordValue(text);
+                      }}
+                    />
+                  </View>
+
+                  <View>
+                    <View style={styles.Forgetpass}>
+                      <TransparentBtn
+                        text={'Forget Password?'}
+                        color={Colors.black}
+                        fontSize={16}
+                        width={'45%'}
+                        onPress={gotoForgotPassword}
                       />
-                    </View>
-                    <View style={styles.input}>
-                      <TextField
-                        value={passwordValue}
-                        label="Password"
-                        secure={true}
-                        onChangeText={text => {
-                          setPasswordValue(text);
-                        }}
-                      />
-                    </View>
-                    <View>
-                      <View style={styles.Forgetpass}>
-                        <TransparentBtn
-                          text={'Forget Password?'}
-                          color={Colors.black}
-                          fontSize={16}
-                          width={'45%'}
-                          onPress={gotoForgotPassword}
-                        />
-                      </View>
                     </View>
                   </View>
 
