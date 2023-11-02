@@ -24,7 +24,10 @@ import ImagePicker from 'react-native-image-crop-picker';
 import RNImageToBase64 from 'react-native-image-base64';
 import PickerButton from '@components/Button/pickerButton';
 import Toast from 'react-native-simple-toast';
-import {SignUp_Request} from '../../../../utils/API/Requests';
+import {
+  SignUp_Request,
+  update_user_Profile,
+} from '../../../../utils/API/Requests';
 const Profile = ({navigation}) => {
   const [user, setUser] = useState({});
   const [name, setName] = useState('');
@@ -47,6 +50,7 @@ const Profile = ({navigation}) => {
   };
   const UpdateProfile = async () => {
     setLoading(true);
+    let token = await AsyncStorage.getItem('USER_TOKEN');
     let finalUsername = name.replace(/\s+/g, '');
     const formattedEmailValue =
       emailValue.charAt(0).toLowerCase() + emailValue.slice(1);
@@ -74,16 +78,14 @@ const Profile = ({navigation}) => {
       setLoading(false);
     } else {
       try {
-        let response = await SignUp_Request(body);
+        let response = await update_user_Profile(token, user?.userId);
         console.log('response ==== > ', response);
+        await AsyncStorage.removeItem('USER_INFOR');
         Toast.show('Profile Updated Successfully', Toast.LONG);
-        await AsyncStorage.removeItem('USER_INFORMATION');
-        await AsyncStorage.setItem(
-          'USER_INFORMATION',
-          JSON.stringify(userInfo),
-        );
-        navigation.navigate('HomeModule');
+        await AsyncStorage.setItem('USER_INFO', JSON.stringify(userInfo));
+        setEditable(false);
         setLoading(false);
+        navigation.navigate('HomeModule');
       } catch (error) {
         console.error('Error signing up:', error);
         setLoading(false);
@@ -314,50 +316,28 @@ const Profile = ({navigation}) => {
                           onChangeText={text => setPasswordValue(text)}
                           secure={true}
                         />
-                        <Icon name="eye" size={20} color="red" />
                       </View>
                     )}
                   </View>
                 </>
 
-                <>
-                  <View style={styles.dummy}>
-                    {loading ? (
-                      <View
-                        style={{
-                          alignSelf: 'center',
-                          backgroundColor: Colors.black,
-                          height: 50,
-                          width: '90%',
-                          borderRadius: 10,
-                          justifyContent: 'center',
-
-                          borderColor: '#000',
-                          top: -10,
-                        }}>
-                        <ActivityIndicator size="small" color={Colors.white} />
-                      </View>
-                    ) : (
-                      <>
-                        <Button
-                          text={
-                            editable === false
-                              ? 'Edit profile'
-                              : 'Update Profile'
-                          }
-                          color={Colors.white}
-                          fontSize={15}
-                          height={50}
-                          width={'95%'}
-                          backgroundColor={Colors.black}
-                          marginBottom={20}
-                          onPress={onPressHandler}
-                          marginTop={80}
-                        />
-                      </>
-                    )}
-                  </View>
-                </>
+                <View style={styles.dummy}>
+                  <>
+                    <Button
+                      text={
+                        editable === false ? 'Edit profile' : 'Update Profile'
+                      }
+                      color={Colors.white}
+                      fontSize={15}
+                      height={50}
+                      width={'95%'}
+                      backgroundColor={Colors.black}
+                      marginBottom={20}
+                      onPress={onPressHandler}
+                      marginTop={80}
+                    />
+                  </>
+                </View>
               </View>
             </ScrollView>
           </View>

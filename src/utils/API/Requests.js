@@ -1,31 +1,7 @@
 import Url from '../../baseUrl';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-const get_request = async ({target, auth_token = null}) => {
-  try {
-    console.log(Url + target);
-    // let token = await get_data("USER_TOKEN")
-    console.log('x-auth-token:' + token);
-    const inst = axios.create({
-      baseURL: Url,
-      headers: {
-        'x-auth-token': token ? token : auth_token,
-      },
-    });
-    const response = await inst.get(target);
-    console.log('get response', JSON.stringify(response.data));
 
-    return response;
-  } catch (error) {
-    if (error.response) {
-      console.log('get error', JSON.stringify(error.response));
-
-      return error.response.data.message;
-    } else {
-      return 'Invalide Error!';
-    }
-  }
-};
 const SignUp_Request = async body => {
   try {
     const inst = axios.create({
@@ -64,43 +40,7 @@ const Login_Request = async body => {
     }
   }
 };
-const post_request_with_Token = async ({target, body}) => {
-  let token = await AsyncStorage.getItem('USER_TOKEN');
-  console.log(
-    '🚀 ~ file: Requests.js:71 ~ constpost_request_with_Token= ~ token:',
-    token,
-  );
-  try {
-    var myHeaders = new Headers();
-    myHeaders.append('x-auth-token', '' + token);
-    myHeaders.append('Authorization', 'Bearer ' + token);
-    myHeaders.append('Accept', 'application/json');
-    myHeaders.append('Content-Type', 'application/json');
 
-    var raw = JSON.stringify(body);
-    var requestOptions = {
-      method: 'POST',
-      headers: myHeaders,
-      body: raw,
-      redirect: 'follow',
-    };
-    const data = await fetch(`${Url}${target}`, requestOptions)
-      .then(response => response.text())
-      .then(result => {
-        //   console.log( "result data",result);
-        return result;
-      })
-      .catch(error => {
-        console.log('error', error.message);
-        throw new error.message();
-      });
-    console.log('post response===============> ', data);
-    return data;
-  } catch (error) {
-    console.log('----------', error);
-    return error;
-  }
-};
 const get_properties = async token => {
   // console.log('Token + UL', token, Url);
   try {
@@ -187,6 +127,25 @@ const get_Seller = async (token, sellerId) => {
     }
   }
 };
+const update_user_Profile = async (token, useID) => {
+  try {
+    const inst = axios.create({
+      baseURL: Url,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const response = await inst.get(`auth/user/${useID}`);
+
+    return response.data;
+  } catch (error) {
+    if (error.response) {
+      return new Error(JSON.stringify(error.response.data.message));
+    } else {
+      throw new Error('Invalide Error!');
+    }
+  }
+};
 export {
   SignUp_Request,
   Login_Request,
@@ -194,4 +153,5 @@ export {
   get_bidding_properties,
   get_allSeller,
   get_Seller,
+  update_user_Profile,
 };
