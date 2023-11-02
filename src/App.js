@@ -7,13 +7,14 @@ import AuthModule from './modules/Auth/navigation/index';
 import {LogBox} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import BottomTab from './navigator/BottomTab';
+// import BottomTab from './navigator/BottomTab';
 LogBox.ignoreLogs(['Warning: ...']);
 LogBox.ignoreAllLogs();
 const Stack = createNativeStackNavigator();
 const App = () => {
   const fetchUserDetail = async () => {
     let user = await AsyncStorage.getItem('USER_INFO');
-    console.log('🚀 ~ file: App.js:18 ~ fetchUserDetail ~ user:', user);
+    
     let registeredUser = JSON.parse(user);
     if (registeredUser === null) {
       setUser(false);

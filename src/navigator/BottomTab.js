@@ -31,28 +31,34 @@ const BottomTab = () => {
     <Tab.Navigator
       initialRouteName="HomeModule"
       screenOptions={{
+        showLabel: false,
         tabBarStyle: {
           padding: 10,
           height: 70,
         },
-      }}
-      tabBarOptions={{
-        showLabel: false,
-        style: {
-          backgroundColor: '#F8F8F8',
+        tabBarOptions: {
+          style: {
+            borderTopWidth: 0,
+            position: 'absolute',
+            elevation: 0,
+          },
+        },
+        tabBarStyle: {
+          height: 60,
+          // marginBottom: 10,
           borderTopLeftRadius: 35,
           borderTopRightRadius: 35,
           borderBottomLeftRadius: 0,
-          borderTopWidth: 0,
-          position: 'absolute',
-          elevation: 0,
+          backgroundColor: '#000',
+          padding: 5,
         },
-      }}
-      tabBarStyle={{height: 100, marginBottom: 10}}>
+      }}>
       <Tab.Screen
         name="HomeModule"
         component={HomeModule}
         options={{
+          tabBarShowLabel: false,
+          tabBarShowLabel: false,
           headerShown: false,
           tabBarIcon: ({focused}) => (
             <View
@@ -63,18 +69,18 @@ const BottomTab = () => {
                 alignItems: 'center',
               }}>
               <HomeIcon
-                fill={focused ? '#000' : '#798293'}
+                fill={focused ? '#Fff' : '#798293'}
                 style={{
                   height: 30,
                   width: 25,
                   alignSelf: 'center',
-                  tintColor: focused ? '#000' : '#748c94',
+                  tintColor: focused ? '#Fff' : '#798293',
                   zIndex: 1,
                 }}
               />
               <Text
                 style={{
-                  color: focused ? '#000' : '#748c94',
+                  color: focused ? '#Fff' : '#798293',
                   fontSize: 12,
                   textAlign: 'center',
                 }}>
@@ -89,6 +95,7 @@ const BottomTab = () => {
         name="SellersModule"
         component={SellersModule}
         options={{
+          tabBarShowLabel: false,
           headerShown: false,
           tabBarIcon: ({focused}) => (
             <View
@@ -99,18 +106,18 @@ const BottomTab = () => {
                 alignItems: 'center',
               }}>
               <ClientsIcon
-                fill={focused ? '#000' : '#798293'}
+                fill={focused ? '#fff' : '#798293'}
                 style={{
                   height: 30,
                   width: 25,
                   alignSelf: 'center',
-                  tintColor: focused ? '#000' : '#748c94',
+                  tintColor: focused ? '#Fff' : '#798293',
                   zIndex: 1,
                 }}
               />
               <Text
                 style={{
-                  color: focused ? '#000' : '#748c94',
+                  color: focused ? '#Fff' : '#798293',
                   fontSize: 12,
                   textAlign: 'center',
                 }}>
@@ -125,6 +132,7 @@ const BottomTab = () => {
         name="ChatModule"
         component={ChatModule}
         options={{
+          tabBarShowLabel: false,
           headerShown: false,
           tabBarIcon: ({focused}) => (
             <View
@@ -135,18 +143,18 @@ const BottomTab = () => {
                 alignItems: 'center',
               }}>
               <ChatIcon
-                fill={focused ? '#000' : '#798293'}
+                fill={focused ? '#fff' : '#798293'}
                 style={{
                   height: 30,
                   width: 25,
                   alignSelf: 'center',
-                  tintColor: focused ? '#000' : '#748c94',
+                  tintColor: focused ? '#Fff' : '#798293',
                   zIndex: 1,
                 }}
               />
               <Text
                 style={{
-                  color: focused ? '#000' : '#748c94',
+                  color: focused ? '#Fff' : '#798293',
                   fontSize: 12,
                   textAlign: 'center',
                 }}>
@@ -161,6 +169,7 @@ const BottomTab = () => {
         name="profileModule"
         component={ProfileModule}
         options={{
+          tabBarShowLabel: false,
           headerShown: false,
           tabBarIcon: ({focused}) => (
             <View
@@ -171,18 +180,18 @@ const BottomTab = () => {
                 alignItems: 'center',
               }}>
               <ProfileIcon
-                fill={focused ? '#000' : '#798293'}
+                fill={focused ? '#fff' : '#798293'}
                 style={{
                   height: 30,
                   width: 25,
                   alignSelf: 'center',
-                  tintColor: focused ? '#000' : '#748c94',
+                  tintColor: focused ? '#Fff' : '#798293',
                   zIndex: 1,
                 }}
               />
               <Text
                 style={{
-                  color: focused ? '#000' : '#748c94',
+                  color: focused ? '#Fff' : '#798293',
                   fontSize: 12,
                   textAlign: 'center',
                 }}>

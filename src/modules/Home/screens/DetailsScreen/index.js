@@ -123,29 +123,26 @@ const DetailsScreen = ({navigation, route}) => {
               <Text style={styles.facilityText}>{item?.specifications[3]}</Text>
             </View>
           </View>
-          {reviews && (
-            <>
-              <View style={{flex: 1}}>
-                <View>
-                  <Text
-                    style={{
-                      fontSize: 20,
-                      color: Colors.black,
-                      fontWeight: 'bold',
-                    }}>
-                    Customer Reviews
-                  </Text>
-                </View>
-                <FlatList
-                  horizontal
-                  showsHorizontalScrollIndicator={true}
-                  keyExtractor={(_, key) => key.toString()}
-                  data={reviews}
-                  renderItem={renderReview}
-                />
-              </View>
-            </>
-          )}
+
+          <View style={{flex: 1}}>
+            <View>
+              <Text
+                style={{
+                  fontSize: 20,
+                  color: Colors.black,
+                  fontWeight: 'bold',
+                }}>
+                Customer Reviews
+              </Text>
+            </View>
+            <FlatList
+              horizontal
+              showsHorizontalScrollIndicator={true}
+              keyExtractor={(_, key) => key.toString()}
+              data={reviews}
+              renderItem={renderReview}
+            />
+          </View>
 
           <View style={{marginVertical: 10}}>
             <Text
@@ -180,8 +177,7 @@ const DetailsScreen = ({navigation, route}) => {
               />
             </>
           </View>
-          {/* footer container */}
-          <View style={{backgroundColor: 'red'}}>
+          {/* <View style={{backgroundColor: 'red'}}>
             <View
               style={{
                 flex: 1,
@@ -355,7 +351,8 @@ const DetailsScreen = ({navigation, route}) => {
                 </ScrollView>
               </View>
             </View>
-          </View>
+          </View> */}
+          {/* footer container */}
           <View
             style={{
               marginVertical: 10,
@@ -439,6 +436,11 @@ const DetailsScreen = ({navigation, route}) => {
               width={'100%'}
               backgroundColor={Colors.black}
               marginBottom={10}
+              onPress={() => {
+                navigation.navigate('PaymentScreen', {
+                  price: item.fixedPrice,
+                });
+              }}
             />
           </>
         </View>

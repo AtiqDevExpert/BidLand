@@ -1,8 +1,11 @@
 import React from 'react'; //
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import HomeScreen from '../screens/HomeScreen';
-import DetailsScreen from '@Home/screens/DetailsScreen';
+
+import DetailsScreen from '../screens/DetailsScreen';
 import {NavigationContainer} from '@react-navigation/native';
+import PaymentScreen from '../screens/PaymentStripe/';
+
 const Stack = createNativeStackNavigator();
 const screenOptions = {headerShown: false};
 export const HomeModule = () => {
@@ -16,6 +19,11 @@ export const HomeModule = () => {
       <Stack.Screen
         name="DetailsScreen"
         component={DetailsScreen}
+        options={screenOptions}
+      />
+      <Stack.Screen
+        name="PaymentScreen"
+        component={PaymentScreen}
         options={screenOptions}
       />
     </Stack.Navigator>
