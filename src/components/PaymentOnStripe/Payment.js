@@ -138,6 +138,7 @@ export default function Payment({price}) {
           cardStyle={{
             backgroundColor: '#FFFFFF',
             textColor: '#000000',
+            placeholderColor: 'black',
           }}
           style={{
             width: '100%',
