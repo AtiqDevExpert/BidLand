@@ -45,11 +45,8 @@ const BottomTab = () => {
         },
         tabBarStyle: {
           height: 60,
-          // marginBottom: 10,
-          borderTopLeftRadius: 35,
-          borderTopRightRadius: 35,
           borderBottomLeftRadius: 0,
-          backgroundColor: '#000',
+          backgroundColor: '#fff',
           padding: 5,
         },
       }}>
@@ -69,18 +66,18 @@ const BottomTab = () => {
                 alignItems: 'center',
               }}>
               <HomeIcon
-                fill={focused ? '#Fff' : '#798293'}
+                fill={focused ? '#000' : '#798293'}
                 style={{
                   height: 30,
                   width: 25,
                   alignSelf: 'center',
-                  tintColor: focused ? '#Fff' : '#798293',
+                  tintColor: focused ? '#000' : '#798293',
                   zIndex: 1,
                 }}
               />
               <Text
                 style={{
-                  color: focused ? '#Fff' : '#798293',
+                  color: focused ? '#000' : '#798293',
                   fontSize: 12,
                   textAlign: 'center',
                 }}>
@@ -106,18 +103,18 @@ const BottomTab = () => {
                 alignItems: 'center',
               }}>
               <ClientsIcon
-                fill={focused ? '#fff' : '#798293'}
+                fill={focused ? '#000' : '#798293'}
                 style={{
                   height: 30,
                   width: 25,
                   alignSelf: 'center',
-                  tintColor: focused ? '#Fff' : '#798293',
+                  tintColor: focused ? '#000' : '#798293',
                   zIndex: 1,
                 }}
               />
               <Text
                 style={{
-                  color: focused ? '#Fff' : '#798293',
+                  color: focused ? '#000' : '#798293',
                   fontSize: 12,
                   textAlign: 'center',
                 }}>
@@ -143,18 +140,18 @@ const BottomTab = () => {
                 alignItems: 'center',
               }}>
               <ChatIcon
-                fill={focused ? '#fff' : '#798293'}
+                fill={focused ? '#000' : '#798293'}
                 style={{
                   height: 30,
                   width: 25,
                   alignSelf: 'center',
-                  tintColor: focused ? '#Fff' : '#798293',
+                  tintColor: focused ? '#000' : '#798293',
                   zIndex: 1,
                 }}
               />
               <Text
                 style={{
-                  color: focused ? '#Fff' : '#798293',
+                  color: focused ? '#000' : '#798293',
                   fontSize: 12,
                   textAlign: 'center',
                 }}>
@@ -180,18 +177,18 @@ const BottomTab = () => {
                 alignItems: 'center',
               }}>
               <ProfileIcon
-                fill={focused ? '#fff' : '#798293'}
+                fill={focused ? '#000' : '#798293'}
                 style={{
                   height: 30,
                   width: 25,
                   alignSelf: 'center',
-                  tintColor: focused ? '#Fff' : '#798293',
+                  tintColor: focused ? '#000' : '#798293',
                   zIndex: 1,
                 }}
               />
               <Text
                 style={{
-                  color: focused ? '#Fff' : '#798293',
+                  color: focused ? '#000' : '#798293',
                   fontSize: 12,
                   textAlign: 'center',
                 }}>

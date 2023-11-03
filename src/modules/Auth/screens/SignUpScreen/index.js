@@ -137,7 +137,9 @@ const SignUp = ({navigation}) => {
     setSelecter(false);
   };
   return (
-    <SafeAreaView style={styles.mainView}>
+    <SafeAreaView
+      pointerEvents={loading === true ? 'none' : 'auto'}
+      style={styles.mainView}>
       <ImageBackground
         style={{flex: 1, justifyContent: 'center'}}
         source={require('../../../../Assets/Images/background2.jpg')}>

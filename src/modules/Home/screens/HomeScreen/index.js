@@ -24,7 +24,9 @@ const {width} = Dimensions.get('screen');
 import {
   get_properties,
   get_bidding_properties,
+  place_bid,
 } from '../../../../utils/API/Requests';
+import Toast from 'react-native-simple-toast';
 import Loading from '../../../../components/Loading/Loading';
 import {useFocusEffect} from '@react-navigation/native';
 import Button from '../../../../components/Button/button';
@@ -32,7 +34,7 @@ import TextField from '../../../../components/TextField';
 const HomeScreen = ({navigation}) => {
   const [search, setSearch] = useState('');
   const [activeSwicth, setActiveSwicth] = useState('listing');
-  const [proerties, setProperties] = useState([]);
+  const [properties, setProperties] = useState([]);
   const [user, setUser] = useState({});
   const [biddingProerties, setBiddingProperties] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -48,10 +50,6 @@ const HomeScreen = ({navigation}) => {
     try {
       let token = await AsyncStorage.getItem('USER_TOKEN');
       let response = await get_properties(token);
-      console.log(
-        '🚀 ~ file: index.js:51 ~ fetchPropertyListing ~ response:',
-        response.properties,
-      );
 
       if (response.properties.length > 0) {
         setProperties(response.properties);
@@ -100,6 +98,33 @@ const HomeScreen = ({navigation}) => {
     setRefreshing(false);
   };
 
+  const placeBid = async (propertyID, item, bidPrice) => {
+    setLoading(true);
+    setVisible(false);
+
+    try {
+      let body = {
+        biddingPrice: bidPrice,
+      };
+      Toast.show('Request in process', Toast.LONG);
+      let response = await place_bid(propertyID, body);
+      if (response) {
+        Toast.show(response.message, Toast.LONG);
+        navigation.navigate('DetailsScreen', {
+          item: item,
+          bidPrice: response?.bid?.biddingPrice,
+          propertyID: propertyID,
+        });
+        setBidPrice('');
+        setLoading(false);
+      }
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
   const renderListingProperties = ({item, index}) => {
     return (
       <Pressable
@@ -108,6 +133,7 @@ const HomeScreen = ({navigation}) => {
           navigation.navigate('DetailsScreen', {
             item: item,
             bidPrice: null,
+            propertyID: item._id,
           })
         }
         style={{marginVertical: 5}}>
@@ -287,6 +313,7 @@ const HomeScreen = ({navigation}) => {
                       navigation.navigate('DetailsScreen', {
                         item: item,
                         bidPrice: null,
+                        propertyID: item._id,
                       });
                     }}
                   />
@@ -317,13 +344,13 @@ const HomeScreen = ({navigation}) => {
                 }}>
                 Enter the Bid Amount
               </Text>
-
               <View style={styles.input}>
                 <TextField
                   value={bidPrice}
                   label="Price"
                   onChangeText={text => setBidPrice(text)}
                   secure={false}
+                  keyboardType="numeric"
                 />
               </View>
 
@@ -339,14 +366,11 @@ const HomeScreen = ({navigation}) => {
                     fontSize={15}
                     height={50}
                     width={'60%'}
-                    backgroundColor={Colors.black}
-                    onPress={() => {
-                      navigation.navigate('DetailsScreen', {
-                        item: item,
-                        bidPrice: bidPrice,
-                      });
-                      setBidPrice('');
-                    }}
+                    backgroundColor={
+                      bidPrice === '' ? Colors.secondry : Colors.black
+                    }
+                    disabled={bidPrice === '' ? true : false}
+                    onPress={() => placeBid(item?._id, item, bidPrice)}
                   />
                 </View>
                 <View style={{width: '60%'}}>
@@ -402,8 +426,9 @@ const HomeScreen = ({navigation}) => {
           <TextInput
             placeholder="Search property"
             value={search}
-            placeholderTextColor={'#000'}
+            placeholderTextColor={Colors.dark}
             onChangeText={text => setSearch(text)}
+            style={{color: Colors.dark}}
           />
         </View>
       </View>
@@ -443,18 +468,39 @@ const HomeScreen = ({navigation}) => {
                 paddingVertical: 20,
               }}
               horizontal={false}
-              data={proerties}
+              data={properties.filter(
+                property =>
+                  property?.name.toLowerCase().includes(search.toLowerCase()) ||
+                  property?.description
+                    .toLowerCase()
+                    .includes(search.toLowerCase()) ||
+                  property.fixedPrice
+                    .toString()
+                    .includes(search.toLowerCase()) ||
+                  (property.location &&
+                    property.location.address &&
+                    property.location.address
+                      .toLowerCase()
+                      .includes(search.toLowerCase())),
+              )}
               renderItem={renderListingProperties}
-              extraData={proerties}
+              extraData={properties.filter(
+                property =>
+                  property?.name.toLowerCase().includes(search.toLowerCase()) ||
+                  property?.description
+                    .toLowerCase()
+                    .includes(search.toLowerCase()) ||
+                  property.fixedPrice
+                    .toString()
+                    .includes(search.toLowerCase()) ||
+                  (property.location &&
+                    property.location.address &&
+                    property.location.address
+                      .toLowerCase()
+                      .includes(search.toLowerCase())),
+              )}
               refreshControl={
                 <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-              }
-              ListEmptyComponent={
-                <>
-                  <View>
-                    <Text>No data found</Text>
-                  </View>
-                </>
               }
             />
           </View>
@@ -470,18 +516,39 @@ const HomeScreen = ({navigation}) => {
                 paddingVertical: 20,
               }}
               horizontal={false}
-              data={biddingProerties}
+              data={biddingProerties.filter(
+                property =>
+                  property?.name.toLowerCase().includes(search.toLowerCase()) ||
+                  property?.description
+                    .toLowerCase()
+                    .includes(search.toLowerCase()) ||
+                  property.fixedPrice
+                    .toString()
+                    .includes(search.toLowerCase()) ||
+                  (property.location &&
+                    property.location.address &&
+                    property.location.address
+                      .toLowerCase()
+                      .includes(search.toLowerCase())),
+              )}
               renderItem={renderBiddingProperties}
-              extraData={biddingProerties}
+              extraData={biddingProerties.filter(
+                property =>
+                  property?.name.toLowerCase().includes(search.toLowerCase()) ||
+                  property?.description
+                    .toLowerCase()
+                    .includes(search.toLowerCase()) ||
+                  property.fixedPrice
+                    .toString()
+                    .includes(search.toLowerCase()) ||
+                  (property.location &&
+                    property.location.address &&
+                    property.location.address
+                      .toLowerCase()
+                      .includes(search.toLowerCase())),
+              )}
               refreshControl={
                 <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-              }
-              ListEmptyComponent={
-                <>
-                  <View>
-                    <Text>No data found</Text>
-                  </View>
-                </>
               }
             />
           </View>

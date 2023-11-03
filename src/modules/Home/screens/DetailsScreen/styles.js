@@ -15,8 +15,8 @@ const {width} = Dimensions.get('screen');
 export default StyleSheet.create({
   backgroundImageContainer: {
     elevation: 20,
-    marginHorizontal: 20,
-    marginTop: 20,
+    marginHorizontal: 10,
+    marginTop: 21,
     alignItems: 'center',
     height: 350,
   },
@@ -102,5 +102,14 @@ export default StyleSheet.create({
     backgroundColor: '#f1f3f6',
     paddingHorizontal: 10,
     borderRadius: 10,
+  },
+  popupContainer: {
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    zIndex: 9999,
   },
 });

@@ -146,6 +146,26 @@ const update_user_Profile = async (token, useID) => {
     }
   }
 };
+const place_bid = async (propertyID, body) => {
+  let token = await AsyncStorage.getItem('USER_TOKEN');
+  try {
+    const inst = axios.create({
+      baseURL: Url,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const response = await inst.post(`bidding/${propertyID}/placeBid`, body);
+
+    return response.data;
+  } catch (error) {
+    if (error.response) {
+      return new Error(JSON.stringify(error.response.data.message));
+    } else {
+      throw new Error('Invalide Error!');
+    }
+  }
+};
 export {
   SignUp_Request,
   Login_Request,
@@ -154,4 +174,5 @@ export {
   get_allSeller,
   get_Seller,
   update_user_Profile,
+  place_bid,
 };
