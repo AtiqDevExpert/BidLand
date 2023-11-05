@@ -15,6 +15,7 @@ import {
   StatusBar,
 } from 'react-native';
 import styles from './styles';
+import Toast from 'react-native-simple-toast';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {Colors} from '../../../../constants/Colors';
 const {width} = Dimensions.get('screen');
@@ -67,6 +68,7 @@ const DetailsScreen = ({navigation, route}) => {
       }
       setLoading(false);
     } catch (error) {
+      Toast.show(error.message, Toast.LONG);
       console.log(error);
     } finally {
       setLoading(false);

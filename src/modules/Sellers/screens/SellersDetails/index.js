@@ -25,7 +25,7 @@ import {
 } from '../../../../utils/API/Requests';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useFocusEffect} from '@react-navigation/native';
-
+import Toast from 'react-native-simple-toast';
 const SellersDetail = ({navigation, route}) => {
   const [activeSwicth, setActiveSwicth] = useState('listing');
   const options = [
@@ -53,6 +53,7 @@ const SellersDetail = ({navigation, route}) => {
       }
     } catch (error) {
       console.log(error);
+      Toast.show(error.message, Toast.LONG);
       setLoading(false);
     }
   };

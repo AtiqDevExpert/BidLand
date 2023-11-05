@@ -64,6 +64,7 @@ const Profile = ({navigation}) => {
       );
       setLoading(false);
     } catch (error) {
+      Toast.show(error.message, Toast.LONG);
       console.error('Error signing up:', error);
       setLoading(false);
     }

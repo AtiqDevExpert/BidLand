@@ -24,6 +24,7 @@ const TextField = props => {
     editable,
     keyboardType,
     Children,
+
     ...restOfProps
   } = props;
   const [isFocused, setIsFocused] = useState(false);
@@ -111,6 +112,7 @@ const TextField = props => {
             </Text>
           </Animated.View>
         </TouchableWithoutFeedback>
+
         {!!errorText && <Text style={styles.error}>{errorText}</Text>}
       </View>
     </>

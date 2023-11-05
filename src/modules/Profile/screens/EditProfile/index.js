@@ -83,6 +83,7 @@ const EditProfile = ({navigation}) => {
         setLoading(false);
         navigation.navigate('HomeModule');
       } catch (error) {
+        Toast.show(error.message, Toast.LONG);
         console.error('Error signing up:', error);
         setLoading(false);
       }

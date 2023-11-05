@@ -17,6 +17,7 @@ import SellerComponent from '@components/SellerComponent';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Loading from '../../../../components/Loading/Loading';
 import {get_allSeller} from '../../../../utils/API/Requests';
+import Toast from 'react-native-simple-toast';
 const Sellers = ({navigation}) => {
   const [search, setSearch] = useState('');
   const [allSellers, setAllSellers] = useState([]);
@@ -39,6 +40,7 @@ const Sellers = ({navigation}) => {
         setRefreshing(false);
       }
     } catch (error) {
+      Toast.show(error.message, Toast.LONG);
       console.log(error);
       setLoading(false);
       setRefreshing(false);

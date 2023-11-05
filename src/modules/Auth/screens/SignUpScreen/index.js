@@ -69,6 +69,7 @@ const SignUp = ({navigation}) => {
         setLoading(false);
       } catch (error) {
         console.error('Error signing up:', error);
+        Toast.show(error.message, Toast.LONG);
         setLoading(false);
       }
     }
