@@ -1,6 +1,7 @@
 import React from 'react'; //
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import ProfileScreen from '../screens/ProfileScreen';
+import EditProfile from '../screens/EditProfile';
 import AuthModule from '../../Auth/navigation';
 
 const Stack = createNativeStackNavigator();
@@ -14,10 +15,15 @@ export const ProfileModule = () => {
         options={screenOptions}
       />
       <Stack.Screen
+        name="editProfile"
+        component={EditProfile}
+        options={screenOptions}
+      />
+      {/* <Stack.Screen
         name="AuthModule"
         component={AuthModule}
         options={screenOptions}
-      />
+      /> */}
     </Stack.Navigator>
   );
 };

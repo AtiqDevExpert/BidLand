@@ -146,6 +146,25 @@ const update_user_Profile = async (token, useID) => {
     }
   }
 };
+const delete_user_Account = async (token, userId) => {
+  try {
+    const inst = axios.create({
+      baseURL: Url,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const response = await inst.delete(`auth/delete/${userId}`);
+
+    return response.data;
+  } catch (error) {
+    if (error.response) {
+      return new Error(JSON.stringify(error.response.data.message));
+    } else {
+      throw new Error('Invalid Error!');
+    }
+  }
+};
 const place_bid = async (propertyID, body) => {
   let token = await AsyncStorage.getItem('USER_TOKEN');
   try {
@@ -174,5 +193,6 @@ export {
   get_allSeller,
   get_Seller,
   update_user_Profile,
+  delete_user_Account,
   place_bid,
 };

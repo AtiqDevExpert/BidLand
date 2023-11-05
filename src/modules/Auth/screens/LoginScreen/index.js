@@ -61,7 +61,8 @@ const Login = () => {
           setLoading(false);
         }
       } catch (error) {
-        console.error('Error Login up:', error);
+        Toast.show(error.message, Toast.LONG);
+        // console.error('Error Login up:', error);
         setLoading(false);
       }
     }

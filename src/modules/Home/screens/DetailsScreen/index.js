@@ -32,7 +32,6 @@ const DetailsScreen = ({navigation, route}) => {
   const item = route.params?.item;
   const bidPrice = route.params?.bidPrice;
   const propertyID = route.params?.propertyID;
-  console.log('propertyID:', propertyID);
   const [review, setReview] = useState('');
   const [reviews, setReviews] = useState(null);
   const [loading, setLoading] = useState(false);

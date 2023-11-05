@@ -5,7 +5,7 @@ import {Colors} from '../../constants/Colors';
 
 const BiddindList = ({item1, onPressButton, onChangeText}) => {
   const data = item1;
-  console.log('🚀 ~ file: index.js:8 ~ BiddindList ~ data:', item1);
+
   const date = new Date(data?.timestamp);
 
   // Extract date and time components

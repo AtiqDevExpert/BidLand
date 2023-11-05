@@ -22,6 +22,10 @@ const Sellers = ({navigation}) => {
   const [allSellers, setAllSellers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
+  useEffect(() => {
+    setRefreshing(false);
+    fetchAllSellers();
+  }, []);
   const fetchAllSellers = async () => {
     setLoading(true);
     try {
@@ -29,6 +33,7 @@ const Sellers = ({navigation}) => {
       let response = await get_allSeller(token);
 
       if (response?.sellers?.length > 0) {
+        console.log(response.sellers);
         setAllSellers(response.sellers);
         setLoading(false);
         setRefreshing(false);
@@ -39,10 +44,7 @@ const Sellers = ({navigation}) => {
       setRefreshing(false);
     }
   };
-  useEffect(() => {
-    setRefreshing(false);
-    fetchAllSellers();
-  }, []);
+
   const onRefresh = () => {
     setRefreshing(true);
     fetchAllSellers();
@@ -60,6 +62,7 @@ const Sellers = ({navigation}) => {
       />
     );
   };
+
   return (
     <SafeAreaView style={styles.mainView1}>
       <StatusBar hidden={true} />
@@ -94,7 +97,7 @@ const Sellers = ({navigation}) => {
                   placeholder="Search seller"
                   placeholderTextColor={'#000'}
                   value={search}
-                  onChange={text => {
+                  onChangeText={text => {
                     setSearch(text);
                   }}
                 />
@@ -109,7 +112,12 @@ const Sellers = ({navigation}) => {
             style={{
               borderRadius: 20,
             }}
-            data={allSellers}
+            data={allSellers.filter(
+              user =>
+                user.username.toLowerCase().includes(search.toLowerCase()) ||
+                user.email.toLowerCase().includes(search.toLowerCase()) ||
+                user.phone.toLowerCase().includes(search.toLowerCase()),
+            )}
             showsVerticalScrollIndicator={false}
             renderItem={renderSellers}
             keyExtractor={item => item.id}
