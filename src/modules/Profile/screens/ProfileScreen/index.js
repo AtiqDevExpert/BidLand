@@ -54,15 +54,20 @@ const Profile = ({navigation}) => {
     try {
       let response = await delete_user_Account(token, user?.userId);
       console.log('response ==== > ', response);
-      await AsyncStorage.clear();
-      Toast.show('Profile Deleted Successfully', Toast.LONG);
-      navigation.dispatch(
-        CommonActions.reset({
-          index: 0,
-          routes: [{name: 'AuthModule'}],
-        }),
-      );
-      setLoading(false);
+      if (response) {
+        await AsyncStorage.getAllKeys()
+          .then(keys => AsyncStorage.multiRemove(keys))
+          .then(() => {
+            Toast.show('Account Deleted Successfully', Toast.LONG);
+            navigation.dispatch(
+              CommonActions.reset({
+                index: 0,
+                routes: [{name: 'AuthModule'}],
+              }),
+            );
+            setLoading(false);
+          });
+      }
     } catch (error) {
       Toast.show(error.message, Toast.LONG);
       console.error('Error signing up:', error);

@@ -7,11 +7,14 @@ import CreateNewPassword from '../screens/CreateNewPasswordScreen';
 import SignUpScreen from '@Auth/screens/SignUpScreen';
 import BottomTab from '../../../navigator/BottomTab';
 import ProfileModule from '@Profile/navigation';
+import Loading from '@components/Loading/Loading';
+import { View } from 'react-native';
 const Stack = createNativeStackNavigator();
 const screenOptions = {headerShown: false};
 
 export const AuthModule = () => {
   return (
+    <>
     <Stack.Navigator>
       {/* {user === false ? (
         <Stack.Screen
@@ -52,6 +55,8 @@ export const AuthModule = () => {
         options={screenOptions}
       />
     </Stack.Navigator>
+    
+    </>
   );
 };
 
