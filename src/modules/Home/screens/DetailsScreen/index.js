@@ -34,7 +34,9 @@ const DetailsScreen = ({navigation, route}) => {
   const bidPrice = route.params?.bidPrice;
   const propertyID = route.params?.propertyID;
   const [review, setReview] = useState('');
-  const [reviews, setReviews] = useState(null);
+  const [reviews, setReviews] = useState([
+    'good location , with good price , awosome ',
+  ]);
   const [loading, setLoading] = useState(false);
   const [property, setProperty] = useState(item);
 
@@ -78,22 +80,46 @@ const DetailsScreen = ({navigation, route}) => {
     return (
       <>
         <View style={styles.review}>
-          <Text style={styles.facilityText}>{item}</Text>
+          <Text style={styles.facilityText}>{item.username}</Text>
+          <View
+            style={{
+              flexDirection: 'row-reverse',
+              alignItems: 'center',
+            }}>
+            <View style={{backgroundColor: Colors.light}}>
+              <Rating
+                ratingCount={item.rating}
+                imageSize={20}
+                onFinishRating={rating => {
+                  console.log('Star Rating: ' + JSON.stringify(rating));
+                }}
+              />
+            </View>
+          </View>
         </View>
       </>
     );
   };
-  const SubmitReview = () => {
-    if (review.trim() !== '') {
-      setReviews([...reviews, review]);
-      property.reviews.push(review);
-      setReview(''); // Clear the review input field after submission
-    }
-  };
+  // const SubmitReview = () => {
+  //   console.log('property.reviews', property.reviews);
+  //   if (review.trim() !== '') {
+  //     setReviews([...reviews, review]);
+  //     if (
+  //       (Array.isArray(property.reviews) && property.reviews !== undefined) ||
+  //       property.reviews !== null
+  //     ) {
+  //       property.reviews.push(review);
+  //       setReview('');
+  //     } else {
+  //       setReview('');
+  //     }
+  //     // Clear the review input field after submission
+  //   }
+  // };
   const renderBids = ({item, index}) => {
     return <BiddindList item1={item} />;
   };
-  console.log('updatedProperty', property);
+
   return (
     <>
       <SafeAreaView style={{flex: 1, backgroundColor: Colors.white}}>
@@ -133,7 +159,7 @@ const DetailsScreen = ({navigation, route}) => {
                     ratingCount={5}
                     imageSize={20}
                     onFinishRating={rating => {
-                      Alert.alert('Star Rating: ' + JSON.stringify(rating));
+                      console.log('Star Rating: ' + JSON.stringify(rating));
                     }}
                   />
                 </View>
@@ -198,7 +224,7 @@ const DetailsScreen = ({navigation, route}) => {
               </View>
             )}
 
-            <View style={{marginVertical: 10}}>
+            {/* <View style={{marginVertical: 10}}>
               <Text
                 style={{fontSize: 16, color: Colors.black, fontWeight: '600'}}>
                 Enter your Feedback
@@ -234,7 +260,7 @@ const DetailsScreen = ({navigation, route}) => {
                   onPress={SubmitReview}
                 />
               </>
-            </View>
+            </View> */}
 
             {Array.isArray(property?.bids) && property.bids.length > 0 && (
               <View
