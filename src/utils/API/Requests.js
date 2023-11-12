@@ -40,6 +40,25 @@ const Login_Request = async body => {
     }
   }
 };
+const Forget_Password_Request = async body => {
+  try {
+    const inst = axios.create({
+      baseURL: Url,
+    });
+    const response = await inst.post('auth/forgot-password', body);
+    console.log('Forget_Password_Request response', response.data);
+
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    if (error.response) {
+      console.log('post error', error.response);
+      throw new Error(error.response.data.message);
+    } else {
+      throw new Error('Invalide Error!');
+    }
+  }
+};
 
 const get_properties = async token => {
   // console.log('Token + UL', token, Url);
@@ -185,9 +204,30 @@ const place_bid = async (propertyID, body) => {
     }
   }
 };
+const write_review = async (propertyID, body) => {
+  let token = await AsyncStorage.getItem('USER_TOKEN');
+  try {
+    const inst = axios.create({
+      baseURL: Url,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const response = await inst.post(`property/review/${propertyID}`, body);
+
+    return response.data;
+  } catch (error) {
+    if (error.response) {
+      return new Error(JSON.stringify(error.response.data.message));
+    } else {
+      throw new Error('Invalide Error!');
+    }
+  }
+};
 export {
   SignUp_Request,
   Login_Request,
+  Forget_Password_Request,
   get_properties,
   get_bidding_properties,
   get_allSeller,
@@ -195,4 +235,5 @@ export {
   update_user_Profile,
   delete_user_Account,
   place_bid,
+  write_review,
 };

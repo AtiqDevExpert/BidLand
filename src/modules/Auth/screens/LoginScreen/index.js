@@ -3,11 +3,8 @@ import {
   Text,
   ScrollView,
   SafeAreaView,
-  Image,
   ImageBackground,
   ActivityIndicator,
-  TouchableOpacity,
-  TextInput,
 } from 'react-native';
 import React, {useState} from 'react';
 import Toast from 'react-native-simple-toast';
@@ -19,19 +16,16 @@ import styles from './styles';
 import {Colors} from '../../../../constants/Colors';
 import {useNavigation} from '@react-navigation/native';
 import {Login_Request} from '../../../../utils/API/Requests';
-import Icon from 'react-native-vector-icons/FontAwesome';
 const Login = () => {
   const navigation = useNavigation();
   const [emailValue, setEmailValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
   const [loading, setLoading] = useState(false);
-  const [isVisiblePassword, setVisiblePassword] = useState(false);
+
   const gotoForgotPassword = () => {
     navigation.navigate('forgotpassword');
   };
-  const visiblePassword = () => {
-    setVisiblePassword(!isVisiblePassword);
-  };
+
   const SubmitLogin = async () => {
     setLoading(true);
     const formattedEmailValue =
@@ -90,6 +84,7 @@ const Login = () => {
                     <TextField
                       value={emailValue}
                       label="Email"
+                      autoCapitalize={'none'}
                       onChangeText={text => {
                         setEmailValue(text);
                       }}
@@ -99,7 +94,6 @@ const Login = () => {
                   <View style={styles.input}>
                     <TextField
                       value={passwordValue}
-                      secureTextEntry={!isVisiblePassword}
                       label="Password"
                       secure={true}
                       onChangeText={text => {
@@ -144,7 +138,6 @@ const Login = () => {
                           height={50}
                           width={'90%'}
                           backgroundColor={Colors.black}
-                          // onPress={() => navigation.navigate('otp')}
                           onPress={SubmitLogin}
                         />
                       </>

@@ -27,6 +27,7 @@ import {useFocusEffect} from '@react-navigation/native';
 import {
   get_bidding_properties,
   get_properties,
+  write_review,
 } from '../../../../utils/API/Requests';
 import Loading from '../../../../components/Loading/Loading';
 const DetailsScreen = ({navigation, route}) => {
@@ -34,15 +35,22 @@ const DetailsScreen = ({navigation, route}) => {
   const bidPrice = route.params?.bidPrice;
   const propertyID = route.params?.propertyID;
   const [review, setReview] = useState('');
-  const [reviews, setReviews] = useState([
-    'good location , with good price , awosome ',
-  ]);
+  const [userRating, setUserRating] = useState(0);
+  const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(false);
   const [property, setProperty] = useState(item);
-
+  const [user, setUser] = useState({});
   useEffect(() => {
     fetchProperties(propertyID);
+    fetchUserInfo();
   }, [propertyID]);
+  const fetchUserInfo = async () => {
+    let userInfo = await AsyncStorage.getItem('USER_INFO');
+    let userDetail = JSON.parse(userInfo);
+    if (userDetail) {
+      setUser(userDetail);
+    }
+  };
   const fetchProperties = async propertyID => {
     setLoading(true);
     try {
@@ -55,7 +63,7 @@ const DetailsScreen = ({navigation, route}) => {
         let updatedProperty = combineArrays.find(property => {
           return property._id === propertyID;
         });
-
+        console.log('updatedProperty', updatedProperty);
         if (updatedProperty !== undefined) {
           setProperty(updatedProperty);
           if (updatedProperty.reviews.length > 0) {
@@ -79,47 +87,70 @@ const DetailsScreen = ({navigation, route}) => {
   const renderReview = ({item}) => {
     return (
       <>
-        <View style={styles.review}>
-          <Text style={styles.facilityText}>{item.username}</Text>
+        <View pointerEvents="none" style={styles.review}>
+          <Text style={styles.facilityText}>Name : {item.username}</Text>
           <View
             style={{
-              flexDirection: 'row-reverse',
+              justifyContent: 'center',
               alignItems: 'center',
             }}>
             <View style={{backgroundColor: Colors.light}}>
-              <Rating
-                ratingCount={item.rating}
-                imageSize={20}
-                onFinishRating={rating => {
-                  console.log('Star Rating: ' + JSON.stringify(rating));
-                }}
-              />
+              {item?.reviews?.reviewText !== '' && (
+                <Text style={styles.facilityText}>
+                  Review : {item.reviewText ? item.reviewText : ''}
+                </Text>
+              )}
+              {item?.reviews?.rating !== 0 && (
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                  }}>
+                  <Text style={styles.facilityText}>Rating : </Text>
+                  <Rating
+                    ratingBackgroundColor={Colors.light}
+                    isDisabled={true}
+                    ratingCount={item.rating}
+                    imageSize={20}
+                    onFinishRating={rating => {
+                      console.log('Star Rating: ' + JSON.stringify(rating));
+                    }}
+                  />
+                </View>
+              )}
             </View>
           </View>
         </View>
       </>
     );
   };
-  // const SubmitReview = () => {
-  //   console.log('property.reviews', property.reviews);
-  //   if (review.trim() !== '') {
-  //     setReviews([...reviews, review]);
-  //     if (
-  //       (Array.isArray(property.reviews) && property.reviews !== undefined) ||
-  //       property.reviews !== null
-  //     ) {
-  //       property.reviews.push(review);
-  //       setReview('');
-  //     } else {
-  //       setReview('');
-  //     }
-  //     // Clear the review input field after submission
-  //   }
-  // };
+  const SubmitReview = async propertyID => {
+    setLoading(true);
+    let body = {
+      username: user?.username,
+      email: user?.email,
+      reviewText: review,
+      rating: userRating !== 0 ? userRating : 0,
+    };
+    try {
+      let response = await write_review(propertyID, body);
+
+      if (response) {
+        console.log('response=====>', response);
+        setUserRating(0);
+        setReview('');
+        fetchProperties(propertyID);
+      }
+    } catch (error) {
+      Toast.show(error.message, Toast.LONG);
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
   const renderBids = ({item, index}) => {
     return <BiddindList item1={item} />;
   };
-
   return (
     <>
       <SafeAreaView style={{flex: 1, backgroundColor: Colors.white}}>
@@ -153,10 +184,23 @@ const DetailsScreen = ({navigation, route}) => {
                 style={{
                   flexDirection: 'row-reverse',
                   alignItems: 'center',
+                  // padding: 8,
                 }}>
                 <View>
                   <Rating
-                    ratingCount={5}
+                    isDisabled={true}
+                    selectedColor={'#f1c40f'}
+                    unSelectedColor={'#BDC3C7'}
+                    ratingCount={
+                      property?.rating !== 0 && property?.rating
+                        ? property?.rating
+                        : 0
+                    }
+                    defaultRating={
+                      property?.rating !== 0 && property?.rating
+                        ? property?.rating
+                        : 0
+                    }
                     imageSize={20}
                     onFinishRating={rating => {
                       console.log('Star Rating: ' + JSON.stringify(rating));
@@ -224,15 +268,36 @@ const DetailsScreen = ({navigation, route}) => {
               </View>
             )}
 
-            {/* <View style={{marginVertical: 10}}>
+            <View style={{marginVertical: 10}}>
               <Text
                 style={{fontSize: 16, color: Colors.black, fontWeight: '600'}}>
                 Enter your Feedback
               </Text>
+              <View
+                style={{
+                  flexDirection: 'row-reverse',
+                  alignItems: 'center',
+                }}>
+                <View>
+                  <Rating
+                    ratingCount={5}
+                    defaultRating={0}
+                    imageSize={20}
+                    selectedColor={'#f1c40f'}
+                    unSelectedColor={'#BDC3C7'}
+                    onFinishRating={rating => {
+                      console.log('Star Rating: ' + rating);
+                      let finalRating = JSON.stringify(rating);
+                      setUserRating(finalRating);
+                    }}
+                  />
+                </View>
+              </View>
               <View style={{marginTop: 10}}>
                 <TextInput
                   value={review}
                   placeholder="Write your review"
+                  placeholderTextColor={'#000'}
                   onChangeText={text => {
                     setReview(text);
                   }}
@@ -242,6 +307,8 @@ const DetailsScreen = ({navigation, route}) => {
                       height: 100,
                       paddingVertical: 10,
                       textAlignVertical: 'top',
+                      color: '#000',
+                      fontSize: 12,
                     },
                   ]}
                   multiline={true}
@@ -257,10 +324,10 @@ const DetailsScreen = ({navigation, route}) => {
                   width={'100%'}
                   backgroundColor={Colors.black}
                   marginTop={10}
-                  onPress={SubmitReview}
+                  onPress={() => SubmitReview(property?._id)}
                 />
               </>
-            </View> */}
+            </View>
 
             {Array.isArray(property?.bids) && property.bids.length > 0 && (
               <View

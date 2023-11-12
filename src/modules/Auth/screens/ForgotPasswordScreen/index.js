@@ -6,31 +6,44 @@ import {
   SafeAreaView,
   TouchableOpacity,
   ImageBackground,
+  ActivityIndicator,
 } from 'react-native';
 import styles from './styles';
+import Toast from 'react-native-simple-toast';
 import {Colors} from '../../../../constants/Colors';
 import TextField from '../../../../components/TextField/index';
 import Button from '../../../../components/Button/button';
 import {ForgotPasswordScreenLogo} from '../../../../Assets/SVG/Svg';
+import {Forget_Password_Request} from '../../../../utils/API/Requests';
 const ForgotPassword = ({navigation}) => {
-  const countdownRef = useRef(null);
-  const [value, setValue] = useState('');
-  const [error, setError] = useState(null);
-  const sendCode = () => {
-    navigation.navigate('createnewpassword');
-    //  // -------Email validation---------
-    //  let validate = emailValidation(value);
-    //  if (validate.valid == false) {
-    //    setError(validate.errors);
-    //    return;
-    //  } else {
-    //    setError('');
-    //  }
-    //  const body ={
-    //    email:value,
-    //  }
-    //  console.log("body-------------->",body)
-    //  dispatch(otpRequest({otpData:body}));
+  const [emailValue, setEmailValue] = useState('');
+
+  const [loading, setLoading] = useState(false);
+  const onForgetPassword = async () => {
+    setLoading(true);
+    const formattedEmailValue =
+      emailValue.charAt(0).toLowerCase() + emailValue.slice(1);
+    let body = {
+      email: formattedEmailValue,
+    };
+    console.log('onForgetPassword ===>', body?.email);
+    if (!body.email.includes('@')) {
+      alert('Invalid Credential! Please check your email has @ ');
+      setLoading(false);
+    } else {
+      try {
+        let response = await Forget_Password_Request(body);
+        console.log('forget password response ==== > ', response?.message);
+        if (response) {
+          Toast.show(response?.message, Toast.LONG);
+          navigation.navigate('login');
+          setLoading(false);
+        }
+      } catch (error) {
+        Toast.show(error.message, Toast.LONG);
+        setLoading(false);
+      }
+    }
   };
   return (
     <SafeAreaView style={styles.main}>
@@ -50,30 +63,46 @@ const ForgotPassword = ({navigation}) => {
 
             <View
               style={{
-                // paddingHorizontal: 20,
                 marginVertical: 30,
               }}>
               <View style={{marginVertical: 15, marginHorizontal: 15}}>
                 <TextField
-                  value={value}
+                  value={emailValue}
                   label="Email"
-                  errorText={error}
-                  onChangeText={text => setValue(text)}
+                  autoCapitalize={'none'}
+                  onChangeText={text => setEmailValue(text)}
                 />
               </View>
               <View style={{marginHorizontal: 15}}>
-                <Button
-                  text={'Send Code'}
-                  color={Colors.white}
-                  fontSize={15}
-                  height={50}
-                  width={'95%'}
-                  borderWidth={1}
-                  marginTop={20}
-                  // marginBottom={10}
-                  backgroundColor={Colors.black}
-                  onPress={sendCode}
-                />
+                <>
+                  {loading ? (
+                    <View
+                      style={{
+                        alignSelf: 'center',
+                        backgroundColor: Colors.black,
+                        height: 50,
+                        width: '90%',
+                        borderRadius: 10,
+                        justifyContent: 'center',
+
+                        borderColor: '#000',
+                      }}>
+                      <ActivityIndicator size="small" color={Colors.white} />
+                    </View>
+                  ) : (
+                    <>
+                      <Button
+                        text={'Get Code'}
+                        color={Colors.white}
+                        fontSize={15}
+                        height={50}
+                        width={'90%'}
+                        backgroundColor={Colors.black}
+                        onPress={onForgetPassword}
+                      />
+                    </>
+                  )}
+                </>
               </View>
             </View>
           </View>
