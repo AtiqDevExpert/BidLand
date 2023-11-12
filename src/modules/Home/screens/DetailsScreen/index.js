@@ -63,7 +63,7 @@ const DetailsScreen = ({navigation, route}) => {
         let updatedProperty = combineArrays.find(property => {
           return property._id === propertyID;
         });
-        console.log('updatedProperty', updatedProperty);
+
         if (updatedProperty !== undefined) {
           setProperty(updatedProperty);
           if (updatedProperty.reviews.length > 0) {

@@ -83,19 +83,23 @@ const Profile = ({navigation}) => {
   };
 
   const logout = async () => {
-    setLoading(true);
-    navigation.dispatch(
-      CommonActions.reset({
-        index: 0,
-        routes: [{name: 'AuthModule'}],
-      }),
-    );
-
-    await AsyncStorage.getAllKeys()
-      .then(keys => AsyncStorage.multiRemove(keys))
-      .then(() => {
-        setLoading(false);
-      });
+    try {
+      setLoading(true);
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [{name: 'AuthModule'}],
+        }),
+      );
+      await AsyncStorage.getAllKeys()
+        .then(keys => AsyncStorage.multiRemove(keys))
+        .then(() => {
+          setLoading(false);
+        });
+    } catch (error) {
+      Toast.show('User Logout Successfully', Toast.LONG);
+      setLoading(false);
+    }
   };
 
   const dashboardSettingArray = [
