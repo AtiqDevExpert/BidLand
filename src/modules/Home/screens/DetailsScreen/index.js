@@ -17,6 +17,7 @@ import {
 import styles from './styles';
 import Toast from 'react-native-simple-toast';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon2 from 'react-native-vector-icons/SimpleLineIcons';
 import {Colors} from '../../../../constants/Colors';
 const {width} = Dimensions.get('screen');
 import {Rating} from 'react-native-ratings';
@@ -28,18 +29,23 @@ import {
   get_bidding_properties,
   get_properties,
   write_review,
+  report_property,
 } from '../../../../utils/API/Requests';
 import Loading from '../../../../components/Loading/Loading';
+import Modal from 'react-native-modal';
 const DetailsScreen = ({navigation, route}) => {
   const item = route.params?.item;
   const bidPrice = route.params?.bidPrice;
   const propertyID = route.params?.propertyID;
   const [review, setReview] = useState('');
+  const [feedBack, setFeedBack] = useState('');
+  const [reason, setReason] = useState('');
   const [userRating, setUserRating] = useState(0);
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(false);
   const [property, setProperty] = useState(item);
   const [user, setUser] = useState({});
+  const [verifyModal, setVerifyModal] = useState(false);
   useEffect(() => {
     fetchProperties(propertyID);
     fetchUserInfo();
@@ -151,6 +157,40 @@ const DetailsScreen = ({navigation, route}) => {
   const renderBids = ({item, index}) => {
     return <BiddindList item1={item} />;
   };
+  const onPressOptions = () => {
+    setVerifyModal(true);
+  };
+  const onPressCancel = () => {
+    if (feedBack || reason) {
+      setFeedBack('');
+      setReason('');
+      setVerifyModal(false);
+    } else {
+      setVerifyModal(false);
+    }
+  };
+  const onReportProperty = async () => {
+    setLoading(true);
+    let token = await AsyncStorage.getItem('USER_TOKEN');
+
+    let body = {
+      feedbackMessage: feedBack,
+      feedbackReason: reason,
+    };
+
+    try {
+      let response = await report_property(token, propertyID, body);
+      console.log('response ==== > ', response);
+      setVerifyModal(false);
+
+      setLoading(false);
+      Toast.show(response.message, Toast.LONG);
+    } catch (error) {
+      Toast.show(error.message, Toast.LONG);
+      console.error('Error signing up:', error);
+      setLoading(false);
+    }
+  };
   return (
     <>
       <SafeAreaView style={{flex: 1, backgroundColor: Colors.white}}>
@@ -166,9 +206,13 @@ const DetailsScreen = ({navigation, route}) => {
                     navigation.goBack();
                   }}
                   style={styles.headerBtn}>
-                  <Icon name="arrow-back-ios" size={20} color={'black'} />
+                  <Icon name="arrow-back-ios" size={20} color={'white'} />
                 </TouchableOpacity>
-                <View style={styles.headerBtn}></View>
+                <TouchableOpacity
+                  onPress={onPressOptions}
+                  style={styles.headerBtn}>
+                  <Icon2 name="options-vertical" size={20} color={'white'} />
+                </TouchableOpacity>
               </View>
             </ImageBackground>
           </View>
@@ -453,7 +497,111 @@ const DetailsScreen = ({navigation, route}) => {
             </>
           </View>
         </ScrollView>
-
+        <>
+          <Modal isVisible={verifyModal}>
+            <View style={styles.ModalViewImage}>
+              <View
+                style={{
+                  justifyContent: 'center',
+                  width: '100%',
+                }}>
+                <View
+                  style={{
+                    marginTop: 10,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
+                  <TextInput
+                    value={feedBack}
+                    placeholder="Write your Feedback"
+                    placeholderTextColor={'#000'}
+                    onChangeText={text => {
+                      setFeedBack(text);
+                    }}
+                    style={{
+                      height: 100,
+                      paddingVertical: 10,
+                      textAlignVertical: 'top',
+                      color: '#000',
+                      fontSize: 12,
+                      width: '95%',
+                      backgroundColor: '#f1f3f6',
+                      paddingHorizontal: 10,
+                      borderRadius: 10,
+                    }}
+                    multiline={true}
+                    maxLength={1000}
+                  />
+                </View>
+                <View
+                  style={{
+                    marginTop: 10,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
+                  <TextInput
+                    value={reason}
+                    placeholder="Reason"
+                    placeholderTextColor={'#000'}
+                    onChangeText={text => {
+                      setReason(text);
+                    }}
+                    style={{
+                      height: 50,
+                      paddingVertical: 10,
+                      textAlignVertical: 'top',
+                      color: '#000',
+                      fontSize: 12,
+                      width: '95%',
+                      backgroundColor: '#f1f3f6',
+                      paddingHorizontal: 10,
+                      borderRadius: 10,
+                    }}
+                    multiline={false}
+                    maxLength={50}
+                  />
+                </View>
+              </View>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'space-evenly',
+                  width: '100%',
+                }}>
+                <View style={styles.dummy}>
+                  <Button
+                    text={'Report'}
+                    color={Colors.white}
+                    fontSize={15}
+                    height={50}
+                    width={'120%'}
+                    backgroundColor={Colors.black}
+                    marginBottom={20}
+                    onPress={onReportProperty}
+                    marginTop={80}
+                    borderWidth={1}
+                    padding={10}
+                  />
+                </View>
+                <View style={styles.dummy}>
+                  <Button
+                    text={'Cancel'}
+                    color={Colors.white}
+                    fontSize={15}
+                    height={50}
+                    width={'120%'}
+                    backgroundColor={Colors.black}
+                    marginBottom={20}
+                    onPress={onPressCancel}
+                    marginTop={80}
+                    borderWidth={1}
+                    padding={10}
+                  />
+                </View>
+              </View>
+            </View>
+          </Modal>
+        </>
         {loading && (
           <View style={[styles.popupContainer, {zIndex: 99999}]}>
             <Loading />

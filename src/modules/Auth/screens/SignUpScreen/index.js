@@ -119,10 +119,6 @@ const SignUp = ({navigation}) => {
       // Use the library to convert the image to Base64
       RNImageToBase64.getBase64String(img.path)
         .then(base64String => {
-          console.log(
-            '🚀 ~ file: index.js:96 ~ .then ~ base64String:',
-            base64String,
-          );
           setImageUrl(base64String);
           // You can now use the base64String in your request to upload the image to the server
           // Include the base64String in your request body
@@ -272,6 +268,16 @@ const SignUp = ({navigation}) => {
                       ) : (
                         <>
                           <Button
+                            disabled={
+                              name === '' &&
+                              phoneNumber === '' &&
+                              emailValue === '' &&
+                              passwordValue === '' &&
+                              role === '' &&
+                              imageUrl === null
+                                ? true
+                                : false
+                            }
                             text={'Next'}
                             color={Colors.white}
                             fontSize={15}

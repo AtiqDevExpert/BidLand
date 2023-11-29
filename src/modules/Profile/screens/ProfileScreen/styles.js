@@ -82,6 +82,18 @@ export default StyleSheet.create({
     alignSelf: 'center',
     borderRadius: 10,
   },
+  ModalViewImage: {
+    backgroundColor: '#FFFFFF',
+
+    height: 500,
+    width: '100%',
+
+    // marginHorizontal:10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+    borderRadius: 10,
+  },
   ModalBtnView: {
     flexDirection: 'row',
     marginTop: 30,
@@ -118,8 +130,13 @@ export default StyleSheet.create({
     height: 130,
     borderRadius: 100,
   },
+  imagesVerify: {
+    width: 90,
+    height: 90,
+    borderRadius: 10,
+  },
   imageBox: {
-    flexDirection: 'row-reverse',
+    // flexDirection: 'row-reverse',
     marginHorizontal: 10,
   },
   touchable: {

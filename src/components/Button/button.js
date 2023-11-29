@@ -20,6 +20,8 @@ export const Button = ({
   borderWidth,
   borderColor,
   onPressIn,
+  padding,
+  textPadding,
 }) => {
   // console.log(borderColor)
 
@@ -42,6 +44,7 @@ export const Button = ({
         marginTop: marginTop,
         elevation: elevation,
         borderColor: '#000',
+        padding: padding,
       }}>
       <Text
         style={{
@@ -49,6 +52,7 @@ export const Button = ({
           fontSize: fontSize,
           textAlign: 'center',
           fontWeight: fontWeight,
+          textPadding: textPadding,
         }}>
         {text}
       </Text>

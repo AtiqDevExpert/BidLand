@@ -407,12 +407,21 @@ const HomeScreen = ({navigation}) => {
         <Pressable
           activeOpacity={0.8}
           onPress={() => navigation.navigate('profileModule')}>
-          <>
-            <Image
-              style={styles.profileImage}
-              source={{uri: `data:image/png;base64,${user.profilePicture}`}}
-            />
-          </>
+          {user.profilePicture ? (
+            <>
+              <Image
+                style={styles.profileImage}
+                source={{uri: `data:image/png;base64,${user.profilePicture}`}}
+              />
+            </>
+          ) : (
+            <>
+              <Image
+                style={styles.profileImage}
+                source={require('../../../../Assets/Images/profile.png')}
+              />
+            </>
+          )}
         </Pressable>
       </View>
       <View

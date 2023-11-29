@@ -165,6 +165,25 @@ const update_user_Profile = async (token, useID) => {
     }
   }
 };
+const verify_user_Profile = async (token, userID, body) => {
+  try {
+    const inst = axios.create({
+      baseURL: Url,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const response = await inst.post(`auth/verify-profile/${userID}`, body);
+
+    return response.data;
+  } catch (error) {
+    if (error.response) {
+      return new Error(JSON.stringify(error.response.data.message));
+    } else {
+      throw new Error('Invalide Error!');
+    }
+  }
+};
 const delete_user_Account = async (token, userId) => {
   try {
     const inst = axios.create({
@@ -224,6 +243,25 @@ const write_review = async (propertyID, body) => {
     }
   }
 };
+const report_property = async (token, propertyID, body) => {
+  try {
+    const inst = axios.create({
+      baseURL: Url,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const response = await inst.post(`property/report/${propertyID}`, body);
+
+    return response.data;
+  } catch (error) {
+    if (error.response) {
+      return new Error(JSON.stringify(error.response.data.message));
+    } else {
+      throw new Error('Invalide Error!');
+    }
+  }
+};
 export {
   SignUp_Request,
   Login_Request,
@@ -234,6 +272,8 @@ export {
   get_Seller,
   update_user_Profile,
   delete_user_Account,
+  verify_user_Profile,
   place_bid,
   write_review,
+  report_property,
 };

@@ -24,15 +24,8 @@ import ImagePicker from 'react-native-image-crop-picker';
 import RNImageToBase64 from 'react-native-image-base64';
 import PickerButton from '@components/Button/pickerButton';
 import Toast from 'react-native-simple-toast';
-import {
-  SignUp_Request,
-  update_user_Profile,
-} from '../../../../utils/API/Requests';
-import Menu, {
-  MenuOptions,
-  MenuOption,
-  MenuTrigger,
-} from 'react-native-popup-menu';
+import {update_user_Profile} from '../../../../utils/API/Requests';
+
 const EditProfile = ({navigation}) => {
   const [user, setUser] = useState({});
   const [name, setName] = useState('');

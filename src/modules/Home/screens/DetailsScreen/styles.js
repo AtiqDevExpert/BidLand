@@ -31,6 +31,7 @@ export default StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: 10,
+    width: '100%',
   },
   headerBtn: {
     height: 50,
@@ -111,5 +112,17 @@ export default StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'rgba(255, 255, 255, 0.9)',
     zIndex: 9999,
+  },
+  ModalViewImage: {
+    backgroundColor: '#FFFFFF',
+
+    height: 500,
+    width: '100%',
+
+    // marginHorizontal:10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+    borderRadius: 10,
   },
 });
