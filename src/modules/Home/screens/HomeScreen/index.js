@@ -418,7 +418,7 @@ const HomeScreen = ({navigation}) => {
             <>
               <Image
                 style={styles.profileImage}
-                source={require('../../../../Assets/Images/profile.png')}
+                source={require('../../../../Assets/Images/Userimage.png')}
               />
             </>
           )}

@@ -93,8 +93,8 @@ const Profile = ({navigation}) => {
     let token = await AsyncStorage.getItem('USER_TOKEN');
 
     let body = {
-      cnicFront: 'http://firebase/14m32144dfadsf.com',
-      cnicBack: 'http://firebase/14m32144dfadsf.com',
+      cnicFront: 'https://in.pinterest.com/pin/372954412886875421/',
+      cnicBack: 'https://in.pinterest.com/pin/372954412886875421/',
     };
 
     try {
@@ -291,7 +291,7 @@ const Profile = ({navigation}) => {
       setVerifyModal(false);
     }
   };
-  console.log('image', user.profilePicture);
+
   return (
     <SafeAreaView style={styles.safearea}>
       <StatusBar hidden={true} />
@@ -360,7 +360,7 @@ const Profile = ({navigation}) => {
                     style={{justifyContent: 'center', alignItems: 'center'}}>
                     <Image
                       resizeMode="contain"
-                      source={require('../../../../Assets/Images/profile.png')}
+                      source={require('../../../../Assets/Images/Userimage.png')}
                       style={{width: 130, height: 130, borderRadius: 100}}
                     />
                   </View>
