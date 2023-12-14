@@ -13,7 +13,9 @@ import {CommonActions} from '@react-navigation/native';
 import {Colors} from '../../../../constants/Colors';
 import styles from './styles';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon4 from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icon2 from 'react-native-vector-icons/AntDesign';
+import Icon3 from 'react-native-vector-icons/FontAwesome';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useFocusEffect} from '@react-navigation/native';
 import TextField from '../../../../components/TextField';
@@ -157,6 +159,20 @@ const Profile = ({navigation}) => {
       color: Colors.black,
     },
     {
+      id: 'orders',
+      title: 'Orders',
+
+      icon: <Icon3 name={'first-order'} size={30} color={Colors.black} />,
+      color: Colors.black,
+    },
+    {
+      id: 'chatSupports',
+      title: 'Chat & Supports',
+
+      icon: <Icon4 name={'google-assistant'} size={30} color={Colors.black} />,
+      color: Colors.black,
+    },
+    {
       id: 'deleteProfile',
       title: 'Delete Profile',
       icon: <Icon name={'delete-outline'} size={30} color={Colors.black} />,
@@ -176,6 +192,12 @@ const Profile = ({navigation}) => {
         break;
       case 'verifyProfile':
         setVerifyModal(true);
+        break;
+      case 'orders':
+        navigation.navigate('orders');
+        break;
+      case 'chatSupports':
+        navigation.navigate('chatSupports');
         break;
       case 'deleteProfile':
         deleteProfile();
@@ -203,7 +225,7 @@ const Profile = ({navigation}) => {
         <MenuOptions
           optionsContainerStyle={{
             width: 'auto',
-            marginTop: 32,
+            marginTop: 50,
           }}>
           {dashboardSettingArray.map((item, index) => (
             <MenuOption

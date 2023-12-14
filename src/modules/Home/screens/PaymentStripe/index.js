@@ -1,9 +1,18 @@
-import {View, Text} from 'react-native';
 import React from 'react';
+import {View, Text, TouchableOpacity} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/Ionicons';
 import {StripeProvider} from '@stripe/stripe-react-native';
 import Payment from '../../../../components/PaymentOnStripe/Payment';
+
 export default function PaymentScreen({route}) {
   const {price} = route.params;
+  const navigation = useNavigation();
+
+  const handleGoBack = () => {
+    // Handle navigation or other logic to go back
+    navigation.goBack();
+  };
 
   return (
     <StripeProvider
@@ -11,7 +20,34 @@ export default function PaymentScreen({route}) {
       urlScheme="your-url-scheme" // required for 3D Secure and bank redirects
       merchantIdentifier="merchant.com.{{YOUR_APP_NAME}}" // required for Apple Pay
     >
-      <Payment price={price} />
+      <View style={{flex: 1}}>
+        {/* Header */}
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            padding: 16,
+            backgroundColor: '#000', // White background color
+          }}>
+          <TouchableOpacity onPress={handleGoBack}>
+            <Icon name="arrow-back" size={24} color="#fff" />
+          </TouchableOpacity>
+          <Text
+            style={{
+              fontSize: 18,
+              fontWeight: 'bold',
+              marginLeft: 16,
+              color: '#fff',
+            }}>
+            Check Out
+          </Text>
+          <View style={{width: 24}} />
+        </View>
+
+        {/* Payment Component */}
+        <Payment price={price} />
+      </View>
     </StripeProvider>
   );
 }

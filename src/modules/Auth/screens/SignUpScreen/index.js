@@ -39,7 +39,7 @@ const SignUp = ({navigation}) => {
       emailValue.charAt(0).toLowerCase() + emailValue.slice(1);
     let body = {
       username: finalUsername,
-      email: formattedEmailValue,
+      email: emailValue,
       password: passwordValue,
       role: role,
       phone: phoneNumber,
@@ -47,7 +47,7 @@ const SignUp = ({navigation}) => {
     };
     let userInfo = {
       username: finalUsername,
-      email: formattedEmailValue,
+      email: emailValue,
       password: passwordValue,
       role: role,
       phone: phoneNumber,
@@ -229,6 +229,7 @@ const SignUp = ({navigation}) => {
                       <View style={styles.input}>
                         <TextField
                           value={emailValue}
+                          autoCapitalize={'none'}
                           label="Email"
                           onChangeText={text => setEmailValue(text)}
                           secure={false}

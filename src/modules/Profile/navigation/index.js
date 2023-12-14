@@ -2,7 +2,8 @@ import React from 'react'; //
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import ProfileScreen from '../screens/ProfileScreen';
 import EditProfile from '../screens/EditProfile';
-import AuthModule from '../../Auth/navigation';
+import UserOrders from '../screens/UserOrders';
+import ChatSupport from '../screens/ChatSupports';
 
 const Stack = createNativeStackNavigator();
 const screenOptions = {headerShown: false};
@@ -19,11 +20,16 @@ export const ProfileModule = () => {
         component={EditProfile}
         options={screenOptions}
       />
-      {/* <Stack.Screen
-        name="AuthModule"
-        component={AuthModule}
+      <Stack.Screen
+        name="orders"
+        component={UserOrders}
         options={screenOptions}
-      /> */}
+      />
+      <Stack.Screen
+        name="chatSupports"
+        component={ChatSupport}
+        options={screenOptions}
+      />
     </Stack.Navigator>
   );
 };
