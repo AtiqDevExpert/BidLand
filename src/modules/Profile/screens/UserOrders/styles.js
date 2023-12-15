@@ -3,72 +3,153 @@ import {Colors} from '../../../../constants/Colors';
 const {width, height} = Dimensions.get('window');
 import {Dimensions} from 'react-native';
 export default StyleSheet.create({
-  safearea: {
+  container: {
     flex: 1,
-    backgroundColor: Colors.white,
-    justifyContent: 'center',
-    // alignItems: 'center',
+    // padding: 16,
   },
-
-  img: {
-    backgroundColor: Colors.white,
-    borderRadius: 10,
-
+  header1: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#333',
+    padding: 20,
+  },
+  questionItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
+  },
+  icon: {
+    marginRight: 10,
+  },
+  questionText: {
+    fontSize: 16,
+    color: '#333',
+  },
+  chatContainer: {
+    flex: 1,
+    marginVertical: 20,
+  },
+  messageContainer: {
+    maxWidth: '70%',
+    padding: 10,
+    marginVertical: 5,
+    borderRadius: 8,
+    backgroundColor: '#f0f0f0',
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: 6,
+      height: 2,
     },
-    shadowOpacity: 0.37,
-    shadowRadius: 7.49,
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
 
     elevation: 5,
-
-    marginVertical: 10,
-    height: 180,
-    width: 180,
-    borderRadius: 100,
-
+  },
+  messageText: {
+    fontSize: 16,
+  },
+  header: {
+    paddingVertical: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 20,
+  },
+  profileImage: {
+    height: 50,
+    width: 50,
+    borderRadius: 25,
+  },
+  searchInputContainer: {
+    height: 50,
+    backgroundColor: Colors.light,
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+    borderRadius: 12,
+    marginBottom: 10,
+  },
+  sortBtn: {
+    backgroundColor: Colors.dark,
+    height: 50,
+    width: 50,
+    borderRadius: 12,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  mainView: {
-    flex: 1,
-    // backgroundColor: Colors.fullDarkBlue,
+    marginLeft: 10,
   },
 
-  text: {
-    color: Colors.black,
+  optionsCard: {
+    height: 210,
+    width: width / 2 - 30,
+    elevation: 15,
+    alignItems: 'center',
+    backgroundColor: Colors.white,
+    borderRadius: 20,
+    paddingTop: 10,
+    paddingHorizontal: 10,
+  },
+  optionsCardImage: {
+    height: 140,
+    borderRadius: 10,
+    width: '100%',
+  },
+  optionListsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 20,
+    paddingHorizontal: 20,
+  },
+  categoryListText: {
+    fontSize: 16,
     fontWeight: 'bold',
-    fontSize: 26,
-    textAlign: 'right',
-    justifyContent: 'center',
+    paddingBottom: 5,
+    color: Colors.grey,
   },
-  whitebackground: {
-    // backgroundColor: Colors.white,
-    // borderRadius: width * 0.09,
-    // marginHorizontal: 5,
-    // justifyContent: 'center',
-    // flex: 1,
+  activeCategoryListText: {
+    color: Colors.dark,
+    borderBottomWidth: 1,
+    paddingBottom: 5,
   },
-
-  dummyView: {
-    justifyContent: 'center',
-    alignContent: 'center',
-    flex: 1,
+  categoryListContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 40,
+    paddingHorizontal: 40,
   },
-  dummyView1: {
+  card: {
+    backgroundColor: Colors.graywhite,
+    elevation: 10,
+    // width: width - 40,
+    // marginRight: 20,
+    padding: 15,
+    borderRadius: 20,
+  },
+  cardImage: {
+    width: '100%',
+    height: 150,
+    borderRadius: 15,
+  },
+  facility: {flexDirection: 'row', marginRight: 15},
+  facilityText: {marginLeft: 5, color: Colors.grey},
+  popupContainer: {
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
     justifyContent: 'center',
     alignItems: 'center',
-    alignContent: 'center',
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    zIndex: 9999,
   },
-  dummy: {
-    marginHorizontal: 20,
-  },
-  input: {marginVertical: 20, marginHorizontal: 10},
-  mainView1: {
+  slide: {
+    alignItems: 'center',
     justifyContent: 'center',
-    alignContent: 'center',
+  },
+  modelMainView: {
+    backgroundColor: Colors.white,
+    borderRadius: 10,
   },
   ModalView: {
     backgroundColor: '#FFFFFF',
@@ -82,93 +163,5 @@ export default StyleSheet.create({
     alignSelf: 'center',
     borderRadius: 10,
   },
-  ModalBtnView: {
-    flexDirection: 'row',
-    marginTop: 30,
-    width: '100%',
-    justifyContent: 'space-evenly',
-    // marginVertical:-50
-  },
-  Modalbtn: {
-    borderRadius: 40,
-    backgroundColor: 'white',
-    height: 50,
-    width: 130,
-    fontWeight: 'bold',
-    alignSelf: 'center',
-    justifyContent: 'center',
-    borderColor: 'lightgrey',
-    borderWidth: 0.2,
-  },
-  Modalbtntext: {
-    fontWeight: 'bold',
-    alignSelf: 'center',
-    marginTop: 15,
-    flex: 1,
-  },
-  modalIcon: {
-    width: 18,
-    height: 18,
-    position: 'absolute',
-    right: 0,
-    top: 0,
-  },
-  images: {
-    width: 130,
-    height: 130,
-    borderRadius: 100,
-  },
-  imageBox: {
-    flexDirection: 'row-reverse',
-    marginHorizontal: 10,
-  },
-  touchable: {
-    marginTop: -10,
-    height: 15,
-    marginLeft: -10,
-  },
-  imageContainer: {
-    flex: 1,
-    justifyContent: 'center',
-  },
-  buttonTouch: {
-    justifyContent: 'center',
-    marginTop: 20,
-    marginHorizontal: 15,
-  },
-  icon: {height: 20, width: 30},
-  indicator: {height: 120, width: '100%'},
-  mainView1: {
-    justifyContent: 'center',
-    alignContent: 'center',
-  },
-  coverView: {
-    backgroundColor: Colors.white,
-    height: 150,
-    width: 150,
-    borderRadius: 100,
-    borderWidth: 1,
-    borderColor: Colors.hiddenText,
-    marginBottom: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  touch1: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  uploadIcon: {height: 50, width: 50},
-  buttonView: {marginBottom: 45},
-
-  modelMainView: {
-    backgroundColor: Colors.white,
-    borderRadius: 10,
-  },
-  crossRedIcon: {
-    height: 30,
-    width: 30,
-    bottom: 18,
-    marginRight: -12,
-  },
-  crossRedIcon2: {},
+  input: {marginVertical: 15, marginHorizontal: 10, height: 60, width: '70%'},
 });

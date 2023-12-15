@@ -490,7 +490,7 @@ const DetailsScreen = ({navigation, route}) => {
                 marginBottom={10}
                 onPress={() => {
                   navigation.navigate('PaymentScreen', {
-                    price: property.fixedPrice,
+                    price: bidPrice ? bidPrice : property.fixedPrice,
                   });
                 }}
               />
