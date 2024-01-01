@@ -7,7 +7,9 @@ import Payment from '../../../../components/PaymentOnStripe/Payment';
 import {Colors} from '../../../../constants/Colors';
 
 export default function PaymentScreen({route}) {
+  console.log(route.params);
   const {price} = route.params;
+
   const navigation = useNavigation();
 
   const handleGoBack = () => {
@@ -17,7 +19,7 @@ export default function PaymentScreen({route}) {
 
   return (
     <StripeProvider
-      publishableKey="pk_test_51Nq98VKzlwySXelsLW0RjGYfpEbD6O5rhl3XhQO8sWLMGeVGevtYF2xX5Iyn0QUDpIDaHrJrqeZzwFgUsuDUaP4L00O6fN4K0Z"
+      publishableKey="pk_test_51NO5Z9COYbX4EEUkrTs8Zb2tvXYstfc1aLzXCwlg1k9bOKy5BPuriLZAgCjMNmXkERdYyzwYEKz6P0OzF2IkVdjg00ly46twDk"
       urlScheme="your-url-scheme" // required for 3D Secure and bank redirects
       merchantIdentifier="merchant.com.{{YOUR_APP_NAME}}" // required for Apple Pay
     >
@@ -79,7 +81,7 @@ export default function PaymentScreen({route}) {
         </View>
 
         {/* Payment Component */}
-        <Payment price={price} />
+        <Payment details={route.params} />
       </View>
     </StripeProvider>
   );

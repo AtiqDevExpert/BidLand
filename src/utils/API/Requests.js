@@ -83,6 +83,29 @@ const get_properties = async token => {
     }
   }
 };
+const get_All_Orders = async token => {
+  // console.log('Token + UL', token, Url);
+  try {
+    const inst = axios.create({
+      baseURL: Url,
+      headers: {
+        // Authorization: `Bearer ${token}`,
+      },
+    });
+    const response = await inst.get('orders/getallorders');
+    // console.log('post response', JSON.stringify(response.data));
+
+    return response.data;
+  } catch (error) {
+    if (error.response) {
+      // console.log("post error", JSON.stringify(error.response));
+
+      return new Error(JSON.stringify(error.response.data));
+    } else {
+      throw new Error('Invalide Error!');
+    }
+  }
+};
 const get_bidding_properties = async token => {
   try {
     const inst = axios.create({
@@ -276,4 +299,5 @@ export {
   place_bid,
   write_review,
   report_property,
+  get_All_Orders,
 };

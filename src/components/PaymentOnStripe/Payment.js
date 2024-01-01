@@ -18,14 +18,61 @@ import {
   confirmPayment,
 } from '@stripe/stripe-react-native';
 import {Colors} from '../../constants/Colors';
-export default function Payment({price}) {
+export default function Payment({details}) {
   const [cardInfo, setCardinfo] = useState(null);
   const [amount, setAmount] = useState();
   const [modalVisible, setModalVisible] = useState(false);
+  console.log('details', details);
+  // const hanldeCheckout = async () => {
 
+  //   const response = await fetch(
+  //     "http://localhost:3000/property/create-checkout-session",
+  //     {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         propertyId: propertyDetails?._id,
+  //         name: propertyDetails?.name,
+  //         fixedPrice: propertyDetails?.fixedPrice,
+  //       }),
+  //     }
+  //   );
+
+  //   console.log(response);
+
+  //   const stripe = await loadStripe(
+  //     "pk_test_51NO5Z9COYbX4EEUkrTs8Zb2tvXYstfc1aLzXCwlg1k9bOKy5BPuriLZAgCjMNmXkERdYyzwYEKz6P0OzF2IkVdjg00ly46twDk"
+  //   );
+  //   const session = await response.json();
+  //   console.log(session);
+  //   const json = {
+  //     sessionId: session?.sessionId,
+  //     userId: userId,
+  //     propertyId: propertyDetails?._id,
+  //     totalPrice: propertyDetails?.fixedPrice,
+  //     paymentMethod: "card",
+
+  //   }
+  //   console.log(json);
+  //   try {
+  //     axios.post("http://localhost:3000/orders/create", json).then( async (res) =>{
+  //       const result = await stripe.redirectToCheckout({
+  //         sessionId: session?.sessionId,
+  //       });
+  //       if (result.error) {
+  //         console.error(result.error.message);
+  //       }
+  //     })
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+
+  // };
   useEffect(() => {
-    setAmount(price);
-    console.log(price);
+    setAmount(details?.fixedPrice);
+    console.log(details?.fixedPrice);
   });
 
   const createPaymentIntent = async data => {
@@ -50,18 +97,10 @@ export default function Payment({price}) {
     }
   };
 
-  const fatchCardInfo = cardDetail => {
-    if (cardDetail.complete) {
-      setCardinfo(cardDetail);
-      setCardinfo(true);
-    } else {
-      setCardinfo(null);
-    }
-  };
   const onDone = async () => {
     let sendingData = {
-      amount: price,
-      currency: 'usd',
+      amount: details?.fixedPrice,
+      currency: 'pkr',
     };
     Keyboard.dismiss();
     console.log('CARD INFO', cardInfo);
@@ -85,7 +124,7 @@ export default function Payment({price}) {
           );
           setModalVisible(true);
           Alert.alert(
-            'Payment successfully...',
+            'Payment Done successfully...',
             <LottieView
               source={require('../../Assets/Images/payment.json')}
               autoPlay
@@ -106,7 +145,14 @@ export default function Payment({price}) {
       // Handle the error, e.g., display an error message to the user.
     }
   };
-
+  const fatchCardInfo = cardDetail => {
+    if (cardDetail.complete) {
+      setCardinfo(cardDetail);
+      setCardinfo(true);
+    } else {
+      setCardinfo(null);
+    }
+  };
   return (
     <SafeAreaView
       style={{

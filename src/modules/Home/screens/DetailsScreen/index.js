@@ -13,6 +13,8 @@ import {
   Alert,
   TextInput,
   StatusBar,
+  Linking,
+  Platform,
 } from 'react-native';
 import styles from './styles';
 import Toast from 'react-native-simple-toast';
@@ -30,6 +32,7 @@ import {
   get_properties,
   write_review,
   report_property,
+  get_allSeller,
 } from '../../../../utils/API/Requests';
 import Loading from '../../../../components/Loading/Loading';
 import Modal from 'react-native-modal';
@@ -38,6 +41,7 @@ const DetailsScreen = ({navigation, route}) => {
   const bidPrice = route.params?.bidPrice;
   const propertyID = route.params?.propertyID;
   const [review, setReview] = useState('');
+  const [query, setQuery] = useState('');
   const [feedBack, setFeedBack] = useState('');
   const [reason, setReason] = useState('');
   const [userRating, setUserRating] = useState(0);
@@ -46,9 +50,12 @@ const DetailsScreen = ({navigation, route}) => {
   const [property, setProperty] = useState(item);
   const [user, setUser] = useState({});
   const [verifyModal, setVerifyModal] = useState(false);
+  const [seller, setSeller] = useState({});
+
   useEffect(() => {
     fetchProperties(propertyID);
     fetchUserInfo();
+    fetchAllSellers();
   }, [propertyID]);
   const fetchUserInfo = async () => {
     let userInfo = await AsyncStorage.getItem('USER_INFO');
@@ -189,6 +196,53 @@ const DetailsScreen = ({navigation, route}) => {
       Toast.show(error.message, Toast.LONG);
       console.error('Error signing up:', error);
       setLoading(false);
+    }
+  };
+  const fetchAllSellers = async () => {
+    setLoading(true);
+    try {
+      let token = await AsyncStorage.getItem('USER_TOKEN');
+      let response = await get_allSeller(token);
+
+      if (response?.sellers?.length > 0) {
+        const filterSeller = response?.sellers.find(seller => {
+          console.log(seller?._id === property?.addedBy);
+          return seller?._id === property?.addedBy;
+        });
+
+        if (filterSeller !== undefined) {
+          setSeller(filterSeller);
+          setLoading(false);
+        } else {
+          setLoading(false);
+        }
+      }
+    } catch (error) {
+      Toast.show(error.message, Toast.LONG);
+      console.log(error);
+      setLoading(false);
+    }
+  };
+
+  const sendWhatsApp = () => {
+    let msg = 'i want to your about this property details';
+
+    let mobile = seller.phone;
+    if (mobile) {
+      if (msg) {
+        let url = 'whatsapp://send?text=' + msg + '&phone=' + mobile;
+        Linking.openURL(url)
+          .then(data => {
+            console.log('WhatsApp Opened');
+          })
+          .catch(() => {
+            alert('Make sure WhatsApp installed on your device');
+          });
+      } else {
+        alert('Please insert message to send');
+      }
+    } else {
+      alert('Please insert mobile no');
     }
   };
   return (
@@ -403,8 +457,193 @@ const DetailsScreen = ({navigation, route}) => {
                 />
               </View>
             )}
+            {/* Query form */}
+            <View
+              style={{
+                marginVertical: 10,
+              }}>
+              <Text
+                style={{fontSize: 20, color: Colors.black, fontWeight: 'bold'}}>
+                Wants to send a Query ?
+              </Text>
+            </View>
+            <View
+              style={{
+                // backgroundColor: 'red',
+                justifyContent: 'center',
+                alignItems: 'center',
+                flex: 1,
+                height: 200,
+                marginVertical: 20,
+              }}>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  width: '100%',
+                  alignItems: 'center',
+                  marginHorizontal: 10,
+                }}>
+                <View
+                  style={{
+                    shadowColor: '#000',
+                    shadowOffset: {
+                      width: 0,
+                      height: 2,
+                    },
+                    shadowOpacity: 0.25,
+                    shadowRadius: 3.84,
+
+                    elevation: 5,
+                    backgroundColor: Colors.white,
+                    height: 60,
+                    // width: 200,
+                    padding: 10,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    borderRadius: 10,
+                  }}>
+                  <Text
+                    style={{
+                      color: Colors.switchergray,
+                      fontWeight: 'bold',
+                      fontSize: 18,
+                    }}>
+                    Name : {user.username}
+                  </Text>
+                </View>
+                <View
+                  style={{
+                    shadowColor: '#000',
+                    shadowOffset: {
+                      width: 0,
+                      height: 2,
+                    },
+                    shadowOpacity: 0.25,
+                    shadowRadius: 3.84,
+
+                    elevation: 5,
+                    backgroundColor: Colors.white,
+                    height: 60,
+                    // width: 200,
+                    padding: 10,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    borderRadius: 10,
+                  }}>
+                  <Text
+                    style={{
+                      color: Colors.switchergray,
+                      fontWeight: 'bold',
+                      fontSize: 18,
+                    }}>
+                    Phone : {user.phone}
+                  </Text>
+                </View>
+                <View
+                  style={{
+                    shadowColor: '#000',
+                    shadowOffset: {
+                      width: 0,
+                      height: 2,
+                    },
+                    shadowOpacity: 0.25,
+                    shadowRadius: 3.84,
+
+                    elevation: 5,
+                    backgroundColor: Colors.white,
+                    height: 60,
+                    // width: 200,
+                    padding: 10,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    borderRadius: 10,
+                  }}>
+                  <Text
+                    style={{
+                      color: Colors.switchergray,
+                      fontWeight: 'bold',
+                      fontSize: 18,
+                    }}>
+                    Email : {user.email}
+                  </Text>
+                </View>
+              </View>
+              <View style={{marginTop: 10, width: '100%'}}>
+                <TextInput
+                  value={query}
+                  placeholder="Enter Your Query"
+                  placeholderTextColor={'#000'}
+                  onChangeText={text => {
+                    setQuery(text);
+                  }}
+                  style={[
+                    styles.inputReview,
+                    {
+                      height: 100,
+                      paddingVertical: 10,
+                      textAlignVertical: 'top',
+                      color: '#000',
+                      fontSize: 12,
+                    },
+                  ]}
+                  multiline={true}
+                  maxLength={1000}
+                />
+              </View>
+              <>
+                <Button
+                  text={'Send Query'}
+                  color={Colors.white}
+                  fontSize={15}
+                  height={50}
+                  width={'100%'}
+                  backgroundColor={Colors.black}
+                  // marginBottom={10}
+                  marginVertical={20}
+                  marginTop={20}
+                  // onPress={() => {
+                  //   navigation.navigate('PaymentScreen', {
+                  //     price: bidPrice ? bidPrice : property.fixedPrice,
+                  //   });
+                  // }}
+                />
+              </>
+            </View>
 
             {/* footer container */}
+            {seller && (
+              <View
+                style={{
+                  marginVertical: 10,
+                }}>
+                <Text
+                  style={{
+                    fontSize: 20,
+                    color: Colors.black,
+                    fontWeight: 'bold',
+                  }}>
+                  Contact on WhatsApp ?
+                </Text>
+                <TouchableOpacity
+                  onPress={() => sendWhatsApp()}
+                  style={{flexDirection: 'row', alignItems: 'center'}}>
+                  <Image
+                    source={require('../../../../Assets/Images/whatsapp.png')}
+                    style={{height: 30, width: 30}}
+                  />
+                  <Text
+                    style={{
+                      fontSize: 20,
+                      color: Colors.black,
+                      fontWeight: 'bold',
+                    }}>
+                    {seller.phone}
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            )}
+
             <View
               style={{
                 marginVertical: 10,
@@ -490,7 +729,9 @@ const DetailsScreen = ({navigation, route}) => {
                 marginBottom={10}
                 onPress={() => {
                   navigation.navigate('PaymentScreen', {
-                    price: bidPrice ? bidPrice : property.fixedPrice,
+                    fixedPrice: property?.fixedPrice,
+                    name: property?.name,
+                    propertyId: property?._id,
                   });
                 }}
               />

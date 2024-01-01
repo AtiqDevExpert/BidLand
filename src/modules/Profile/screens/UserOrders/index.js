@@ -9,13 +9,22 @@ import {
   ScrollView,
   Dimensions,
 } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import {useFocusEffect} from '@react-navigation/native';
 import {useNavigation} from '@react-navigation/native';
 import styles from './styles';
 import {Colors} from '../../../../constants/Colors';
+import Loading from '../../../../components/Loading/Loading';
+import {
+  get_All_Orders,
+  get_bidding_properties,
+  get_properties,
+} from '../../../../utils/API/Requests';
 
 const UserOrders = () => {
   const navigation = useNavigation();
+  const [loading, setLoading] = useState(false);
   const {width} = Dimensions.get('screen');
   const [orders, setOrders] = useState([
     {
@@ -257,7 +266,25 @@ const UserOrders = () => {
       specifications: [null, null, '2 Kannal', null],
     },
   ]);
-
+  useFocusEffect(
+    React.useCallback(() => {
+      getAllOrder();
+      fetchAllProperty();
+    }, []),
+  );
+  const getAllOrder = async () => {
+    setLoading(true);
+    try {
+      let response = await get_All_Orders();
+      if (response?.orders?.length > 0) {
+        setOrders(response?.orders);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
   const handleBack = () => {
     navigation.goBack();
   };
@@ -289,22 +316,73 @@ const UserOrders = () => {
               }}>
               <Text
                 style={{fontSize: 16, fontWeight: 'bold', color: Colors.black}}>
-                Property Name
+                {item?.paymentName ? item.paymentName : '--------'}
               </Text>
               <Text
                 style={{fontWeight: 'bold', color: Colors.black, fontSize: 16}}>
-                PKR-{item.fixedPrice ? item.fixedPrice : ''}
+                PKR-{item.totalPrice ? item.totalPrice : ''}
               </Text>
             </View>
 
             <Text style={{color: Colors.black, fontSize: 14, marginTop: 5}}>
               {item?.location?.address ? item?.location?.address : ''}
             </Text>
+            <Text
+              style={{
+                color: Colors.black,
+                fontSize: 14,
+                marginTop: 5,
+                backgroundColor: Colors.graywhite,
+              }}>
+              <Text
+                style={{
+                  color: Colors.black,
+                  fontSize: 14,
+                  marginTop: 5,
+                  fontWeight: 'bold',
+                }}>
+                Payment Mode :
+              </Text>
+              {item?.paymentMethod ? item?.paymentMethod : ''}
+            </Text>
           </View>
         </View>
       </View>
     );
   };
+  const fetchAllProperty = async () => {
+    setLoading(true);
+    try {
+      let token = await AsyncStorage.getItem('USER_TOKEN');
+      let bidingProperties = await get_bidding_properties(token);
+      let listingproperties = await get_properties(token);
+
+      // Ensure that both are arrays
+      if (!Array.isArray(bidingProperties)) {
+        bidingProperties = [];
+      }
+
+      if (!Array.isArray(listingproperties)) {
+        listingproperties = [];
+      }
+
+      // Combine the two arrays
+      const allSellerProperties = [...listingproperties, ...bidingProperties];
+
+      // Remove duplicates based on property ID (adjust this based on your data structure)
+      const uniqueSellerProperties = Array.from(
+        new Set(allSellerProperties.map(property => property.id)),
+      ).map(id => allSellerProperties.find(property => property.id === id));
+
+      // Set the merged and deduplicated result in the state
+      console.log('uniqueSellerProperties', uniqueSellerProperties);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
       <ListHeader />
@@ -317,6 +395,13 @@ const UserOrders = () => {
           renderItem={renderOrders}
         />
       </View>
+      <>
+        {loading && (
+          <View style={[styles.popupContainer, {zIndex: 99999}]}>
+            <Loading />
+          </View>
+        )}
+      </>
     </ScrollView>
   );
 };

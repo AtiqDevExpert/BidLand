@@ -490,9 +490,16 @@ const HomeScreen = ({navigation}) => {
                     property.location.address &&
                     property.location.address
                       .toLowerCase()
-                      .includes(search.toLowerCase())),
+                      .includes(search.toLowerCase())) ||
+                  (property?.city &&
+                    property.city
+                      .toLowerCase()
+                      .includes(search.toLowerCase())) || // Include city filter
+                  (property?.propertyType &&
+                    property.propertyType
+                      .toLowerCase()
+                      .includes(search.toLowerCase())), // Include propertyType filter
               )}
-              renderItem={renderListingProperties}
               extraData={properties.filter(
                 property =>
                   property?.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -506,8 +513,17 @@ const HomeScreen = ({navigation}) => {
                     property.location.address &&
                     property.location.address
                       .toLowerCase()
-                      .includes(search.toLowerCase())),
+                      .includes(search.toLowerCase())) ||
+                  (property?.city &&
+                    property.city
+                      .toLowerCase()
+                      .includes(search.toLowerCase())) || // Include city filter
+                  (property?.propertyType &&
+                    property.propertyType
+                      .toLowerCase()
+                      .includes(search.toLowerCase())), // Include propertyType filter
               )}
+              renderItem={renderListingProperties}
               refreshControl={
                 <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
               }
@@ -538,9 +554,16 @@ const HomeScreen = ({navigation}) => {
                     property.location.address &&
                     property.location.address
                       .toLowerCase()
-                      .includes(search.toLowerCase())),
+                      .includes(search.toLowerCase())) ||
+                  (property?.city &&
+                    property.city
+                      .toLowerCase()
+                      .includes(search.toLowerCase())) || // Include city filter
+                  (property?.propertyType &&
+                    property.propertyType
+                      .toLowerCase()
+                      .includes(search.toLowerCase())), // Include propertyType filter
               )}
-              renderItem={renderBiddingProperties}
               extraData={biddingProerties.filter(
                 property =>
                   property?.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -554,8 +577,17 @@ const HomeScreen = ({navigation}) => {
                     property.location.address &&
                     property.location.address
                       .toLowerCase()
-                      .includes(search.toLowerCase())),
+                      .includes(search.toLowerCase())) ||
+                  (property?.city &&
+                    property.city
+                      .toLowerCase()
+                      .includes(search.toLowerCase())) || // Include city filter
+                  (property?.propertyType &&
+                    property.propertyType
+                      .toLowerCase()
+                      .includes(search.toLowerCase())), // Include propertyType filter
               )}
+              renderItem={renderBiddingProperties}
               refreshControl={
                 <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
               }
