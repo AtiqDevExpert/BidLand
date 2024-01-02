@@ -20,8 +20,9 @@ import styles from './styles';
 import Toast from 'react-native-simple-toast';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Icon2 from 'react-native-vector-icons/SimpleLineIcons';
+import Icon3 from 'react-native-vector-icons/FontAwesome';
 import {Colors} from '../../../../constants/Colors';
-const {width} = Dimensions.get('screen');
+
 import {Rating} from 'react-native-ratings';
 import Button from '@components/Button/button';
 import BiddindList from '@components/BiddingList';
@@ -40,13 +41,11 @@ import Loading from '../../../../components/Loading/Loading';
 import Modal from 'react-native-modal';
 const DetailsScreen = ({navigation, route}) => {
   const {width} = Dimensions.get('screen');
-  console.log('width', width);
   const item = route.params?.item;
   const bidPrice = route.params?.bidPrice;
   const propertyID = route.params?.propertyID;
   const [review, setReview] = useState('');
   const [query, setQuery] = useState('');
-  // const [phone, setPhone] = useState(seller.phopne);
   const [feedBack, setFeedBack] = useState('');
   const [reason, setReason] = useState('');
   const [userRating, setUserRating] = useState(0);
@@ -765,16 +764,18 @@ const DetailsScreen = ({navigation, route}) => {
                 </Text>
                 <TouchableOpacity
                   onPress={() => sendWhatsApp()}
-                  style={{flexDirection: 'row', alignItems: 'center'}}>
-                  <Image
-                    source={require('../../../../Assets/Images/whatsapp.png')}
-                    style={{height: 30, width: 30}}
-                  />
+                  style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                  }}>
+                  <Icon3 name="whatsapp" size={30} color="green" />
+
                   <Text
                     style={{
                       fontSize: 20,
                       color: Colors.black,
                       fontWeight: 'bold',
+                      marginHorizontal: 10,
                     }}>
                     {seller.phone}
                   </Text>
