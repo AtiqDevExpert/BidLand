@@ -23,53 +23,53 @@ export default function Payment({details}) {
   const [amount, setAmount] = useState();
   const [modalVisible, setModalVisible] = useState(false);
   console.log('details', details);
-  // const hanldeCheckout = async () => {
 
-  //   const response = await fetch(
-  //     "http://localhost:3000/property/create-checkout-session",
-  //     {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({
-  //         propertyId: propertyDetails?._id,
-  //         name: propertyDetails?.name,
-  //         fixedPrice: propertyDetails?.fixedPrice,
-  //       }),
-  //     }
-  //   );
+  const hanldeCheckout = async () => {
+    const response = await fetch(
+      'http://localhost:3000/property/create-checkout-session',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          propertyId: propertyDetails?._id,
+          name: propertyDetails?.name,
+          fixedPrice: propertyDetails?.fixedPrice,
+        }),
+      },
+    );
 
-  //   console.log(response);
+    console.log(response);
 
-  //   const stripe = await loadStripe(
-  //     "pk_test_51NO5Z9COYbX4EEUkrTs8Zb2tvXYstfc1aLzXCwlg1k9bOKy5BPuriLZAgCjMNmXkERdYyzwYEKz6P0OzF2IkVdjg00ly46twDk"
-  //   );
-  //   const session = await response.json();
-  //   console.log(session);
-  //   const json = {
-  //     sessionId: session?.sessionId,
-  //     userId: userId,
-  //     propertyId: propertyDetails?._id,
-  //     totalPrice: propertyDetails?.fixedPrice,
-  //     paymentMethod: "card",
-
-  //   }
-  //   console.log(json);
-  //   try {
-  //     axios.post("http://localhost:3000/orders/create", json).then( async (res) =>{
-  //       const result = await stripe.redirectToCheckout({
-  //         sessionId: session?.sessionId,
-  //       });
-  //       if (result.error) {
-  //         console.error(result.error.message);
-  //       }
-  //     })
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-
-  // };
+    const stripe = await loadStripe(
+      'pk_test_51NO5Z9COYbX4EEUkrTs8Zb2tvXYstfc1aLzXCwlg1k9bOKy5BPuriLZAgCjMNmXkERdYyzwYEKz6P0OzF2IkVdjg00ly46twDk',
+    );
+    const session = await response.json();
+    // console.log(session);
+    const json = {
+      sessionId: session?.sessionId,
+      userId: userId,
+      propertyId: propertyDetails?._id,
+      totalPrice: propertyDetails?.fixedPrice,
+      paymentMethod: 'card',
+    };
+    console.log(json);
+    try {
+      axios
+        .post('http://localhost:3000/orders/create', json)
+        .then(async res => {
+          const result = await stripe.redirectToCheckout({
+            sessionId: session?.sessionId,
+          });
+          if (result.error) {
+            console.error(result.error.message);
+          }
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
     setAmount(details?.fixedPrice);
     console.log(details?.fixedPrice);

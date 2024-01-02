@@ -246,6 +246,46 @@ const place_bid = async (propertyID, body) => {
     }
   }
 };
+const add_Query = async (propertyID, body) => {
+  let token = await AsyncStorage.getItem('USER_TOKEN');
+  try {
+    const inst = axios.create({
+      baseURL: Url,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const response = await inst.post(`property/add-query/${propertyID}`, body);
+
+    return response.data;
+  } catch (error) {
+    if (error.response) {
+      return new Error(JSON.stringify(error.response.data.message));
+    } else {
+      throw new Error('Invalide Error!');
+    }
+  }
+};
+const get_All_Queries = async propertyID => {
+  let token = await AsyncStorage.getItem('USER_TOKEN');
+  try {
+    const inst = axios.create({
+      baseURL: Url,
+      headers: {
+        // Authorization: `Bearer ${token}`,
+      },
+    });
+    const response = await inst.get(`property/queries/${propertyID}`);
+
+    return response.data;
+  } catch (error) {
+    if (error.response) {
+      return new Error(JSON.stringify(error.response.data.message));
+    } else {
+      throw new Error('Invalide Error!');
+    }
+  }
+};
 const write_review = async (propertyID, body) => {
   let token = await AsyncStorage.getItem('USER_TOKEN');
   try {
@@ -300,4 +340,6 @@ export {
   write_review,
   report_property,
   get_All_Orders,
+  add_Query,
+  get_All_Queries,
 };

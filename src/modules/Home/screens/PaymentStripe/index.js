@@ -7,8 +7,8 @@ import Payment from '../../../../components/PaymentOnStripe/Payment';
 import {Colors} from '../../../../constants/Colors';
 
 export default function PaymentScreen({route}) {
-  console.log(route.params);
-  const {price} = route.params;
+  const details = route.params;
+  console.log('details', details);
 
   const navigation = useNavigation();
 
@@ -75,7 +75,7 @@ export default function PaymentScreen({route}) {
             }}>
             <Text style={{color: Colors.black}}>
               {'Your Total Payable Amount ' + ' '}
-              <Text style={{fontWeight: 'bold'}}>PKR-{price}</Text>
+              <Text style={{fontWeight: 'bold'}}>PKR-{details.fixedPrice}</Text>
             </Text>
           </View>
         </View>

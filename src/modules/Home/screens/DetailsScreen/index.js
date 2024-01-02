@@ -33,15 +33,20 @@ import {
   write_review,
   report_property,
   get_allSeller,
+  add_Query,
+  get_All_Queries,
 } from '../../../../utils/API/Requests';
 import Loading from '../../../../components/Loading/Loading';
 import Modal from 'react-native-modal';
 const DetailsScreen = ({navigation, route}) => {
+  const {width} = Dimensions.get('screen');
+  console.log('width', width);
   const item = route.params?.item;
   const bidPrice = route.params?.bidPrice;
   const propertyID = route.params?.propertyID;
   const [review, setReview] = useState('');
   const [query, setQuery] = useState('');
+  // const [phone, setPhone] = useState(seller.phopne);
   const [feedBack, setFeedBack] = useState('');
   const [reason, setReason] = useState('');
   const [userRating, setUserRating] = useState(0);
@@ -51,7 +56,8 @@ const DetailsScreen = ({navigation, route}) => {
   const [user, setUser] = useState({});
   const [verifyModal, setVerifyModal] = useState(false);
   const [seller, setSeller] = useState({});
-
+  const [phone, setPhone] = useState();
+  const [allQuries, setAllQueries] = useState([]);
   useEffect(() => {
     fetchProperties(propertyID);
     fetchUserInfo();
@@ -61,6 +67,7 @@ const DetailsScreen = ({navigation, route}) => {
     let userInfo = await AsyncStorage.getItem('USER_INFO');
     let userDetail = JSON.parse(userInfo);
     if (userDetail) {
+      setPhone(userDetail.phone);
       setUser(userDetail);
     }
   };
@@ -70,7 +77,10 @@ const DetailsScreen = ({navigation, route}) => {
       let token = await AsyncStorage.getItem('USER_TOKEN');
       let responseList = await get_properties(token);
       let responseBiding = await get_bidding_properties(token);
-
+      const allQuries = await get_All_Queries(propertyID);
+      if (allQuries.queries.length > 0) {
+        setAllQueries(allQuries.queries);
+      }
       if (responseList.properties.length > 0 && responseBiding.length > 0) {
         let combineArrays = responseList.properties.concat(responseBiding);
         let updatedProperty = combineArrays.find(property => {
@@ -80,6 +90,7 @@ const DetailsScreen = ({navigation, route}) => {
         if (updatedProperty !== undefined) {
           setProperty(updatedProperty);
           if (updatedProperty.reviews.length > 0) {
+            console.log('updatedProperty', updatedProperty);
             setReviews(updatedProperty.reviews);
           } else {
             setReviews(null);
@@ -137,6 +148,41 @@ const DetailsScreen = ({navigation, route}) => {
       </>
     );
   };
+  const renderQuries = ({item}) => {
+    return (
+      <>
+        <View pointerEvents="none" style={styles.review}>
+          <Text style={styles.facilityText}>
+            Name : {item.userDetails?.name}
+          </Text>
+          <View
+            style={{
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <View style={{backgroundColor: Colors.light}}>
+              {item?.queryText !== '' && (
+                <Text style={styles.facilityText}>
+                  Query : {item.queryText ? item.queryText : ''}
+                </Text>
+              )}
+              {item?.userDetails?.email !== '' && (
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                  }}>
+                  <Text style={styles.facilityText}>
+                    Query :{item?.userDetails?.email}
+                  </Text>
+                </View>
+              )}
+            </View>
+          </View>
+        </View>
+      </>
+    );
+  };
   const SubmitReview = async propertyID => {
     setLoading(true);
     let body = {
@@ -153,6 +199,40 @@ const DetailsScreen = ({navigation, route}) => {
         setUserRating(0);
         setReview('');
         fetchProperties(propertyID);
+      }
+    } catch (error) {
+      Toast.show(error.message, Toast.LONG);
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+  const SubmitQuery = async propertyID => {
+    setLoading(true);
+
+    let body = {
+      userDetails: {
+        name: user?.username,
+        email: user?.email,
+        profilePicture: 'https://example.com/profile.jpg',
+      },
+      queryText: query,
+    };
+    try {
+      let response = await add_Query(propertyID, body);
+
+      if (response) {
+        console.log('response=====>', response);
+        setUserRating(0);
+        setReview('');
+        setQuery('');
+        fetchProperties(propertyID);
+        const allQuries = await get_All_Queries(propertyID);
+        if (allQuries.queries.length > 0) {
+          setAllQueries(allQuries.queries);
+        }
+        console.log(allQuries);
+        setLoading(false);
       }
     } catch (error) {
       Toast.show(error.message, Toast.LONG);
@@ -212,6 +292,7 @@ const DetailsScreen = ({navigation, route}) => {
 
         if (filterSeller !== undefined) {
           setSeller(filterSeller);
+
           setLoading(false);
         } else {
           setLoading(false);
@@ -245,6 +326,7 @@ const DetailsScreen = ({navigation, route}) => {
       alert('Please insert mobile no');
     }
   };
+
   return (
     <>
       <SafeAreaView style={{flex: 1, backgroundColor: Colors.white}}>
@@ -469,12 +551,10 @@ const DetailsScreen = ({navigation, route}) => {
             </View>
             <View
               style={{
-                // backgroundColor: 'red',
                 justifyContent: 'center',
                 alignItems: 'center',
                 flex: 1,
-                height: 200,
-                marginVertical: 20,
+                marginVertical: 10,
               }}>
               <View
                 style={{
@@ -482,7 +562,7 @@ const DetailsScreen = ({navigation, route}) => {
                   justifyContent: 'space-between',
                   width: '100%',
                   alignItems: 'center',
-                  marginHorizontal: 10,
+                  marginHorizontal: 30,
                 }}>
                 <View
                   style={{
@@ -496,8 +576,9 @@ const DetailsScreen = ({navigation, route}) => {
 
                     elevation: 5,
                     backgroundColor: Colors.white,
-                    height: 60,
-                    // width: 200,
+                    height: width > 450 ? 60 : 40,
+                    width: width > 450 ? 200 : 80,
+                    padding: width > 450 ? 10 : 5,
                     padding: 10,
                     justifyContent: 'center',
                     alignItems: 'center',
@@ -506,10 +587,55 @@ const DetailsScreen = ({navigation, route}) => {
                   <Text
                     style={{
                       color: Colors.switchergray,
-                      fontWeight: 'bold',
-                      fontSize: 18,
+                      fontWeight: '700',
+                      fontSize: 14,
                     }}>
-                    Name : {user.username}
+                    Name:
+                  </Text>
+                  <Text
+                    style={{
+                      color: Colors.switchergray,
+                      fontWeight: '700',
+                      fontSize: 14,
+                    }}>
+                    {user.username}
+                  </Text>
+                </View>
+
+                <View
+                  style={{
+                    shadowColor: '#000',
+                    shadowOffset: {
+                      width: 0,
+                      height: 2,
+                    },
+                    shadowOpacity: 0.25,
+                    shadowRadius: 3.84,
+
+                    elevation: 5,
+                    backgroundColor: Colors.white,
+                    height: width > 450 ? 60 : 40,
+                    width: width > 450 ? 200 : 150,
+                    padding: width > 450 ? 10 : 5,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    borderRadius: 10,
+                  }}>
+                  <Text
+                    style={{
+                      color: Colors.switchergray,
+                      fontWeight: '700',
+                      fontSize: 14,
+                    }}>
+                    Email:
+                  </Text>
+                  <Text
+                    style={{
+                      color: Colors.switchergray,
+                      fontWeight: '700',
+                      fontSize: 14,
+                    }}>
+                    {user.email}
                   </Text>
                 </View>
                 <View
@@ -524,9 +650,9 @@ const DetailsScreen = ({navigation, route}) => {
 
                     elevation: 5,
                     backgroundColor: Colors.white,
-                    height: 60,
-                    // width: 200,
-                    padding: 10,
+                    height: width > 450 ? 60 : 60,
+                    width: width > 450 ? 200 : 150,
+                    padding: width > 450 ? 10 : 5,
                     justifyContent: 'center',
                     alignItems: 'center',
                     borderRadius: 10,
@@ -534,41 +660,36 @@ const DetailsScreen = ({navigation, route}) => {
                   <Text
                     style={{
                       color: Colors.switchergray,
-                      fontWeight: 'bold',
-                      fontSize: 18,
+                      fontWeight: '700',
+                      fontSize: 14,
                     }}>
-                    Phone : {user.phone}
+                    Phone:
                   </Text>
-                </View>
-                <View
-                  style={{
-                    shadowColor: '#000',
-                    shadowOffset: {
-                      width: 0,
-                      height: 2,
-                    },
-                    shadowOpacity: 0.25,
-                    shadowRadius: 3.84,
+                  <TextInput
+                    value={phone}
+                    placeholder="Enter Your Query"
+                    placeholderTextColor={'#000'}
+                    onChangeText={text => {
+                      setPhone(text);
+                    }}
+                    style={[
+                      {
+                        height: width > 450 ? 60 : 40,
+                        // paddingVertical: 10,
+                        textAlignVertical: 'top',
+                        color: '#000',
+                        fontSize: 12,
+                        width: '100%',
 
-                    elevation: 5,
-                    backgroundColor: Colors.white,
-                    height: 60,
-                    // width: 200,
-                    padding: 10,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    borderRadius: 10,
-                  }}>
-                  <Text
-                    style={{
-                      color: Colors.switchergray,
-                      fontWeight: 'bold',
-                      fontSize: 18,
-                    }}>
-                    Email : {user.email}
-                  </Text>
+                        backgroundColor: '#f1f3f6',
+                        paddingHorizontal: 10,
+                        borderRadius: 10,
+                      },
+                    ]}
+                  />
                 </View>
               </View>
+
               <View style={{marginTop: 10, width: '100%'}}>
                 <TextInput
                   value={query}
@@ -591,6 +712,7 @@ const DetailsScreen = ({navigation, route}) => {
                   maxLength={1000}
                 />
               </View>
+
               <>
                 <Button
                   text={'Send Query'}
@@ -599,16 +721,32 @@ const DetailsScreen = ({navigation, route}) => {
                   height={50}
                   width={'100%'}
                   backgroundColor={Colors.black}
-                  // marginBottom={10}
                   marginVertical={20}
                   marginTop={20}
-                  // onPress={() => {
-                  //   navigation.navigate('PaymentScreen', {
-                  //     price: bidPrice ? bidPrice : property.fixedPrice,
-                  //   });
-                  // }}
+                  onPress={() => SubmitQuery(property?._id)}
                 />
               </>
+              {Array.isArray(allQuries) && allQuries.length > 0 && (
+                <View style={{flex: 1}}>
+                  <View>
+                    <Text
+                      style={{
+                        fontSize: 20,
+                        color: Colors.black,
+                        fontWeight: 'bold',
+                      }}>
+                      Customer Quries
+                    </Text>
+                  </View>
+                  <FlatList
+                    horizontal
+                    showsHorizontalScrollIndicator={true}
+                    keyExtractor={(_, key) => key.toString()}
+                    data={allQuries}
+                    renderItem={renderQuries}
+                  />
+                </View>
+              )}
             </View>
 
             {/* footer container */}
@@ -732,6 +870,7 @@ const DetailsScreen = ({navigation, route}) => {
                     fixedPrice: property?.fixedPrice,
                     name: property?.name,
                     propertyId: property?._id,
+                    userId: user?.userId,
                   });
                 }}
               />
