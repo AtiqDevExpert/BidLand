@@ -8,6 +8,8 @@ import {
   Keyboard,
   TouchableOpacity,
 } from 'react-native';
+import Toast from 'react-native-simple-toast';
+import axios from 'axios';
 import React, {useState, useEffect, useRef} from 'react';
 import LottieView from 'lottie-react-native';
 // import {createPaymentIntent} from '../../utils/API/Requests';
@@ -18,129 +20,111 @@ import {
   confirmPayment,
 } from '@stripe/stripe-react-native';
 import {Colors} from '../../constants/Colors';
+import Loading from '@components/Loading/Loading';
+import {useNavigation} from '@react-navigation/native';
 export default function Payment({details}) {
+  const navigation = useNavigation();
   const [cardInfo, setCardinfo] = useState(null);
   const [amount, setAmount] = useState();
   const [modalVisible, setModalVisible] = useState(false);
-  console.log('details', details);
+  const [loading, setLoading] = useState(false);
 
-  const hanldeCheckout = async () => {
-    const response = await fetch(
-      'http://localhost:3000/property/create-checkout-session',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          propertyId: propertyDetails?._id,
-          name: propertyDetails?.name,
-          fixedPrice: propertyDetails?.fixedPrice,
-        }),
-      },
-    );
-
-    console.log(response);
-
-    const stripe = await loadStripe(
-      'pk_test_51NO5Z9COYbX4EEUkrTs8Zb2tvXYstfc1aLzXCwlg1k9bOKy5BPuriLZAgCjMNmXkERdYyzwYEKz6P0OzF2IkVdjg00ly46twDk',
-    );
-    const session = await response.json();
-    // console.log(session);
-    const json = {
-      sessionId: session?.sessionId,
-      userId: userId,
-      propertyId: propertyDetails?._id,
-      totalPrice: propertyDetails?.fixedPrice,
-      paymentMethod: 'card',
-    };
-    console.log(json);
-    try {
-      axios
-        .post('http://localhost:3000/orders/create', json)
-        .then(async res => {
-          const result = await stripe.redirectToCheckout({
-            sessionId: session?.sessionId,
-          });
-          if (result.error) {
-            console.error(result.error.message);
-          }
-        });
-    } catch (error) {
-      console.log(error);
-    }
-  };
   useEffect(() => {
     setAmount(details?.fixedPrice);
     console.log(details?.fixedPrice);
   });
 
-  const createPaymentIntent = async data => {
-    try {
-      const response = await fetch('http://192.168.30.131:8182/payment-sheet', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
+  // const createPaymentIntent = async data => {
+  //   try {
+  //     const response = await fetch('http://192.168.30.131:8182/payment-sheet', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify(data),
+  //     });
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
+  //     if (!response.ok) {
+  //       throw new Error(`HTTP error! Status: ${response.status}`);
+  //     }
 
-      const responseData = await response.json();
-      return responseData;
-    } catch (error) {
-      console.error('Error creating payment intent:', error);
-      throw error; // You can choose to re-throw the error for the calling code to handle
-    }
-  };
+  //     const responseData = await response.json();
+  //     return responseData;
+  //   } catch (error) {
+  //     console.error('Error creating payment intent:', error);
+  //     throw error; // You can choose to re-throw the error for the calling code to handle
+  //   }
+  // };
 
   const onDone = async () => {
-    let sendingData = {
-      amount: details?.fixedPrice,
-      currency: 'pkr',
-    };
+    // let sendingData = {
+    //   amount: details?.fixedPrice,
+    //   currency: 'pkr',
+    // };
     Keyboard.dismiss();
-    console.log('CARD INFO', cardInfo);
+    // console.log('CARD INFO', cardInfo);
 
     try {
-      const response = await createPaymentIntent(sendingData);
-      console.log('response____', response);
-
-      if (response?.paymentIntent) {
-        const confirmPaymentIntent = await confirmPayment(
-          response?.paymentIntent,
-          {paymentMethodType: 'Card'},
+      setLoading(true);
+      // const response = await createPaymentIntent(sendingData);
+      // console.log('response____', response);
+      const json = {
+        sessionId: details?.propertyId + 101,
+        userId: details?.userId,
+        propertyId: details?.propertyId,
+        totalPrice: details?.fixedPrice,
+        paymentMethod: 'card',
+      };
+      try {
+        const createOrderResponse = await axios.post(
+          'https://bidland-backend.onrender.com/orders/create',
+          json,
         );
-        console.log('response of confirm payments is...', confirmPaymentIntent);
-
-        if (confirmPaymentIntent?.paymentIntent?.status === 'Succeeded') {
-          // Payment was successful
-          console.log(
-            'Payment successfully...status:',
-            confirmPaymentIntent?.paymentIntent?.status,
-          );
-          setModalVisible(true);
-          Alert.alert(
-            'Payment Done successfully...',
-            <LottieView
-              source={require('../../Assets/Images/payment.json')}
-              autoPlay
-              loop
-              style={{width: 200, height: 200}}
-            />,
-          );
+        if (createOrderResponse) {
+          Toast.show(createOrderResponse.data.message, Toast.LONG);
+          setLoading(false);
+          navigation.navigate('Home');
         } else {
-          // Payment failed or was canceled
-          console.log('Payment failed or canceled');
+          setLoading(false);
+          Toast.show(createOrderResponse.data.message, Toast.LONG);
         }
-      } else {
-        console.log('Payment intent not found in the response.');
-        // Handle this case as needed.
+      } catch (error) {
+        setLoading(false);
+        console.log(error);
       }
+      // if (response?.paymentIntent) {
+      //   const confirmPaymentIntent = await confirmPayment(
+      //     response?.paymentIntent,
+      //     {paymentMethodType: 'Card'},
+      //   );
+      //   console.log('response of confirm payments is...', confirmPaymentIntent);
+
+      //   if (confirmPaymentIntent?.paymentIntent?.status === 'Succeeded') {
+      //     // Payment was successful
+      //     console.log(
+      //       'Payment successfully...status:',
+      //       confirmPaymentIntent?.paymentIntent?.status,
+      //     );
+      //     setModalVisible(true);
+      //     Alert.alert(
+      //       'Payment Done successfully...',
+      //       <LottieView
+      //         source={require('../../Assets/Images/payment.json')}
+      //         autoPlay
+      //         loop
+      //         style={{width: 200, height: 200}}
+      //       />,
+      //     );
+      //   } else {
+      //     // Payment failed or was canceled
+      //     console.log('Payment failed or canceled');
+      //   }
+      // } else {
+      //   console.log('Payment intent not found in the response.');
+      //   // Handle this case as needed.
+      // }
     } catch (error) {
+      setLoading(false);
       console.error('Error in onDone:', error);
       // Handle the error, e.g., display an error message to the user.
     }
@@ -217,7 +201,7 @@ export default function Payment({details}) {
         <Text style={{color: '#fff', fontSize: 20}}>Payment Done</Text>
       </TouchableOpacity>
 
-      <Modal
+      {/* <Modal
         animationType="slide"
         transparent={true}
         visible={modalVisible}
@@ -267,7 +251,22 @@ export default function Payment({details}) {
             </TouchableOpacity>
           </View>
         </View>
-      </Modal>
+      </Modal> */}
+      {loading && (
+        <View
+          style={{
+            zIndex: 99999,
+            width: '100%',
+            height: '100%',
+            position: 'absolute',
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: 'rgba(255, 255, 255, 0.9)',
+            zIndex: 9999,
+          }}>
+          <Loading />
+        </View>
+      )}
     </SafeAreaView>
   );
 }

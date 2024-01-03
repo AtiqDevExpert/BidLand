@@ -8,7 +8,6 @@ import {Colors} from '../../../../constants/Colors';
 
 export default function PaymentScreen({route}) {
   const details = route.params;
-  console.log('details', details);
 
   const navigation = useNavigation();
 
