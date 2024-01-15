@@ -38,7 +38,6 @@ const SellersDetail = ({navigation, route}) => {
   const [biddingProerties, setBiddingProperties] = useState([]);
   const [sellerProperties, setSellerProperties] = useState([]);
   let sellerId = route.params?.sellerId;
-  let sellerObj = route.params?.seller;
 
   const {width} = Dimensions.get('screen');
 
@@ -92,9 +91,11 @@ const SellersDetail = ({navigation, route}) => {
       setLoading(false);
     }
   };
+
   const renderProperties = ({item, index}) => {
     return (
       <Pressable
+        disabled={true}
         activeOpacity={0.8}
         onPress={() => navigation.navigate('DetailsScreen', item)}
         style={{marginVertical: 5}}>
@@ -128,9 +129,11 @@ const SellersDetail = ({navigation, route}) => {
             </Text>
             <View
               style={{
-                marginTop: 10,
                 flexDirection: 'row',
-                justifyContent: 'space-around',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                marginHorizental: 10,
+                // marginTop: 5,
               }}>
               <View style={styles.facility}>
                 <Icon name="hotel" size={18} />
@@ -141,13 +144,22 @@ const SellersDetail = ({navigation, route}) => {
               <View style={styles.facility}>
                 <Icon name="bathtub" size={18} />
                 <Text style={styles.facilityText}>
-                  {item?.specifications[1]}
+                  {item?.specifications[2]}
                 </Text>
               </View>
+            </View>
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                marginHorizental: 10,
+                marginTop: 5,
+              }}>
               <View style={styles.facility}>
                 <Icon name="aspect-ratio" size={18} />
                 <Text style={styles.facilityText}>
-                  {item?.specifications[2]}
+                  {item?.specifications[1]}
                 </Text>
               </View>
               <View style={styles.facility}>
@@ -163,7 +175,25 @@ const SellersDetail = ({navigation, route}) => {
     );
   };
   const contactToSeller = () => {
-    navigation.navigate('ChatModule', {seller: sellerObj});
+    let msg = 'i want to your about this property details';
+
+    let mobile = seller.phone;
+    if (mobile) {
+      if (msg) {
+        let url = 'whatsapp://send?text=' + msg + '&phone=' + mobile;
+        Linking.openURL(url)
+          .then(data => {
+            console.log('WhatsApp Opened');
+          })
+          .catch(() => {
+            alert('Make sure WhatsApp installed on your device');
+          });
+      } else {
+        alert('Please insert message to send');
+      }
+    } else {
+      alert('Please insert mobile no');
+    }
   };
   return (
     <SafeAreaView style={styles.mainView}>

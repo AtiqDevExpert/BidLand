@@ -143,7 +143,7 @@ export default StyleSheet.create({
     paddingHorizontal: 40,
   },
   card: {
-    height: 270,
+    // height: 270,
     backgroundColor: Colors.white,
     elevation: 10,
     width: width - 40,
