@@ -14,6 +14,7 @@ import {
   RefreshControl,
   TouchableOpacity,
 } from 'react-native';
+import FastImage from 'react-native-fast-image';
 import Modal from 'react-native-modal';
 import SwitchSelector from 'react-native-switch-selector';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -138,12 +139,17 @@ const HomeScreen = ({navigation}) => {
         }
         style={{marginVertical: 5}}>
         <View style={[styles.card]}>
-          {/* House image */}
+         
           <View>
-            <Image
+            <FastImage
+              style={styles.cardImage}
+              source={{uri: item.images[0]}}
+              resizeMode={FastImage.resizeMode.cover}
+            />
+            {/* <Image
               source={{uri: item.images[0]}} // Assuming item.images contains image URLs
               style={styles.cardImage}
-            />
+            /> */}
           </View>
           <View style={{marginTop: 5}}>
             <View
@@ -219,9 +225,10 @@ const HomeScreen = ({navigation}) => {
           <View style={[styles.card]}>
             {/* House image */}
             <View>
-              <Image
-                source={{uri: item.images[0]}} // Assuming item.images contains image URLs
+              <FastImage
                 style={styles.cardImage}
+                source={{uri: item.images[0]}}
+                resizeMode={FastImage.resizeMode.cover}
               />
             </View>
             <View style={{marginTop: 5}}>

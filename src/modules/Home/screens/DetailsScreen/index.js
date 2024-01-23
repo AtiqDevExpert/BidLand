@@ -859,7 +859,7 @@ const DetailsScreen = ({navigation, route}) => {
 
             <>
               <Button
-                text={'Book Now'}
+                text={'Purchase Now'}
                 color={Colors.white}
                 fontSize={15}
                 height={50}

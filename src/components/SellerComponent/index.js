@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from 'react';
 
 import {Text, View, TouchableOpacity, FlatList, Image} from 'react-native';
 import {Colors} from '../../constants/Colors';
-
+import FastImage from 'react-native-fast-image';
 const SellerComponent = ({item1, onPressButton, onChangeText}) => {
   const data = item1;
 
@@ -53,16 +53,18 @@ const SellerComponent = ({item1, onPressButton, onChangeText}) => {
             }}>
             {data.profilePicture ? (
               <>
-                <Image
+                <FastImage
                   source={{uri: data.profilePicture}}
                   style={{height: 80, width: 80, borderRadius: 100}}
+                  resizeMode={FastImage.resizeMode.cover}
                 />
               </>
             ) : (
               <>
-                <Image
-                  source={require('../../Assets/Images/Userimage.png')}
+                <FastImage
                   style={{height: 80, width: 80, borderRadius: 100}}
+                  source={require('../../Assets/Images/Userimage.png')}
+                  resizeMode={FastImage.resizeMode.cover}
                 />
               </>
             )}

@@ -11,6 +11,7 @@ import {
   Pressable,
   Image,
 } from 'react-native';
+import FastImage from 'react-native-fast-image';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import SwitchSelector from 'react-native-switch-selector';
 import {Colors} from '../../../../constants/Colors';
@@ -102,9 +103,10 @@ const SellersDetail = ({navigation, route}) => {
         <View style={styles.card}>
           {/* House image */}
           <View>
-            <Image
-              source={{uri: item.images[0]}} // Assuming item.images contains image URLs
+            <FastImage
               style={styles.cardImage}
+              source={{uri: item.images[0]}}
+              resizeMode={FastImage.resizeMode.cover}
             />
           </View>
           <View style={{marginTop: 5}}>

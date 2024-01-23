@@ -26,257 +26,46 @@ const UserOrders = () => {
   const navigation = useNavigation();
   const [loading, setLoading] = useState(false);
   const {width} = Dimensions.get('screen');
-  const [orders, setOrders] = useState([
-    {
-      __v: 1,
-      _id: '656da0b9f9eddc959ece0ed3',
-      addedBy: '656d9fa8f9eddc959ece0ec8',
-      bids: [],
-      city: 'Karachi',
-      comments: [],
-      description: 'kjhkjkjdgfdggiuhhiuhhhkjhkjhkjhhkjhkjkjhkjh',
-      fixedPrice: 19000000000,
-      images: [
-        'https://firebasestorage.googleapis.com/v0/b/bidland-7717d.appspot.com/o/images%2FScreenshot%20(157).png?alt=media&token=7526a0e4-82eb-4836-8027-83473302c939',
-      ],
-      isBidding: false,
-      location: {
-        address:
-          'Main boulevard, 15 Raiwnd Rd, D Block Block C Sher Shah Colony, Lahore, Punjab 54000, Pakistan',
-        coordinates: {coordinates: [Array], type: 'Point'},
-      },
-      name: 'Nothing',
-      propertyType: 'Commercial',
-      reports: [],
-      reviews: [
-        {
-          _id: '656da145f9eddc959ece0f76',
-          email: 'zaheerzarifi@gmail.com',
-          profilePicture:
-            'https://firebasestorage.googleapis.com/v0/b/bidland-7717d.appspot.com/o/images%2FWhatsApp%20Image%202023-11-23%20at%2022.45.22_89f78c49.jpg?alt=media&token=608f0e5c-008d-4dbf-b205-d3475c7f6bdf',
-          rating: 5,
-          reviewText: 'good',
-          username: 'zaheer',
-        },
-      ],
-      specifications: [null, null, '2 Kannal', null],
-    },
-    {
-      __v: 1,
-      _id: '656da0b9f9eddc959ece0ed3',
-      addedBy: '656d9fa8f9eddc959ece0ec8',
-      bids: [],
-      city: 'Karachi',
-      comments: [],
-      description: 'kjhkjkjdgfdggiuhhiuhhhkjhkjhkjhhkjhkjkjhkjh',
-      fixedPrice: 19000000000,
-      images: [
-        'https://firebasestorage.googleapis.com/v0/b/bidland-7717d.appspot.com/o/images%2FScreenshot%20(157).png?alt=media&token=7526a0e4-82eb-4836-8027-83473302c939',
-      ],
-      isBidding: false,
-      location: {
-        address:
-          'Main boulevard, 15 Raiwnd Rd, D Block Block C Sher Shah Colony, Lahore, Punjab 54000, Pakistan',
-        coordinates: {coordinates: [Array], type: 'Point'},
-      },
-      name: 'Nothing',
-      propertyType: 'Commercial',
-      reports: [],
-      reviews: [
-        {
-          _id: '656da145f9eddc959ece0f76',
-          email: 'zaheerzarifi@gmail.com',
-          profilePicture:
-            'https://firebasestorage.googleapis.com/v0/b/bidland-7717d.appspot.com/o/images%2FWhatsApp%20Image%202023-11-23%20at%2022.45.22_89f78c49.jpg?alt=media&token=608f0e5c-008d-4dbf-b205-d3475c7f6bdf',
-          rating: 5,
-          reviewText: 'good',
-          username: 'zaheer',
-        },
-      ],
-      specifications: [null, null, '2 Kannal', null],
-    },
-    {
-      __v: 1,
-      _id: '656da0b9f9eddc959ece0ed3',
-      addedBy: '656d9fa8f9eddc959ece0ec8',
-      bids: [],
-      city: 'Karachi',
-      comments: [],
-      description: 'kjhkjkjdgfdggiuhhiuhhhkjhkjhkjhhkjhkjkjhkjh',
-      fixedPrice: 19000000000,
-      images: [
-        'https://firebasestorage.googleapis.com/v0/b/bidland-7717d.appspot.com/o/images%2FScreenshot%20(157).png?alt=media&token=7526a0e4-82eb-4836-8027-83473302c939',
-      ],
-      isBidding: false,
-      location: {
-        address:
-          'Main boulevard, 15 Raiwnd Rd, D Block Block C Sher Shah Colony, Lahore, Punjab 54000, Pakistan',
-        coordinates: {coordinates: [Array], type: 'Point'},
-      },
-      name: 'Nothing',
-      propertyType: 'Commercial',
-      reports: [],
-      reviews: [
-        {
-          _id: '656da145f9eddc959ece0f76',
-          email: 'zaheerzarifi@gmail.com',
-          profilePicture:
-            'https://firebasestorage.googleapis.com/v0/b/bidland-7717d.appspot.com/o/images%2FWhatsApp%20Image%202023-11-23%20at%2022.45.22_89f78c49.jpg?alt=media&token=608f0e5c-008d-4dbf-b205-d3475c7f6bdf',
-          rating: 5,
-          reviewText: 'good',
-          username: 'zaheer',
-        },
-      ],
-      specifications: [null, null, '2 Kannal', null],
-    },
-    {
-      __v: 1,
-      _id: '656da0b9f9eddc959ece0ed3',
-      addedBy: '656d9fa8f9eddc959ece0ec8',
-      bids: [],
-      city: 'Karachi',
-      comments: [],
-      description: 'kjhkjkjdgfdggiuhhiuhhhkjhkjhkjhhkjhkjkjhkjh',
-      fixedPrice: 19000000000,
-      images: [
-        'https://firebasestorage.googleapis.com/v0/b/bidland-7717d.appspot.com/o/images%2FScreenshot%20(157).png?alt=media&token=7526a0e4-82eb-4836-8027-83473302c939',
-      ],
-      isBidding: false,
-      location: {
-        address:
-          'Main boulevard, 15 Raiwnd Rd, D Block Block C Sher Shah Colony, Lahore, Punjab 54000, Pakistan',
-        coordinates: {coordinates: [Array], type: 'Point'},
-      },
-      name: 'Nothing',
-      propertyType: 'Commercial',
-      reports: [],
-      reviews: [
-        {
-          _id: '656da145f9eddc959ece0f76',
-          email: 'zaheerzarifi@gmail.com',
-          profilePicture:
-            'https://firebasestorage.googleapis.com/v0/b/bidland-7717d.appspot.com/o/images%2FWhatsApp%20Image%202023-11-23%20at%2022.45.22_89f78c49.jpg?alt=media&token=608f0e5c-008d-4dbf-b205-d3475c7f6bdf',
-          rating: 5,
-          reviewText: 'good',
-          username: 'zaheer',
-        },
-      ],
-      specifications: [null, null, '2 Kannal', null],
-    },
-    {
-      __v: 1,
-      _id: '656da0b9f9eddc959ece0ed3',
-      addedBy: '656d9fa8f9eddc959ece0ec8',
-      bids: [],
-      city: 'Karachi',
-      comments: [],
-      description: 'kjhkjkjdgfdggiuhhiuhhhkjhkjhkjhhkjhkjkjhkjh',
-      fixedPrice: 19000000000,
-      images: [
-        'https://firebasestorage.googleapis.com/v0/b/bidland-7717d.appspot.com/o/images%2FScreenshot%20(157).png?alt=media&token=7526a0e4-82eb-4836-8027-83473302c939',
-      ],
-      isBidding: false,
-      location: {
-        address:
-          'Main boulevard, 15 Raiwnd Rd, D Block Block C Sher Shah Colony, Lahore, Punjab 54000, Pakistan',
-        coordinates: {coordinates: [Array], type: 'Point'},
-      },
-      name: 'Nothing',
-      propertyType: 'Commercial',
-      reports: [],
-      reviews: [
-        {
-          _id: '656da145f9eddc959ece0f76',
-          email: 'zaheerzarifi@gmail.com',
-          profilePicture:
-            'https://firebasestorage.googleapis.com/v0/b/bidland-7717d.appspot.com/o/images%2FWhatsApp%20Image%202023-11-23%20at%2022.45.22_89f78c49.jpg?alt=media&token=608f0e5c-008d-4dbf-b205-d3475c7f6bdf',
-          rating: 5,
-          reviewText: 'good',
-          username: 'zaheer',
-        },
-      ],
-      specifications: [null, null, '2 Kannal', null],
-    },
-    {
-      __v: 1,
-      _id: '656da0b9f9eddc959ece0ed3',
-      addedBy: '656d9fa8f9eddc959ece0ec8',
-      bids: [],
-      city: 'Karachi',
-      comments: [],
-      description: 'kjhkjkjdgfdggiuhhiuhhhkjhkjhkjhhkjhkjkjhkjh',
-      fixedPrice: 19000000000,
-      images: [
-        'https://firebasestorage.googleapis.com/v0/b/bidland-7717d.appspot.com/o/images%2FScreenshot%20(157).png?alt=media&token=7526a0e4-82eb-4836-8027-83473302c939',
-      ],
-      isBidding: false,
-      location: {
-        address:
-          'Main boulevard, 15 Raiwnd Rd, D Block Block C Sher Shah Colony, Lahore, Punjab 54000, Pakistan',
-        coordinates: {coordinates: [Array], type: 'Point'},
-      },
-      name: 'Nothing',
-      propertyType: 'Commercial',
-      reports: [],
-      reviews: [
-        {
-          _id: '656da145f9eddc959ece0f76',
-          email: 'zaheerzarifi@gmail.com',
-          profilePicture:
-            'https://firebasestorage.googleapis.com/v0/b/bidland-7717d.appspot.com/o/images%2FWhatsApp%20Image%202023-11-23%20at%2022.45.22_89f78c49.jpg?alt=media&token=608f0e5c-008d-4dbf-b205-d3475c7f6bdf',
-          rating: 5,
-          reviewText: 'good',
-          username: 'zaheer',
-        },
-      ],
-      specifications: [null, null, '2 Kannal', null],
-    },
-    {
-      __v: 1,
-      _id: '656da0b9f9eddc959ece0ed3',
-      addedBy: '656d9fa8f9eddc959ece0ec8',
-      bids: [],
-      city: 'Karachi',
-      comments: [],
-      description: 'kjhkjkjdgfdggiuhhiuhhhkjhkjhkjhhkjhkjkjhkjh',
-      fixedPrice: 19000000000,
-      images: [
-        'https://firebasestorage.googleapis.com/v0/b/bidland-7717d.appspot.com/o/images%2FScreenshot%20(157).png?alt=media&token=7526a0e4-82eb-4836-8027-83473302c939',
-      ],
-      isBidding: false,
-      location: {
-        address:
-          'Main boulevard, 15 Raiwnd Rd, D Block Block C Sher Shah Colony, Lahore, Punjab 54000, Pakistan',
-        coordinates: {coordinates: [Array], type: 'Point'},
-      },
-      name: 'Nothing',
-      propertyType: 'Commercial',
-      reports: [],
-      reviews: [
-        {
-          _id: '656da145f9eddc959ece0f76',
-          email: 'zaheerzarifi@gmail.com',
-          profilePicture:
-            'https://firebasestorage.googleapis.com/v0/b/bidland-7717d.appspot.com/o/images%2FWhatsApp%20Image%202023-11-23%20at%2022.45.22_89f78c49.jpg?alt=media&token=608f0e5c-008d-4dbf-b205-d3475c7f6bdf',
-          rating: 5,
-          reviewText: 'good',
-          username: 'zaheer',
-        },
-      ],
-      specifications: [null, null, '2 Kannal', null],
-    },
-  ]);
+  const [orders, setOrders] = useState([]);
   useFocusEffect(
     React.useCallback(() => {
       getAllOrder();
-      fetchAllProperty();
     }, []),
   );
   const getAllOrder = async () => {
     setLoading(true);
+    let myOrdersArray = [];
     try {
       let response = await get_All_Orders();
+      let token = await AsyncStorage.getItem('USER_TOKEN');
+      let bidingProperties = await get_bidding_properties(token);
+      let listingproperties = await get_properties(token);
+
+      // Ensure that both are arrays
+      if (!Array.isArray(bidingProperties)) {
+        bidingProperties = [];
+      }
+
+      if (!Array.isArray(listingproperties)) {
+        listingproperties = [];
+      }
+
+      // Combine the two arrays
+      const allProperties = [...listingproperties, ...bidingProperties];
+
       if (response?.orders?.length > 0) {
+        for (let i = 0; i < response?.orders?.length; i++) {
+          const element = response?.orders[i];
+
+          let findedProperty = allProperties.forEach(property => {
+            return property._id === element.propertyId;
+          });
+          console.log(findedProperty);
+          if (findedProperty) {
+            myOrdersArray.push(findedProperty);
+          }
+        }
+        console.log('esponse?.orders', myOrdersArray);
         setOrders(response?.orders);
       }
     } catch (error) {
@@ -349,38 +138,6 @@ const UserOrders = () => {
         </View>
       </View>
     );
-  };
-  const fetchAllProperty = async () => {
-    setLoading(true);
-    try {
-      let token = await AsyncStorage.getItem('USER_TOKEN');
-      let bidingProperties = await get_bidding_properties(token);
-      let listingproperties = await get_properties(token);
-
-      // Ensure that both are arrays
-      if (!Array.isArray(bidingProperties)) {
-        bidingProperties = [];
-      }
-
-      if (!Array.isArray(listingproperties)) {
-        listingproperties = [];
-      }
-
-      // Combine the two arrays
-      const allSellerProperties = [...listingproperties, ...bidingProperties];
-
-      // Remove duplicates based on property ID (adjust this based on your data structure)
-      const uniqueSellerProperties = Array.from(
-        new Set(allSellerProperties.map(property => property.id)),
-      ).map(id => allSellerProperties.find(property => property.id === id));
-
-      // Set the merged and deduplicated result in the state
-      console.log('uniqueSellerProperties', uniqueSellerProperties);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
   };
 
   return (

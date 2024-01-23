@@ -81,7 +81,10 @@ export default function Payment({details}) {
           json,
         );
         if (createOrderResponse) {
-          Toast.show(createOrderResponse.data.message, Toast.LONG);
+          Toast.show(
+            'Payment Done and order has been created Successfully',
+            Toast.LONG,
+          );
           setLoading(false);
           navigation.navigate('Home');
         } else {
